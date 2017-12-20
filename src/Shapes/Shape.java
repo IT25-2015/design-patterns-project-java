@@ -18,10 +18,27 @@ public abstract class Shape implements Comparable<Shape> {
 		this.color = color;
 	}
 
+	/**
+	 * Draws shape
+	 * 
+	 * @param g
+	 */
 	public abstract void draw(Graphics g);
 
+	/**
+	 * Draws selected shape animation
+	 * 
+	 * @param g
+	 */
 	public abstract void selected(Graphics g);
 
+	/**
+	 * Checks if shape is contained within given x,y coordinates
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public abstract boolean contains(int x, int y);
 
 }
