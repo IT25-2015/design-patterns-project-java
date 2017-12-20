@@ -1,10 +1,12 @@
-package Shapes;
+package shapes.point;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 import lombok.Data;
 import lombok.NonNull;
+import shapes.Moveable;
+import shapes.Shape;
 
 public @Data class Point extends Shape implements Moveable {
 	private int x;
