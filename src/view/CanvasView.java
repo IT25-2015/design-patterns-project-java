@@ -10,7 +10,7 @@ import model.ShapeModel;
 import shapes.Shape;
 
 @SuppressWarnings("serial")
-public class DrawingView extends JPanel {
+public class CanvasView extends JPanel {
 	private @Setter ShapeModel model;
 
 	@Override

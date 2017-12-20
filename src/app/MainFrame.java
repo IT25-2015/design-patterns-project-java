@@ -7,12 +7,16 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 
+import controller.CanvasController;
 import lombok.Getter;
-import view.DrawingView;
+import lombok.Setter;
+import view.CanvasView;
 
+@SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private @Getter DrawingView drawingView;
+	private @Getter CanvasView canvasView = new CanvasView();
+	private @Getter @Setter CanvasController canvasController;
 
 	/**
 	 * Initialize frame and all its properties
@@ -24,12 +28,12 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 
 		// DrawingView related stuff
-		drawingView.setBackground(Color.WHITE);
-		getContentPane().add(drawingView, BorderLayout.CENTER);
-		drawingView.addMouseListener(new MouseAdapter() {
+		canvasView.setBackground(Color.WHITE);
+		getContentPane().add(canvasView, BorderLayout.CENTER);
+		canvasView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("clicked!");
+				canvasController.handleCanvasClick(e);
 			}
 		});
 	}
