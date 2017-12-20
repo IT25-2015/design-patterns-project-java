@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import lombok.Data;
-import lombok.NonNull;
 import shapes.Moveable;
 import shapes.Shape;
 
