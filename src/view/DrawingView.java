@@ -1,12 +1,12 @@
-package View;
+package view;
 
 import java.awt.Graphics;
 import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import Model.ShapeModel;
 import lombok.Setter;
+import model.ShapeModel;
 import shapes.Shape;
 
 @SuppressWarnings("serial")
