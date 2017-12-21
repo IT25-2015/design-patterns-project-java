@@ -53,6 +53,11 @@ public class Point extends Shape implements Moveable {
 	}
 
 	@Override
+	public String toString() {
+		return String.format("Point(x=%d,y=%d,color=%s)", x, y, getColor());
+	}
+
+	@Override
 	public void draw(Graphics g) {
 		g.setColor(getColor());
 		g.drawLine(x - 2, y, x + 2, y);
