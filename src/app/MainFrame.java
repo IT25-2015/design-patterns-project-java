@@ -7,17 +7,20 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
 import view.CanvasView;
+import view.FooterWrapperView;
 import view.InformationPaneView;
+import view.LoggerView;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
 	private CanvasView canvasView = new CanvasView();
-	private InformationPaneView informationPaneView = new InformationPaneView();
+	private FooterWrapperView footerWrapperView = new FooterWrapperView();
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
 
@@ -40,13 +43,12 @@ public class MainFrame extends JFrame {
 				canvasController.handleCanvasClick(e);
 			}
 		});
-
-		// InformationPaneView related stuff
-		getContentPane().add(informationPaneView, BorderLayout.SOUTH);
+		// FooterWrapper and its components related stuff
+		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
 		canvasView.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				informationPaneController.handleCursorMovement(e, informationPaneView.getLblCo());
+				informationPaneController.handleCursorMovement(e, footerWrapperView.getInformationPaneView().getLblCo());
 			}
 		});
 	}
@@ -69,10 +71,6 @@ public class MainFrame extends JFrame {
 
 	public CanvasView getCanvasView() {
 		return canvasView;
-	}
-
-	public InformationPaneView getInformationPaneView() {
-		return informationPaneView;
 	}
 
 }
