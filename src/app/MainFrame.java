@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,7 +21,7 @@ import view.LoggerView;
 public class MainFrame extends JFrame {
 
 	private CanvasView canvasView = new CanvasView();
-	private FooterWrapperView footerWrapperView = new FooterWrapperView();
+	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
 
@@ -71,6 +72,10 @@ public class MainFrame extends JFrame {
 
 	public CanvasView getCanvasView() {
 		return canvasView;
+	}
+
+	public FooterWrapperView getFooterWrapperView() {
+		return footerWrapperView;
 	}
 
 }
