@@ -6,20 +6,19 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
 import view.CanvasView;
 import view.FooterWrapperView;
+import view.HeaderWrapperView;
 import view.InformationPaneView;
 import view.LoggerView;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-
+	private HeaderWrapperView headerWrapperView = new HeaderWrapperView();
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
 	private CanvasController canvasController;
@@ -35,6 +34,9 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 		setTitle("Aleksandar Babic IT53/2015 - Dizajn Paterni");
 
+		// HeaderWrapper and its components related stuff
+		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
+		
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);
 		getContentPane().add(canvasView, BorderLayout.CENTER);

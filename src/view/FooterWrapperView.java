@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 public class FooterWrapperView extends JPanel {
 	LoggerView loggerView;
 	InformationPaneView informationPaneView;
-
+	JLabel lblHeader;
 	/**
 	 * Create the panel.
 	 */
@@ -20,7 +20,7 @@ public class FooterWrapperView extends JPanel {
 
 		add(informationPaneView, BorderLayout.SOUTH);
 
-		JLabel lblHeader = new JLabel("Live action log");
+		lblHeader = new JLabel("Live action log");
 		add(lblHeader, BorderLayout.NORTH);
 
 	}
@@ -31,6 +31,10 @@ public class FooterWrapperView extends JPanel {
 
 	public InformationPaneView getInformationPaneView() {
 		return informationPaneView;
+	}
+
+	public JLabel getLblHeader() {
+		return lblHeader;
 	}
 
 }
