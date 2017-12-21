@@ -5,13 +5,15 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-import lombok.Setter;
 import model.ShapeModel;
 import shapes.Shape;
 
 @SuppressWarnings("serial")
 public class CanvasView extends JPanel {
-	private @Setter ShapeModel model;
+	public CanvasView() {
+	}
+
+	private ShapeModel model;
 
 	@Override
 	public void paint(Graphics g) {
@@ -23,5 +25,9 @@ public class CanvasView extends JPanel {
 			}
 		}
 		repaint();
+	}
+
+	public void setModel(ShapeModel model) {
+		this.model = model;
 	}
 }

@@ -10,18 +10,16 @@ import javax.swing.JFrame;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
-import lombok.Getter;
-import lombok.Setter;
 import view.CanvasView;
 import view.InformationPaneView;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 
-	private @Getter CanvasView canvasView = new CanvasView();
-	private @Getter InformationPaneView informationPaneView = new InformationPaneView();
-	private @Getter @Setter CanvasController canvasController;
-	private @Getter @Setter InformationPaneController informationPaneController;
+	private CanvasView canvasView = new CanvasView();
+	private InformationPaneView informationPaneView = new InformationPaneView();
+	private CanvasController canvasController;
+	private InformationPaneController informationPaneController;
 
 	/**
 	 * Initialize frame and all its properties
@@ -51,6 +49,30 @@ public class MainFrame extends JFrame {
 				informationPaneController.handleCursorMovement(e, informationPaneView.getLblCo());
 			}
 		});
+	}
+
+	public CanvasController getCanvasController() {
+		return canvasController;
+	}
+
+	public void setCanvasController(CanvasController canvasController) {
+		this.canvasController = canvasController;
+	}
+
+	public InformationPaneController getInformationPaneController() {
+		return informationPaneController;
+	}
+
+	public void setInformationPaneController(InformationPaneController informationPaneController) {
+		this.informationPaneController = informationPaneController;
+	}
+
+	public CanvasView getCanvasView() {
+		return canvasView;
+	}
+
+	public InformationPaneView getInformationPaneView() {
+		return informationPaneView;
 	}
 
 }

@@ -3,13 +3,10 @@ package shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import lombok.Getter;
-import lombok.Setter;
-
 public abstract class Shape implements Comparable<Shape> {
 
-	private @Getter @Setter Color color = Color.BLACK;
-	private @Getter @Setter boolean selected;
+	private Color color = Color.BLACK;
+	private boolean selected;
 
 	public Shape() {
 	}
@@ -40,5 +37,21 @@ public abstract class Shape implements Comparable<Shape> {
 	 * @return
 	 */
 	public abstract boolean contains(int x, int y);
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 
 }

@@ -2,11 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-import lombok.Getter;
 import shapes.Shape;
 
 public class ShapeModel {
-	private @Getter ArrayList<Shape> shapesList = new ArrayList<Shape>();
+	private ArrayList<Shape> shapesList = new ArrayList<Shape>();
 
 	/**
 	 * Returns shape on given index from shape list
@@ -35,5 +34,9 @@ public class ShapeModel {
 	 */
 	public boolean remove(Shape s) {
 		return shapesList.remove(s);
+	}
+
+	public ArrayList<Shape> getShapesList() {
+		return shapesList;
 	}
 }

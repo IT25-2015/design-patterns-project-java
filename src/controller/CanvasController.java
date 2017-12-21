@@ -1,9 +1,11 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 
 import app.MainFrame;
 import model.ShapeModel;
+import shapes.point.Point;
 
 public class CanvasController {
 	private MainFrame frame;
@@ -17,5 +19,6 @@ public class CanvasController {
 	public void handleCanvasClick(MouseEvent e) {
 		// TODO Implement handle of this event
 		System.out.println(String.format("Clicked on canvas at - %d , %d", e.getX(), e.getY()));
+		model.add(new Point(e.getX(), e.getY(), Color.RED));
 	}
 }

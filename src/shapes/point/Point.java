@@ -3,11 +3,10 @@ package shapes.point;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import lombok.Data;
 import shapes.Moveable;
 import shapes.Shape;
 
-public @Data class Point extends Shape implements Moveable {
+public class Point extends Shape implements Moveable {
 	private int x;
 	private int y;
 
@@ -85,6 +84,22 @@ public @Data class Point extends Shape implements Moveable {
 	public void moveFor(int x, int y) {
 		this.x += x;
 		this.y += y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }
