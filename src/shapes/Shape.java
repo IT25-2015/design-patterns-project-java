@@ -2,8 +2,9 @@ package shapes;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 
-public abstract class Shape implements Comparable<Shape> {
+public abstract class Shape implements Comparable<Shape>, Serializable {
 
 	private Color color = Color.BLACK;
 	private boolean selected;

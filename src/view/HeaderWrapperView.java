@@ -6,6 +6,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class HeaderWrapperView extends JPanel {
@@ -120,6 +122,30 @@ public class HeaderWrapperView extends JPanel {
 
 	public JMenuItem getMntmRedo() {
 		return mntmRedo;
+	}
+
+	public JMenuItem getMntmImportFile() {
+		return mntmImportFile;
+	}
+
+	public JMenuItem getMntmImportLog() {
+		return mntmImportLog;
+	}
+
+	public JMenuItem getMntmExportFile() {
+		return mntmExportFile;
+	}
+
+	public JMenuItem getMntmExportLog() {
+		return mntmExportLog;
+	}
+
+	public JMenuItem getMntmViewCode() {
+		return mntmViewCode;
+	}
+
+	public JMenuItem getMntmAbout() {
+		return mntmAbout;
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
+import controller.MenuFileController;
 import controller.ToolboxController;
 import view.CanvasView;
 import view.FooterWrapperView;
@@ -23,9 +24,10 @@ public class MainFrame extends JFrame {
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
 	
-	private ToolboxController toolboxController = new ToolboxController();
+	private ToolboxController toolboxController;
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
+	private MenuFileController mfController;
 
 	/**
 	 * Initialize frame and all its properties
@@ -52,6 +54,13 @@ public class MainFrame extends JFrame {
 				toolboxController.handleRedoBtn();
 			}
 		});
+		headerWrapperView.getMntmExportFile().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mfController.handleExportToFile();
+			}
+		});
+		
 		// HeaderWrapper - Toolbox
 		headerWrapperView.getToolboxView().getBtnUndo().addMouseListener(new MouseAdapter() {
 			@Override
@@ -109,6 +118,18 @@ public class MainFrame extends JFrame {
 
 	public FooterWrapperView getFooterWrapperView() {
 		return footerWrapperView;
+	}
+
+	public void setToolboxController(ToolboxController toolboxController) {
+		this.toolboxController = toolboxController;
+	}
+
+	public ToolboxController getToolboxController() {
+		return toolboxController;
+	}
+
+	public void setMfController(MenuFileController mfController) {
+		this.mfController = mfController;
 	}
 
 }

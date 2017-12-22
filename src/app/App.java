@@ -7,6 +7,8 @@ import javax.swing.UIManager;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
+import controller.MenuFileController;
+import controller.ToolboxController;
 import model.ShapeModel;
 import util.Logger;
 
@@ -30,8 +32,12 @@ public class App {
 					MainFrame frame = new MainFrame(800, 600);
 					CanvasController canvasController = new CanvasController(frame, model);
 					frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
+					
 					frame.setCanvasController(canvasController);
 					frame.setInformationPaneController(new InformationPaneController());
+					frame.setToolboxController(new ToolboxController());
+					frame.setMfController(new MenuFileController(frame, model));
+					
 					frame.getCanvasView().setModel(model);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -7,7 +8,7 @@ import java.util.LinkedList;
 import shapes.Command;
 import shapes.Shape;
 
-public class ShapeModel {
+public class ShapeModel implements Serializable {
 	private ArrayList<Shape> shapesList = new ArrayList<Shape>();
 	private static Deque<Command> undoStack = new LinkedList<>();
 	private static Deque<Command> redoStack = new LinkedList<>();
