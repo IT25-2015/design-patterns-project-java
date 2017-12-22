@@ -1,5 +1,7 @@
 package shapes.point;
 
+import util.Logger;
+
 import model.ShapeModel;
 import shapes.Command;
 
@@ -15,10 +17,12 @@ public class AddPoint implements Command {
 	@Override
 	public void execute() {
 		model.add(point);
+		Logger.getInstance().log("AddPoint_execute",point.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.remove(point);
+		Logger.getInstance().log("AddPoint_unexecute",point.toString(), true);
 	}
 }

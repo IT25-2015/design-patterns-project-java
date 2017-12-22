@@ -18,10 +18,12 @@ public class HeaderWrapperView extends JPanel {
 	private JSeparator separator;
 	private JMenuItem mntmExit;
 	private JMenu mnEdit;
-	private JMenu mnAbout;
+	private JMenu mnHelp;
 	private ToolboxView toolboxView;
 	private JMenuItem mntmUndo;
 	private JMenuItem mntmRedo;
+	private JMenuItem mntmViewCode;
+	private JMenuItem mntmAbout;
 
 	/**
 	 * Create the panel.
@@ -62,8 +64,14 @@ public class HeaderWrapperView extends JPanel {
 		mntmRedo = new JMenuItem("Redo action");
 		mnEdit.add(mntmRedo);
 
-		mnAbout = new JMenu("About");
-		menuBar.add(mnAbout);
+		mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		mntmViewCode = new JMenuItem("View GitHub repository");
+		mnHelp.add(mntmViewCode);
+
+		mntmAbout = new JMenuItem("About");
+		mnHelp.add(mntmAbout);
 
 		toolboxView = new ToolboxView();
 		add(toolboxView, BorderLayout.CENTER);
@@ -98,8 +106,8 @@ public class HeaderWrapperView extends JPanel {
 		return mnEdit;
 	}
 
-	public JMenu getMnAbout() {
-		return mnAbout;
+	public JMenu getMnHelp() {
+		return mnHelp;
 	}
 
 	public ToolboxView getToolboxView() {

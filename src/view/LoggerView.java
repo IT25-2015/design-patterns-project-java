@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 @SuppressWarnings("serial")
 public class LoggerView extends JPanel {
 	private JScrollPane scrollPane;
-	private JList<String> lstLogger;
+	private static JList<String> lstLogger;
 	private DefaultListModel<String> dlm;
 
 	/**
@@ -39,5 +39,9 @@ public class LoggerView extends JPanel {
 		if (dlm != null) {
 			lstLogger.setModel(dlm);
 		}
+	}
+
+	public static JList<String> getLstLogger() {
+		return lstLogger;
 	}
 }

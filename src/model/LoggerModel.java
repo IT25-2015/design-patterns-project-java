@@ -33,4 +33,5 @@ public class LoggerModel {
 	public ArrayList<String> getLogLines() {
 		return logLines;
 	}
+
 }
