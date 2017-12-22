@@ -34,4 +34,8 @@ public class LoggerModel {
 		return logLines;
 	}
 
+	public void setLogLines(ArrayList<String> logLines) {
+		this.logLines = logLines;
+	}
+
 }

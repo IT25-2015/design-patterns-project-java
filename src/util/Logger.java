@@ -47,4 +47,8 @@ public class Logger {
 	public DefaultListModel<String> getDlmLogger() {
 		return dlmLogger;
 	}
+
+	public LoggerModel getLoggerModel() {
+		return loggerModel;
+	}
 }

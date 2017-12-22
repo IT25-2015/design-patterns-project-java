@@ -60,6 +60,12 @@ public class MainFrame extends JFrame {
 				mfController.handleExportToFile();
 			}
 		});
+		headerWrapperView.getMntmExportLog().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mfController.handleExportToLog();
+			}
+		});
 		
 		// HeaderWrapper - Toolbox
 		headerWrapperView.getToolboxView().getBtnUndo().addMouseListener(new MouseAdapter() {
