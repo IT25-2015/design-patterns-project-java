@@ -1,11 +1,16 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 
+import shapes.Command;
 import shapes.Shape;
 
 public class ShapeModel {
 	private ArrayList<Shape> shapesList = new ArrayList<Shape>();
+	private static Deque<Command> undoStack = new LinkedList<>();
+	private static Deque<Command> redoStack = new LinkedList<>();
 
 	/**
 	 * Returns shape on given index from shape list
@@ -38,5 +43,13 @@ public class ShapeModel {
 
 	public ArrayList<Shape> getShapesList() {
 		return shapesList;
+	}
+
+	public static Deque<Command> getUndoStack() {
+		return undoStack;
+	}
+
+	public static Deque<Command> getRedoStack() {
+		return redoStack;
 	}
 }

@@ -5,6 +5,8 @@ import java.awt.event.MouseEvent;
 
 import app.MainFrame;
 import model.ShapeModel;
+import shapes.Command;
+import shapes.point.AddPoint;
 import shapes.point.Point;
 
 public class CanvasController {
@@ -18,7 +20,8 @@ public class CanvasController {
 
 	public void handleCanvasClick(MouseEvent e) {
 		// TODO Implement handle of this event
-		System.out.println(String.format("Clicked on canvas at - %d , %d", e.getX(), e.getY()));
-		model.add(new Point(e.getX(), e.getY(), Color.RED));
+		Command point = new AddPoint(model, new Point(e.getX(), e.getY(), Color.RED));
+		point.execute();
+		model.getUndoStack().offerLast(point);
 	}
 }

@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import controller.CanvasController;
 import controller.InformationPaneController;
+import controller.ToolboxController;
 import view.CanvasView;
 import view.FooterWrapperView;
 import view.HeaderWrapperView;
@@ -21,6 +22,8 @@ public class MainFrame extends JFrame {
 	private HeaderWrapperView headerWrapperView = new HeaderWrapperView();
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
+	
+	private ToolboxController toolboxController = new ToolboxController();
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
 
@@ -36,6 +39,18 @@ public class MainFrame extends JFrame {
 
 		// HeaderWrapper and its components related stuff
 		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
+		headerWrapperView.getToolboxView().getBtnUndo().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleUndoBtn();
+			}
+		});
+		headerWrapperView.getToolboxView().getBtnRedo().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleRedoBtn();
+			}
+		});
 		
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);
@@ -46,6 +61,7 @@ public class MainFrame extends JFrame {
 				canvasController.handleCanvasClick(e);
 			}
 		});
+		
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
 		canvasView.addMouseMotionListener(new MouseMotionAdapter() {
