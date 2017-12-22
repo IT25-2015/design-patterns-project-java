@@ -12,6 +12,7 @@ public class SerializeShapesToFile implements Exporter, Serializable {
 	 */
 	@Override
 	public void export(ArrayList<Object> objects, String path) {
+		if(path == null) return;
 		try (ObjectOutputStream oos =
 				new ObjectOutputStream(new FileOutputStream(path))) {
 
