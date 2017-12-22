@@ -3,5 +3,10 @@ package io;
 import java.util.ArrayList;
 
 public interface Exporter {
-	void export(ArrayList<Object> objects);
+	/**
+	 * Exports given objects
+	 * @param objects
+	 * @param path
+	 */
+	void export(ArrayList<Object> objects, String path);
 }

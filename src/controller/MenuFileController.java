@@ -6,6 +6,7 @@ import app.MainFrame;
 import io.ExportManager;
 import io.SerializeShapesToFile;
 import model.ShapeModel;
+import util.FileOperationsHelper;
 
 public class MenuFileController {
 	private MainFrame frame;
@@ -15,13 +16,14 @@ public class MenuFileController {
 		this.frame = frame;
 		this.model = model;
 	}
-	
+
 	public void handleExportToFile() {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(model.getShapesList());
 		bundle.add(ShapeModel.getUndoStack());
 		bundle.add(ShapeModel.getRedoStack());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
-		manager.export(bundle);
+		manager.export(bundle, FileOperationsHelper.showFileDialog());
 	}
+
 }

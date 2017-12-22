@@ -10,8 +10,8 @@ public class ExportManager implements Exporter {
 	}
 
 	@Override
-	public void export(ArrayList<Object> objects) {
-		exporter.export(objects);
+	public void export(ArrayList<Object> objects, String path) {
+		exporter.export(objects, path);
 	}
 
 }
