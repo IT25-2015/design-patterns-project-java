@@ -6,9 +6,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseEvent;
-
+@SuppressWarnings("serial")
 public class InformationPaneView extends JPanel {
 
 	private JLabel lblName;

@@ -1,6 +1,5 @@
 package controller;
 
-import model.ShapeModel;
 import shapes.UndoRedoHelper;
 
 public class ToolboxController {

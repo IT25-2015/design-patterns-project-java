@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class FooterWrapperView extends JPanel {
 	LoggerView loggerView;
 	InformationPaneView informationPaneView;

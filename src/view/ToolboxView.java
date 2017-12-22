@@ -2,15 +2,12 @@ package view;
 
 import javax.swing.JPanel;
 
-import shapes.UndoRedoHelper;
-
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class ToolboxView extends JPanel {
 	GridBagLayout gridBagLayout;
 	JButton btnUndo;

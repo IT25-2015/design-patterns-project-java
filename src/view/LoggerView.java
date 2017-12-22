@@ -3,17 +3,14 @@ package view;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
 
 import java.awt.BorderLayout;
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+@SuppressWarnings("serial")
 public class LoggerView extends JPanel {
 	private JScrollPane scrollPane;
-	private JTextArea txtrTLogger;
-	private JList lstLogger;
+	private JList<String> lstLogger;
 	private DefaultListModel<String> dlm;
 
 	/**
@@ -25,7 +22,7 @@ public class LoggerView extends JPanel {
 		scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
 
-		lstLogger = new JList();
+		lstLogger = new JList<String>();
 		scrollPane.setViewportView(lstLogger);
 	}
 
