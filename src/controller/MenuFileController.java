@@ -31,7 +31,7 @@ public class MenuFileController {
 		bundle.add(ShapeModel.getUndoStack());
 		bundle.add(ShapeModel.getRedoStack());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
-		manager.export(bundle, FileOperationsHelper.showFileDialog());
+		manager.export(bundle, FileOperationsHelper.showFileDialog("drwg"));
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class MenuFileController {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
-		manager.export(bundle, FileOperationsHelper.showFileDialog());
+		manager.export(bundle, FileOperationsHelper.showFileDialog("log"));
 	}
 
 }

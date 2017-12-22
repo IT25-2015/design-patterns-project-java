@@ -15,6 +15,7 @@ public class SaveLogToFile implements Exporter {
 	 */
 	@Override
 	public void export(ArrayList<Object> objects, String path) {
+		if(path == null) return;
 		File logFile = new File(path);
 		try {
 			logFile.createNewFile();
