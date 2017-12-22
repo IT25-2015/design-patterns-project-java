@@ -39,6 +39,20 @@ public class MainFrame extends JFrame {
 
 		// HeaderWrapper and its components related stuff
 		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
+		// HeaderWrapper - Main Menu
+		headerWrapperView.getMntmUndo().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleUndoBtn();
+			}
+		});
+		headerWrapperView.getMntmRedo().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleRedoBtn();
+			}
+		});
+		// HeaderWrapper - Toolbox
 		headerWrapperView.getToolboxView().getBtnUndo().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -51,6 +65,7 @@ public class MainFrame extends JFrame {
 				toolboxController.handleRedoBtn();
 			}
 		});
+	
 		
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);

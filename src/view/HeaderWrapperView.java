@@ -19,6 +19,8 @@ public class HeaderWrapperView extends JPanel {
 	private JMenu mnEdit;
 	private JMenu mnAbout;
 	private ToolboxView toolboxView;
+	private JMenuItem mntmUndo;
+	private JMenuItem mntmRedo;
 	/**
 	 * Create the panel.
 	 */
@@ -45,6 +47,12 @@ public class HeaderWrapperView extends JPanel {
 		
 		mnEdit = new JMenu("Edit");
 		menuBar.add(mnEdit);
+		
+		mntmUndo = new JMenuItem("Undo action");
+		mnEdit.add(mntmUndo);
+		
+		mntmRedo = new JMenuItem("Redo action");
+		mnEdit.add(mntmRedo);
 		
 		mnAbout = new JMenu("About");
 		menuBar.add(mnAbout);
@@ -79,6 +87,12 @@ public class HeaderWrapperView extends JPanel {
 	}
 	public ToolboxView getToolboxView() {
 		return toolboxView;
+	}
+	public JMenuItem getMntmUndo() {
+		return mntmUndo;
+	}
+	public JMenuItem getMntmRedo() {
+		return mntmRedo;
 	}
 
 }
