@@ -1,8 +1,9 @@
-package shapes;
+package util;
 
 import java.util.Deque;
 
 import model.ShapeModel;
+import shapes.Command;
 
 public class UndoRedoHelper {
 	private static Deque<Command> undoStack = ShapeModel.getUndoStack();

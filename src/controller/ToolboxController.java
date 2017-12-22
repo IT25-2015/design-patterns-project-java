@@ -1,6 +1,6 @@
 package controller;
 
-import shapes.UndoRedoHelper;
+import util.UndoRedoHelper;
 
 public class ToolboxController {
 
