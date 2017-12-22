@@ -15,7 +15,6 @@ public class UndoRedoHelper {
 		if (!undoStack.isEmpty()) {
 			Command previousAction = undoStack.pollLast();
 			redoStack.offerLast(previousAction);
-			System.out.println("Undo done");
 			previousAction.unexecute();
 		}
 	}
@@ -27,7 +26,6 @@ public class UndoRedoHelper {
 		if (!redoStack.isEmpty()) {
 			Command previousAction = redoStack.pollLast();
 			undoStack.offerLast(previousAction);
-			System.out.println("Redo done");
 			previousAction.execute();
 		}
 	}

@@ -11,8 +11,10 @@ import javax.swing.JSeparator;
 public class HeaderWrapperView extends JPanel {
 	private JMenuBar menuBar;
 	private JMenu mnFile;
-	private JMenuItem mntmOpenFile;
-	private JMenuItem mntmOpenLog;
+	private JMenuItem mntmImportFile;
+	private JMenuItem mntmImportLog;
+	private JMenuItem mntmExportFile;
+	private JMenuItem mntmExportLog;
 	private JSeparator separator;
 	private JMenuItem mntmExit;
 	private JMenu mnEdit;
@@ -33,11 +35,17 @@ public class HeaderWrapperView extends JPanel {
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 
-		mntmOpenFile = new JMenuItem("Open from file");
-		mnFile.add(mntmOpenFile);
+		mntmImportFile = new JMenuItem("Import from file");
+		mnFile.add(mntmImportFile);
 
-		mntmOpenLog = new JMenuItem("Open from log");
-		mnFile.add(mntmOpenLog);
+		mntmImportLog = new JMenuItem("Import from log file");
+		mnFile.add(mntmImportLog);
+		
+		mntmExportFile = new JMenuItem("Export to file");
+		mnFile.add(mntmExportFile);
+
+		mntmExportLog = new JMenuItem("Export to log file");
+		mnFile.add(mntmExportLog);
 
 		separator = new JSeparator();
 		mnFile.add(separator);
@@ -71,11 +79,11 @@ public class HeaderWrapperView extends JPanel {
 	}
 
 	public JMenuItem getMntmOpenFile() {
-		return mntmOpenFile;
+		return mntmImportFile;
 	}
 
 	public JMenuItem getMntmOpenLog() {
-		return mntmOpenLog;
+		return mntmImportLog;
 	}
 
 	public JSeparator getSeparator() {
