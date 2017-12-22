@@ -1,4 +1,4 @@
-package io;
+package io.exporter;
 
 import java.util.ArrayList;
 
@@ -8,5 +8,5 @@ public interface Exporter {
 	 * @param objects
 	 * @param path
 	 */
-	void export(ArrayList<Object> objects, String path);
+	void exportData(ArrayList<Object> objects, String path);
 }

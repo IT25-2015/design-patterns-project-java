@@ -1,4 +1,4 @@
-package io;
+package io.exporter;
 
 import java.util.ArrayList;
 
@@ -10,8 +10,8 @@ public class ExportManager implements Exporter {
 	}
 
 	@Override
-	public void export(ArrayList<Object> objects, String path) {
-		exporter.export(objects, path);
+	public void exportData(ArrayList<Object> objects, String path) {
+		exporter.exportData(objects, path);
 	}
 
 }

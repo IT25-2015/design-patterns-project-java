@@ -1,4 +1,4 @@
-package io;
+package io.exporter;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -11,13 +11,12 @@ public class SerializeShapesToFile implements Exporter, Serializable {
 	 * Will serialize given array list and save it to path given
 	 */
 	@Override
-	public void export(ArrayList<Object> objects, String path) {
+	public void exportData(ArrayList<Object> objects, String path) {
 		if(path == null) return;
 		try (ObjectOutputStream oos =
 				new ObjectOutputStream(new FileOutputStream(path))) {
 
 			oos.writeObject(objects);
-			System.out.println("Done");
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

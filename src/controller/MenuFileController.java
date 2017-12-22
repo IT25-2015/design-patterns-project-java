@@ -3,9 +3,9 @@ package controller;
 import java.util.ArrayList;
 
 import app.MainFrame;
-import io.ExportManager;
-import io.SaveLogToFile;
-import io.SerializeShapesToFile;
+import io.exporter.ExportManager;
+import io.exporter.SaveLogToFile;
+import io.exporter.SerializeShapesToFile;
 import model.LoggerModel;
 import model.ShapeModel;
 import util.FileOperationsHelper;
@@ -31,7 +31,7 @@ public class MenuFileController {
 		bundle.add(ShapeModel.getUndoStack());
 		bundle.add(ShapeModel.getRedoStack());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
-		manager.export(bundle, FileOperationsHelper.showFileDialog("drwg"));
+		manager.exportData(bundle, FileOperationsHelper.showFileDialog("drwg"));
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class MenuFileController {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
-		manager.export(bundle, FileOperationsHelper.showFileDialog("log"));
+		manager.exportData(bundle, FileOperationsHelper.showFileDialog("log"));
 	}
 
 }

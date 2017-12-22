@@ -1,4 +1,4 @@
-package io;
+package io.exporter;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class SaveLogToFile implements Exporter {
 	 * Will crate new empty file to save log to, save line by line into it
 	 */
 	@Override
-	public void export(ArrayList<Object> objects, String path) {
+	public void exportData(ArrayList<Object> objects, String path) {
 		if(path == null) return;
 		File logFile = new File(path);
 		try {
