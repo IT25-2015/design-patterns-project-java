@@ -99,6 +99,12 @@ public class MainFrame extends JFrame {
 				toolboxController.handleSelectBtnStateChange(ev);
 			}
 		});
+		headerWrapperView.getToolboxView().getBtnDelete().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleDelete();
+			}
+		});
 		headerWrapperView.getToolboxView().getBtnInnerColor().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {

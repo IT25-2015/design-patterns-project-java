@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -63,6 +64,26 @@ public class ToolboxController implements Serializable {
 				s.setSelected(false);
 				frame.repaint();
 			}
+		}
+	}
+	
+	public void handleDelete() {
+		ArrayList<Shape> shapesToDelete = new ArrayList<Shape>();
+		for (Shape s : model.getShapesList()) {
+			if(s.isSelected())
+				shapesToDelete.add(s);
+		}
+		if(shapesToDelete.size() == 0) return;
+		else if(shapesToDelete.size() == 1) {
+			//TODO implement warning dialog
+			model.getShapesList().remove(shapesToDelete.get(0));
+			frame.repaint();
+		} else {
+			//TODO implement multiplie shape warning dialog
+			for (Shape s : shapesToDelete) {
+				model.getShapesList().remove(s);
+			}
+			frame.repaint();
 		}
 	}
 
