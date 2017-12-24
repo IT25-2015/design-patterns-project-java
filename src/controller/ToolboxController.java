@@ -1,8 +1,12 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
+
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 
 import app.MainFrame;
 import model.ShapeModel;
@@ -12,7 +16,6 @@ import util.UndoRedoHelper;
 
 public class ToolboxController implements Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -63,6 +66,12 @@ public class ToolboxController implements Serializable {
 		}
 	}
 
+	/**
+	 * Will handle event when select button changes its state Exits from select mode
+	 * when button is not toggled, de-selects all shapes
+	 * 
+	 * @param ev
+	 */
 	public void handleSelectBtnStateChange(ItemEvent ev) {
 		if (ev.getStateChange() == ItemEvent.SELECTED) {
 			Logger.getInstance().log("Entering select mode", true);
@@ -74,5 +83,15 @@ public class ToolboxController implements Serializable {
 			}
 			Logger.getInstance().log("All shapes have been de-selected", true);
 		}
+	}
+
+	/**
+	 * Will set background color of button based on chosen color in JColorChooser
+	 * If color is not chosen, it will return current color
+	 * @param btn
+	 */
+	public void handleColorButtonClick(JButton btn) {
+		Color newColor = JColorChooser.showDialog(btn, "Choose color", btn.getBackground());
+		btn.setBackground((newColor != null)?newColor:btn.getBackground());
 	}
 }

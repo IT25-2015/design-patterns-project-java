@@ -99,6 +99,18 @@ public class MainFrame extends JFrame {
 				toolboxController.handleSelectBtnStateChange(ev);
 			}
 		});
+		headerWrapperView.getToolboxView().getBtnInnerColor().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleColorButtonClick(headerWrapperView.getToolboxView().getBtnInnerColor());
+			}
+		});
+		headerWrapperView.getToolboxView().getBtnOuterColor().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toolboxController.handleColorButtonClick(headerWrapperView.getToolboxView().getBtnOuterColor());
+			}
+		});
 
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);
@@ -107,7 +119,9 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
-					canvasController.handleCanvasClick(e);
+					canvasController.handleCanvasClick(e,
+							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
+							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
 				else
 					toolboxController.handleSelect(e);
 			}

@@ -24,9 +24,8 @@ public class CanvasController implements Serializable {
 		this.model = model;
 	}
 
-	public void handleCanvasClick(MouseEvent e) {
-		// TODO Implement handle of this event
-		Command point = new AddPoint(model, new Point(e.getX(), e.getY(), Color.RED));
+	public void handleCanvasClick(MouseEvent e, Color inner, Color outer) {
+		Command point = new AddPoint(model, new Point(e.getX(), e.getY(), outer));
 		point.execute();
 		ShapeModel.getUndoStack().offerLast(point);
 	}

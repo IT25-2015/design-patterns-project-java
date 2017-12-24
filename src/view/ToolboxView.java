@@ -7,18 +7,21 @@ import java.awt.GridBagLayout;
 import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class ToolboxView extends JPanel {
-	GridBagLayout gridBagLayout;
-	JButton btnUndo;
-	GridBagConstraints gbc_btnUndo;
-	JButton btnRedo;
-	GridBagConstraints gbc_btnRedo;
-	JToggleButton tglbtnSelect;
-	GridBagConstraints gbc_btnSelect;
-	JButton btnDelete;
-	GridBagConstraints gbc_btnDelete;
+	private GridBagLayout gridBagLayout;
+	private JButton btnUndo;
+	private GridBagConstraints gbc_btnUndo;
+	private JButton btnRedo;
+	private GridBagConstraints gbc_btnRedo;
+	private JToggleButton tglbtnSelect;
+	private GridBagConstraints gbc_btnSelect;
+	private JButton btnDelete;
+	private GridBagConstraints gbc_btnDelete;
+	private JButton btnInnerColor;
+	private JButton btnOuterColor;
 
 	/**
 	 * Create the panel.
@@ -45,6 +48,21 @@ public class ToolboxView extends JPanel {
 		gbc_btnRedo.gridx = 1;
 		gbc_btnRedo.gridy = 0;
 		add(btnRedo, gbc_btnRedo);
+		
+		btnInnerColor = new JButton("");
+		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
+		gbc_btnInnerColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnInnerColor.gridx = 5;
+		gbc_btnInnerColor.gridy = 0;
+		add(btnInnerColor, gbc_btnInnerColor);
+		
+		btnOuterColor = new JButton("");
+		btnOuterColor.setBackground(Color.BLACK);
+		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();
+		gbc_btnOuterColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnOuterColor.gridx = 6;
+		gbc_btnOuterColor.gridy = 0;
+		add(btnOuterColor, gbc_btnOuterColor);
 
 		tglbtnSelect = new JToggleButton("Select");
 		gbc_btnSelect = new GridBagConstraints();
@@ -96,6 +114,18 @@ public class ToolboxView extends JPanel {
 
 	public GridBagConstraints getGbc_btnDelete() {
 		return gbc_btnDelete;
+	}
+
+	public JToggleButton getTglbtnSelect() {
+		return tglbtnSelect;
+	}
+
+	public JButton getBtnInnerColor() {
+		return btnInnerColor;
+	}
+
+	public JButton getBtnOuterColor() {
+		return btnOuterColor;
 	}
 
 }
