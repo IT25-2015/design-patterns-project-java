@@ -11,7 +11,10 @@ import javax.swing.JColorChooser;
 
 import app.MainFrame;
 import model.ShapeModel;
+import shapes.Command;
 import shapes.Shape;
+import shapes.point.Point;
+import shapes.point.RemovePoint;
 import util.Logger;
 import util.UndoRedoHelper;
 
@@ -66,22 +69,30 @@ public class ToolboxController implements Serializable {
 			}
 		}
 	}
-	
+
+	/**
+	 * Will check if there are any selected shapes in list and delete them
+	 */
 	public void handleDelete() {
 		ArrayList<Shape> shapesToDelete = new ArrayList<Shape>();
 		for (Shape s : model.getShapesList()) {
-			if(s.isSelected())
+			if (s.isSelected())
 				shapesToDelete.add(s);
 		}
-		if(shapesToDelete.size() == 0) return;
-		else if(shapesToDelete.size() == 1) {
-			//TODO implement warning dialog
-			model.getShapesList().remove(shapesToDelete.get(0));
+		if (shapesToDelete.size() == 0)
+			return;
+		else if (shapesToDelete.size() == 1) {
+			// TODO implement warning dialog
+			Command removePt = new RemovePoint(model, (Point) shapesToDelete.get(0));
+			ShapeModel.getUndoStack().offerLast(removePt);
+			removePt.execute();
 			frame.repaint();
 		} else {
-			//TODO implement multiplie shape warning dialog
+			// TODO implement multiplie shape warning dialog
 			for (Shape s : shapesToDelete) {
-				model.getShapesList().remove(s);
+				Command removePt = new RemovePoint(model, (Point) s);
+				ShapeModel.getUndoStack().offerLast(removePt);
+				removePt.execute();
 			}
 			frame.repaint();
 		}
@@ -107,12 +118,13 @@ public class ToolboxController implements Serializable {
 	}
 
 	/**
-	 * Will set background color of button based on chosen color in JColorChooser
-	 * If color is not chosen, it will return current color
+	 * Will set background color of button based on chosen color in JColorChooser If
+	 * color is not chosen, it will return current color
+	 * 
 	 * @param btn
 	 */
 	public void handleColorButtonClick(JButton btn) {
 		Color newColor = JColorChooser.showDialog(btn, "Choose color", btn.getBackground());
-		btn.setBackground((newColor != null)?newColor:btn.getBackground());
+		btn.setBackground((newColor != null) ? newColor : btn.getBackground());
 	}
 }
