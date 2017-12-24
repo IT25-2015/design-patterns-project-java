@@ -23,7 +23,7 @@ public class MainFrame extends JFrame {
 	private HeaderWrapperView headerWrapperView = new HeaderWrapperView();
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
-	
+
 	private ToolboxController toolboxController;
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
@@ -66,7 +66,19 @@ public class MainFrame extends JFrame {
 				mfController.handleExportToLog();
 			}
 		});
-		
+		headerWrapperView.getMntmImportLog().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mfController.handleImportFromLog();
+			}
+		});
+		headerWrapperView.getMntmImportFile().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mfController.handleImportFromFile();
+			}
+		});
+
 		// HeaderWrapper - Toolbox
 		headerWrapperView.getToolboxView().getBtnUndo().addMouseListener(new MouseAdapter() {
 			@Override
@@ -80,8 +92,7 @@ public class MainFrame extends JFrame {
 				toolboxController.handleRedoBtn();
 			}
 		});
-	
-		
+
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);
 		getContentPane().add(canvasView, BorderLayout.CENTER);
@@ -91,13 +102,14 @@ public class MainFrame extends JFrame {
 				canvasController.handleCanvasClick(e);
 			}
 		});
-		
+
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
 		canvasView.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				informationPaneController.handleCursorMovement(e, footerWrapperView.getInformationPaneView().getLblCo());
+				informationPaneController.handleCursorMovement(e,
+						footerWrapperView.getInformationPaneView().getLblCo());
 			}
 		});
 	}

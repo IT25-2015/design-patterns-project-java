@@ -27,6 +27,14 @@ public class Logger {
 		if (toConsole)
 			System.out.println(loggerModel.peek());
 	}
+	
+	public void log(String s, boolean toConsole) {
+		loggerModel.add(s);
+		dlmLogger.addElement(loggerModel.peek());
+		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); //Scroll to bottom of log automatically
+		if (toConsole)
+			System.out.println(loggerModel.peek());
+	}
 
 	/**
 	 * Return singleton object Thread safe also using Lazy Loading

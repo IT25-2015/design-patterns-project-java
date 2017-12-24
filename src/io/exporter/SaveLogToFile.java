@@ -8,14 +8,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
+import util.Logger;
+
 public class SaveLogToFile implements Exporter {
 
 	/**
 	 * Will crate new empty file to save log to, save line by line into it
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void exportData(ArrayList<Object> objects, String path) {
-		if(path == null) return;
+		if (path == null)
+			return;
 		File logFile = new File(path);
 		try {
 			logFile.createNewFile();
@@ -24,15 +28,21 @@ public class SaveLogToFile implements Exporter {
 			return;
 		}
 		Path pathObj = Paths.get(path);
-		for (String logLine : (ArrayList<String>) objects.get(0)) {
-			logLine += "\n";
-			byte[] strToBytes = logLine.getBytes();
-		    try {
-				Files.write(pathObj, strToBytes, StandardOpenOption.APPEND);
-			} catch (IOException e) {
-				e.printStackTrace();
+		try {
+			for (String logLine : (ArrayList<String>) objects.get(0)) {
+				logLine += "\n";
+				byte[] strToBytes = logLine.getBytes();
+				try {
+					Files.write(pathObj, strToBytes, StandardOpenOption.APPEND);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+			Logger.getInstance().log("Log has been exported to " + path, true);
+		} catch (Exception e) {
+			Logger.getInstance().log("Error while exporting log file, error message: " + e.getMessage(), true);
 		}
+
 	}
 
 }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public interface Importer {
 	/**
 	 * Imports given objects
-	 * @param objects
+	 * @param bundle
 	 * @param path
 	 */
-	void importData(ArrayList<Object> objects, String path);
+	ArrayList<Object> importData(String path);
 }

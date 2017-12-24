@@ -10,8 +10,8 @@ public class ImportManager implements Importer {
 	}
 
 	@Override
-	public void importData(ArrayList<Object> objects, String path) {
-		importer.importData(objects, path);
+	public ArrayList<Object> importData(String path) {
+		return importer.importData(path);
 	}
 
 }

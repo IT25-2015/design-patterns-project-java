@@ -53,4 +53,16 @@ public class ShapeModel implements Serializable {
 	public static Deque<Command> getRedoStack() {
 		return redoStack;
 	}
+
+	public void setShapesList(ArrayList<Shape> shapesList) {
+		this.shapesList = shapesList;
+	}
+
+	public static void setUndoStack(Deque<Command> undoStack) {
+		ShapeModel.undoStack = undoStack;
+	}
+
+	public static void setRedoStack(Deque<Command> redoStack) {
+		ShapeModel.redoStack = redoStack;
+	}
 }

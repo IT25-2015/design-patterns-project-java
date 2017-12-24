@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class LoggerModel {
-	ArrayList<String> logLines = new ArrayList<String>();
+	private ArrayList<String> logLines = new ArrayList<String>();
 
 	/**
 	 * Will add given line to log
@@ -36,6 +36,7 @@ public class LoggerModel {
 
 	public void setLogLines(ArrayList<String> logLines) {
 		this.logLines = logLines;
+		System.out.println(logLines.size());
 	}
 
 }
