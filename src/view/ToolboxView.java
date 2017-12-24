@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
@@ -14,7 +15,7 @@ public class ToolboxView extends JPanel {
 	GridBagConstraints gbc_btnUndo;
 	JButton btnRedo;
 	GridBagConstraints gbc_btnRedo;
-	JButton btnSelect;
+	JToggleButton tglbtnSelect;
 	GridBagConstraints gbc_btnSelect;
 	JButton btnDelete;
 	GridBagConstraints gbc_btnDelete;
@@ -45,12 +46,12 @@ public class ToolboxView extends JPanel {
 		gbc_btnRedo.gridy = 0;
 		add(btnRedo, gbc_btnRedo);
 
-		btnSelect = new JButton("Select");
+		tglbtnSelect = new JToggleButton("Select");
 		gbc_btnSelect = new GridBagConstraints();
 		gbc_btnSelect.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSelect.gridx = 10;
 		gbc_btnSelect.gridy = 0;
-		add(btnSelect, gbc_btnSelect);
+		add(tglbtnSelect, gbc_btnSelect);
 
 		btnDelete = new JButton("Delete");
 		gbc_btnDelete = new GridBagConstraints();
@@ -80,8 +81,8 @@ public class ToolboxView extends JPanel {
 		return gbc_btnRedo;
 	}
 
-	public JButton getBtnSelect() {
-		return btnSelect;
+	public JToggleButton getTglBtnSelect() {
+		return tglbtnSelect;
 	}
 
 	public GridBagConstraints getGbc_btnSelect() {

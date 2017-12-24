@@ -35,7 +35,7 @@ public class App {
 
 					frame.setCanvasController(canvasController);
 					frame.setInformationPaneController(new InformationPaneController());
-					frame.setToolboxController(new ToolboxController());
+					frame.setToolboxController(new ToolboxController(model, frame));
 					frame.setMfController(new MenuFileController(frame, model, logger.getLoggerModel()));
 
 					frame.getCanvasView().setModel(model);

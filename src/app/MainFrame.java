@@ -2,6 +2,8 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -92,6 +94,11 @@ public class MainFrame extends JFrame {
 				toolboxController.handleRedoBtn();
 			}
 		});
+		headerWrapperView.getToolboxView().getTglBtnSelect().addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent ev) {
+				toolboxController.handleSelectBtnStateChange(ev);
+			}
+		});
 
 		// CanvasView related stuff
 		canvasView.setBackground(Color.WHITE);
@@ -99,7 +106,10 @@ public class MainFrame extends JFrame {
 		canvasView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				canvasController.handleCanvasClick(e);
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
+					canvasController.handleCanvasClick(e);
+				else
+					toolboxController.handleSelect(e);
 			}
 		});
 
