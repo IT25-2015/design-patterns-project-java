@@ -43,7 +43,9 @@ public class MenuFileController implements Serializable {
 		bundle.add(ShapeModel.getUndoStack());
 		bundle.add(ShapeModel.getRedoStack());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
-		manager.exportData(bundle, FileOperationsHelper.showFileDialog("drwg"));
+		String path = FileOperationsHelper.showFileDialog("drwg");
+		if (path != null)
+			manager.exportData(bundle, path);
 	}
 
 	/**
@@ -54,7 +56,9 @@ public class MenuFileController implements Serializable {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
-		manager.exportData(bundle, FileOperationsHelper.showFileDialog("log"));
+		String path = FileOperationsHelper.showFileDialog("drwg");
+		if (path != null)
+			manager.exportData(bundle, FileOperationsHelper.showFileDialog("log"));
 	}
 
 	/**
@@ -63,23 +67,30 @@ public class MenuFileController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void handleImportFromLog() {
 		ImportManager manager = new ImportManager(new LoadLogFromFile());
-		ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("log"));
-		for (String s : (ArrayList<String>) bundle.get(0)) {
-			// TODO Implement this function fully
-			Logger.getInstance().log("IMPORT", s, false);
+		String path = FileOperationsHelper.showFileDialog("drwg");
+		if (path != null) {
+
+			ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("log"));
+			for (String s : (ArrayList<String>) bundle.get(0)) {
+				// TODO Implement this function fully
+				Logger.getInstance().log("IMPORT", s, false);
+			}
 		}
 	}
-	
+
 	/**
 	 * Imports whole drawing from serialized file with .drwg extension
 	 */
 	@SuppressWarnings("unchecked")
 	public void handleImportFromFile() {
 		ImportManager manager = new ImportManager(new LoadDrawingFromFile());
-		ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("drwg"));
-		model.setShapesList((ArrayList<Shape>) bundle.get(0));
-		ShapeModel.setUndoStack((Deque<Command>) bundle.get(1));
-		ShapeModel.setRedoStack((Deque<Command>) bundle.get(2));
+		String path = FileOperationsHelper.showFileDialog("drwg");
+		if (path != null) {
+			ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("drwg"));
+			model.setShapesList((ArrayList<Shape>) bundle.get(0));
+			ShapeModel.setUndoStack((Deque<Command>) bundle.get(1));
+			ShapeModel.setRedoStack((Deque<Command>) bundle.get(2));
+		}
 	}
 
 }

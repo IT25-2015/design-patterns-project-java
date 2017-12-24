@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import util.Logger;
 
-
 public class SerializeShapesToFile implements Exporter {
 
 	/**
@@ -14,9 +13,9 @@ public class SerializeShapesToFile implements Exporter {
 	 */
 	@Override
 	public void exportData(ArrayList<Object> objects, String path) {
-		if(path == null) return;
-		try (ObjectOutputStream oos =
-				new ObjectOutputStream(new FileOutputStream(path))) {
+		if (path == null)
+			return;
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))) {
 
 			oos.writeObject(objects);
 			Logger.getInstance().log("All shapes have been exported to path " + path, true);
