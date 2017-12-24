@@ -1,9 +1,6 @@
 package app;
 
-import java.awt.EventQueue;
-
 import javax.swing.DefaultListModel;
-import javax.swing.UIManager;
 
 import controller.CanvasController;
 import controller.InformationPaneController;

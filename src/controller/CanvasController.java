@@ -11,6 +11,11 @@ import shapes.point.AddPoint;
 import shapes.point.Point;
 
 public class CanvasController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7683586572386187582L;
 	private MainFrame frame;
 	private ShapeModel model;
 

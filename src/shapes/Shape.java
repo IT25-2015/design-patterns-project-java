@@ -5,9 +5,12 @@ import java.awt.Graphics;
 import java.io.Serializable;
 import java.util.Observable;
 
-@SuppressWarnings("serial")
 public abstract class Shape extends Observable implements Comparable<Shape>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3322545285228451945L;
 	private Color color = Color.BLACK;
 	private boolean selected;
 

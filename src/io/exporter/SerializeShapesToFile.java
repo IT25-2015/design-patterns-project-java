@@ -2,13 +2,12 @@ package io.exporter;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import util.Logger;
 
-@SuppressWarnings("serial")
-public class SerializeShapesToFile implements Exporter, Serializable {
+
+public class SerializeShapesToFile implements Exporter {
 
 	/**
 	 * Will serialize given array list and save it to path given

@@ -6,6 +6,10 @@ import model.ShapeModel;
 import shapes.Command;
 
 public class AddPoint implements Command {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7780529610976885676L;
 	private ShapeModel model;
 	private Point point;
 

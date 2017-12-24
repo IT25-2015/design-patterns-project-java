@@ -3,6 +3,10 @@ package shapes.point;
 import shapes.Command;
 
 public class UpdatePoint implements Command {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6507203937849837768L;
 	private Point original;
 	private Point newState;
 	private Point oldState = new Point();
