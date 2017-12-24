@@ -160,4 +160,12 @@ public class MainFrame extends JFrame {
 		this.mfController = mfController;
 	}
 
+	public HeaderWrapperView getHeaderWrapperView() {
+		return headerWrapperView;
+	}
+
+	public MenuFileController getMfController() {
+		return mfController;
+	}
+
 }

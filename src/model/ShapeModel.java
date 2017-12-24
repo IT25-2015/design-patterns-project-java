@@ -9,6 +9,10 @@ import shapes.Command;
 import shapes.Shape;
 
 public class ShapeModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5650547213589215369L;
 	private ArrayList<Shape> shapesList = new ArrayList<Shape>();
 	private static Deque<Command> undoStack = new LinkedList<>();
 	private static Deque<Command> redoStack = new LinkedList<>();

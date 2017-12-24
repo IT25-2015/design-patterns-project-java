@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Deque;
 
@@ -17,7 +18,11 @@ import shapes.Shape;
 import util.FileOperationsHelper;
 import util.Logger;
 
-public class MenuFileController {
+public class MenuFileController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2216489104960003132L;
 	private MainFrame frame;
 	private ShapeModel model;
 	private LoggerModel loggerModel;

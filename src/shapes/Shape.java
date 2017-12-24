@@ -3,8 +3,10 @@ package shapes;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
+import java.util.Observable;
 
-public abstract class Shape implements Comparable<Shape>, Serializable {
+@SuppressWarnings("serial")
+public abstract class Shape extends Observable implements Comparable<Shape>, Serializable {
 
 	private Color color = Color.BLACK;
 	private boolean selected;
@@ -53,6 +55,9 @@ public abstract class Shape implements Comparable<Shape>, Serializable {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+		setChanged();
+		notifyObservers();
+		
 	}
 
 }

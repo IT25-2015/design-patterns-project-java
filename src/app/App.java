@@ -13,6 +13,8 @@ import model.ShapeModel;
 import util.Logger;
 
 public class App {
+	private static ShapeModel model;
+	private static MainFrame frame;
 
 	/**
 	 * Initializes everything needed for app to start
@@ -20,30 +22,28 @@ public class App {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ShapeModel model = new ShapeModel();
+		model = new ShapeModel();
 		Logger logger = Logger.getInstance();
 		DefaultListModel<String> dlmLogger = logger.getDlmLogger();
 
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		frame = new MainFrame(800, 600);
+		CanvasController canvasController = new CanvasController(frame, model);
+		frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
 
-					MainFrame frame = new MainFrame(800, 600);
-					CanvasController canvasController = new CanvasController(frame, model);
-					frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
+		frame.setCanvasController(canvasController);
+		frame.setInformationPaneController(new InformationPaneController());
+		frame.setToolboxController(new ToolboxController(model, frame));
+		frame.setMfController(new MenuFileController(frame, model, logger.getLoggerModel()));
 
-					frame.setCanvasController(canvasController);
-					frame.setInformationPaneController(new InformationPaneController());
-					frame.setToolboxController(new ToolboxController(model, frame));
-					frame.setMfController(new MenuFileController(frame, model, logger.getLoggerModel()));
+		frame.getCanvasView().setModel(model);
+	}
 
-					frame.getCanvasView().setModel(model);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public static ShapeModel getModel() {
+		return model;
+	}
+
+	public static MainFrame getFrame() {
+		return frame;
 	}
 
 }

@@ -54,6 +54,7 @@ public class ToolboxView extends JPanel {
 		add(tglbtnSelect, gbc_btnSelect);
 
 		btnDelete = new JButton("Delete");
+		btnDelete.setEnabled(false);
 		gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridx = 11;
 		gbc_btnDelete.gridy = 0;

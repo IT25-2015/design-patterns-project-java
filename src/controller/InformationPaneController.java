@@ -1,10 +1,16 @@
 package controller;
 
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 import javax.swing.JLabel;
 
-public class InformationPaneController {
+public class InformationPaneController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1045257280694886628L;
 
 	/**
 	 * Will be called on mouse movement, updates JLabel in information pane to match

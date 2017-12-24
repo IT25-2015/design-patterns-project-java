@@ -16,6 +16,7 @@ public class Logger {
 	/**
 	 * Will add given string to logger model (List)
 	 * 
+	 * @param action
 	 * @param s
 	 * @param toConsole
 	 *            if true it will print to console as well
@@ -37,7 +38,7 @@ public class Logger {
 	}
 
 	/**
-	 * Return singleton object Thread safe also using Lazy Loading
+	 * Return Thread safe singleton object also using Lazy Loading
 	 * 
 	 * @return Logger
 	 */

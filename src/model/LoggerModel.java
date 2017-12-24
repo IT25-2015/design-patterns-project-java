@@ -1,8 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LoggerModel {
+public class LoggerModel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5123950954921580008L;
 	private ArrayList<String> logLines = new ArrayList<String>();
 
 	/**

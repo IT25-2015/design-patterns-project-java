@@ -5,10 +5,13 @@ import java.awt.Graphics;
 
 import shapes.Moveable;
 import shapes.Shape;
+import shapes.ShapeObserver;
 
+@SuppressWarnings("serial")
 public class Point extends Shape implements Moveable {
 	private int x;
 	private int y;
+	private ShapeObserver observer;
 
 	public Point() {
 
@@ -17,11 +20,17 @@ public class Point extends Shape implements Moveable {
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
+		observer = new ShapeObserver();
+		observer.setShape(this);
+		addObserver(observer);
 	}
 
 	public Point(int x, int y, Color color) {
 		this(x, y);
 		setColor(color);
+		observer = new ShapeObserver();
+		observer.setShape(this);
+		addObserver(observer);
 	}
 
 	/**

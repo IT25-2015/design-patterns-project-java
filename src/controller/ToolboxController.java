@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 
 import app.MainFrame;
 import model.ShapeModel;
@@ -9,8 +10,12 @@ import shapes.Shape;
 import util.Logger;
 import util.UndoRedoHelper;
 
-public class ToolboxController {
+public class ToolboxController implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2584337498381831016L;
 	ShapeModel model;
 	MainFrame frame;
 
@@ -49,8 +54,7 @@ public class ToolboxController {
 			}
 		}
 		if (!shapeFound) {
-			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()),
-					true);
+			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()), true);
 			for (Shape s : model.getShapesList()) {
 				s.setSelected(false);
 				frame.repaint();
