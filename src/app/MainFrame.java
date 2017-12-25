@@ -2,6 +2,7 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
@@ -38,6 +39,9 @@ public class MainFrame extends JFrame {
 		// Frame related stuff
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(width, height);
+		// Calculate center of screen and set frame there
+		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - getWidth() / 2,
+				(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - getHeight() / 2);
 		setVisible(true);
 		setTitle("Aleksandar Babic IT53/2015 - Dizajn Paterni");
 

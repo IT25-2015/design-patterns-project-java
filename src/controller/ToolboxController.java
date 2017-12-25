@@ -15,6 +15,7 @@ import shapes.Command;
 import shapes.Shape;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
+import shapes.point.UpdatePoint;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
@@ -39,6 +40,7 @@ public class ToolboxController implements Serializable {
 	 */
 	public void handleUndoBtn() {
 		UndoRedoHelper.undoAction();
+		frame.repaint();
 	}
 
 	/**
@@ -46,6 +48,7 @@ public class ToolboxController implements Serializable {
 	 */
 	public void handleRedoBtn() {
 		UndoRedoHelper.redoAction();
+		frame.repaint();
 	}
 
 	/**
@@ -91,12 +94,17 @@ public class ToolboxController implements Serializable {
 	public void handleModify() {
 		Shape selected = getSelectedShape();
 		if (selected != null && selected instanceof Shape) {
-			if(selected instanceof Point) {
+			if (selected instanceof Point) {
 				Point selectedPt = (Point) selected;
-				System.out.println("Starting dialog");
 				PointModifyDialog modifyDialog = new PointModifyDialog(selectedPt);
-				System.out.println("Dialog finished");
-				System.out.println(modifyDialog.getPt());
+				Point modifiedPt = modifyDialog.getPt();
+				if (selectedPt.getX() != modifiedPt.getX() || selectedPt.getY() != modifiedPt.getY()
+						|| selectedPt.getColor() != modifiedPt.getColor()) {
+					Command updatePt = new UpdatePoint(selectedPt, modifiedPt);
+					ShapeModel.getUndoStack().offerLast(updatePt);
+					updatePt.execute();
+					frame.repaint();
+				}
 			}
 		}
 	}

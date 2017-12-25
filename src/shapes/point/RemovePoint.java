@@ -20,12 +20,12 @@ public class RemovePoint implements Command {
 	@Override
 	public void execute() {
 		model.remove(point);
-		Logger.getInstance().log("RemovePoint_execute",point.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", point.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(point);
-		Logger.getInstance().log("RemovePoint_unexecute",point.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", point.toString(), true);
 	}
 }

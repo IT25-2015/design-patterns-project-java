@@ -1,6 +1,7 @@
 package shapes.point;
 
 import shapes.Command;
+import util.Logger;
 
 public class UpdatePoint implements Command {
 	/**
@@ -25,6 +26,8 @@ public class UpdatePoint implements Command {
 		original.setX(newState.getX());
 		original.setY(newState.getY());
 		original.setColor(newState.getColor());
+
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
 	}
 
 	@Override
@@ -32,5 +35,7 @@ public class UpdatePoint implements Command {
 		original.setX(oldState.getX());
 		original.setY(oldState.getY());
 		original.setColor(oldState.getColor());
+		
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
 	}
 }

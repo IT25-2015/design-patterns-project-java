@@ -21,12 +21,12 @@ public class AddPoint implements Command {
 	@Override
 	public void execute() {
 		model.add(point);
-		Logger.getInstance().log("AddPoint_execute",point.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", point.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.remove(point);
-		Logger.getInstance().log("AddPoint_unexecute",point.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", point.toString(), true);
 	}
 }
