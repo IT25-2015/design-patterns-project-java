@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import util.DialogsHelper;
 import util.Logger;
 
 public class SerializeShapesToFile implements Exporter {
@@ -21,8 +22,10 @@ public class SerializeShapesToFile implements Exporter {
 			Logger.getInstance().log("All shapes have been exported to path " + path, true);
 
 		} catch (Exception ex) {
+			String msg = "Error while exporting shapes, error message:" + ex.getMessage();
 			ex.printStackTrace();
-			Logger.getInstance().log("Error while exporting shapes, error message:" + ex.getMessage(), true);
+			DialogsHelper.showErrorMessage(msg);
+			Logger.getInstance().log(msg, true);
 		}
 	}
 

@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
+import util.DialogsHelper;
 import util.Logger;
 
 public class SaveLogToFile implements Exporter {
@@ -35,12 +36,18 @@ public class SaveLogToFile implements Exporter {
 				try {
 					Files.write(pathObj, strToBytes, StandardOpenOption.APPEND);
 				} catch (IOException e) {
+					String msg = "Error while exporting log file, error message: " + e.getMessage();
+					DialogsHelper.showErrorMessage(msg);
+					Logger.getInstance().log(msg, true);
 					e.printStackTrace();
 				}
 			}
 			Logger.getInstance().log("Log has been exported to " + path, true);
 		} catch (Exception e) {
-			Logger.getInstance().log("Error while exporting log file, error message: " + e.getMessage(), true);
+			String msg = "Error while exporting log file, error message: " + e.getMessage();
+			DialogsHelper.showErrorMessage(msg);
+			Logger.getInstance().log(msg, true);
+			e.printStackTrace();
 		}
 
 	}

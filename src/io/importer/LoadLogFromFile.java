@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
+import util.DialogsHelper;
 import util.Logger;
 
 public class LoadLogFromFile implements Importer {
@@ -22,9 +23,10 @@ public class LoadLogFromFile implements Importer {
 			bundle.add(logLines);
 			Logger.getInstance().log("Log from path " + path + " has been imported successfully", true);
 		} catch (IOException e) {
+			String msg = "Error while importing log from path " + path + " , Error message : " + e.getMessage();
 			e.printStackTrace();
-			Logger.getInstance()
-					.log("Error while importing log from path " + path + " , Error message : " + e.getMessage(), true);
+			DialogsHelper.showErrorMessage(msg);
+			Logger.getInstance().log(msg, true);
 		}
 		return bundle;
 	}

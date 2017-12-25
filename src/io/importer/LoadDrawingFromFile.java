@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
+import util.DialogsHelper;
 import util.Logger;
 
 public class LoadDrawingFromFile implements Importer {
@@ -18,8 +19,10 @@ public class LoadDrawingFromFile implements Importer {
 			return (ArrayList<Object>) ois.readObject();
 
 		} catch (Exception ex) {
+			String msg = "Error while importing shapes, error message:" + ex.getMessage();
 			ex.printStackTrace();
-			Logger.getInstance().log("Error while importing shapes, error message:" + ex.getMessage(), true);
+			DialogsHelper.showErrorMessage(msg);
+			Logger.getInstance().log(msg, true);
 		}
 		return null;
 	}
