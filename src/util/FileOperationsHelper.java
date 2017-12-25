@@ -26,7 +26,6 @@ public class FileOperationsHelper {
 		jfc.setFileFilter(new FileNameExtensionFilter("*." + filter, filter));
 
 		int returnValue = jfc.showOpenDialog(null);
-
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = jfc.getSelectedFile();
 			pattern = Pattern.compile((filter.toLowerCase().equals("log")) ? LOG_PATTERN : DRAWING_PATTERN);

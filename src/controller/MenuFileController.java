@@ -56,9 +56,9 @@ public class MenuFileController implements Serializable {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
-		String path = FileOperationsHelper.showFileDialog("drwg");
+		String path = FileOperationsHelper.showFileDialog("log");
 		if (path != null)
-			manager.exportData(bundle, FileOperationsHelper.showFileDialog("log"));
+			manager.exportData(bundle, path);
 	}
 
 	/**
@@ -67,10 +67,10 @@ public class MenuFileController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void handleImportFromLog() {
 		ImportManager manager = new ImportManager(new LoadLogFromFile());
-		String path = FileOperationsHelper.showFileDialog("drwg");
+		String path = FileOperationsHelper.showFileDialog("log");
 		if (path != null) {
 
-			ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("log"));
+			ArrayList<Object> bundle = manager.importData(path);
 			for (String s : (ArrayList<String>) bundle.get(0)) {
 				// TODO Implement this function fully
 				Logger.getInstance().log("IMPORT", s, false);
@@ -86,10 +86,12 @@ public class MenuFileController implements Serializable {
 		ImportManager manager = new ImportManager(new LoadDrawingFromFile());
 		String path = FileOperationsHelper.showFileDialog("drwg");
 		if (path != null) {
-			ArrayList<Object> bundle = manager.importData(FileOperationsHelper.showFileDialog("drwg"));
+			ArrayList<Object> bundle = manager.importData(path);
 			model.setShapesList((ArrayList<Shape>) bundle.get(0));
 			ShapeModel.setUndoStack((Deque<Command>) bundle.get(1));
 			ShapeModel.setRedoStack((Deque<Command>) bundle.get(2));
+			Logger.getInstance().log("Imported drawing from " + path, true);
+			frame.repaint();
 		}
 	}
 
