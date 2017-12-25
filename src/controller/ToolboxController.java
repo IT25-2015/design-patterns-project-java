@@ -15,6 +15,7 @@ import shapes.Command;
 import shapes.Shape;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
+import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
 
@@ -82,19 +83,23 @@ public class ToolboxController implements Serializable {
 		if (shapesToDelete.size() == 0)
 			return;
 		else if (shapesToDelete.size() == 1) {
-			// TODO implement warning dialog
-			Command removePt = new RemovePoint(model, (Point) shapesToDelete.get(0));
-			ShapeModel.getUndoStack().offerLast(removePt);
-			removePt.execute();
-			frame.repaint();
-		} else {
-			// TODO implement multiplie shape warning dialog
-			for (Shape s : shapesToDelete) {
-				Command removePt = new RemovePoint(model, (Point) s);
+			if (DialogsHelper
+					.askUserToConfirm("Are you sure you want to remove this " + Point.class.getSimpleName() + "?")) {
+				Command removePt = new RemovePoint(model, (Point) shapesToDelete.get(0));
 				ShapeModel.getUndoStack().offerLast(removePt);
 				removePt.execute();
+				frame.repaint();
 			}
-			frame.repaint();
+		} else {
+			if (DialogsHelper
+					.askUserToConfirm("You selected more than 1 shape, are you sure you want to delete them all?")) {
+				for (Shape s : shapesToDelete) {
+					Command removePt = new RemovePoint(model, (Point) s);
+					ShapeModel.getUndoStack().offerLast(removePt);
+					removePt.execute();
+				}
+				frame.repaint();
+			}
 		}
 	}
 

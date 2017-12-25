@@ -2,6 +2,7 @@ package shapes.point;
 
 import model.ShapeModel;
 import shapes.Command;
+import util.Logger;
 
 public class RemovePoint implements Command {
 	/**
@@ -19,10 +20,12 @@ public class RemovePoint implements Command {
 	@Override
 	public void execute() {
 		model.remove(point);
+		Logger.getInstance().log("RemovePoint_execute",point.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(point);
+		Logger.getInstance().log("RemovePoint_unexecute",point.toString(), true);
 	}
 }
