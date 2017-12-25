@@ -24,7 +24,6 @@ public class CanvasView extends JPanel {
 				it.next().draw(g);
 			}
 		}
-		repaint();
 	}
 
 	public void setModel(ShapeModel model) {

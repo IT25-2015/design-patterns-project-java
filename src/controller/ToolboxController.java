@@ -18,6 +18,7 @@ import shapes.point.RemovePoint;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
+import util.modifyDialogs.PointModifyDialog;
 
 public class ToolboxController implements Serializable {
 
@@ -67,6 +68,35 @@ public class ToolboxController implements Serializable {
 			for (Shape s : model.getShapesList()) {
 				s.setSelected(false);
 				frame.repaint();
+			}
+		}
+	}
+
+	/**
+	 * Returns selected shape from shape list
+	 * 
+	 * @return Shape
+	 */
+	private Shape getSelectedShape() {
+		for (Shape s : model.getShapesList()) {
+			if (s.isSelected())
+				return s;
+		}
+		return null;
+	}
+
+	/**
+	 * Will handle event of shape modify
+	 */
+	public void handleModify() {
+		Shape selected = getSelectedShape();
+		if (selected != null && selected instanceof Shape) {
+			if(selected instanceof Point) {
+				Point selectedPt = (Point) selected;
+				System.out.println("Starting dialog");
+				PointModifyDialog modifyDialog = new PointModifyDialog(selectedPt);
+				System.out.println("Dialog finished");
+				System.out.println(modifyDialog.getPt());
 			}
 		}
 	}
