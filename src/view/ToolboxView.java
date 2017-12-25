@@ -22,6 +22,7 @@ public class ToolboxView extends JPanel {
 	private GridBagConstraints gbc_btnDelete;
 	private JButton btnInnerColor;
 	private JButton btnOuterColor;
+	private JButton btnModify;
 
 	/**
 	 * Create the panel.
@@ -48,14 +49,14 @@ public class ToolboxView extends JPanel {
 		gbc_btnRedo.gridx = 1;
 		gbc_btnRedo.gridy = 0;
 		add(btnRedo, gbc_btnRedo);
-		
+
 		btnInnerColor = new JButton("");
 		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
 		gbc_btnInnerColor.insets = new Insets(0, 0, 0, 5);
 		gbc_btnInnerColor.gridx = 5;
 		gbc_btnInnerColor.gridy = 0;
 		add(btnInnerColor, gbc_btnInnerColor);
-		
+
 		btnOuterColor = new JButton("");
 		btnOuterColor.setBackground(Color.BLACK);
 		GridBagConstraints gbc_btnOuterColor = new GridBagConstraints();
@@ -67,9 +68,17 @@ public class ToolboxView extends JPanel {
 		tglbtnSelect = new JToggleButton("Select");
 		gbc_btnSelect = new GridBagConstraints();
 		gbc_btnSelect.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSelect.gridx = 10;
+		gbc_btnSelect.gridx = 9;
 		gbc_btnSelect.gridy = 0;
 		add(tglbtnSelect, gbc_btnSelect);
+
+		btnModify = new JButton("Modify");
+		btnModify.setEnabled(false);
+		GridBagConstraints gbc_btnModify = new GridBagConstraints();
+		gbc_btnModify.insets = new Insets(0, 0, 0, 5);
+		gbc_btnModify.gridx = 10;
+		gbc_btnModify.gridy = 0;
+		add(btnModify, gbc_btnModify);
 
 		btnDelete = new JButton("Delete");
 		btnDelete.setEnabled(false);
@@ -126,6 +135,10 @@ public class ToolboxView extends JPanel {
 
 	public JButton getBtnOuterColor() {
 		return btnOuterColor;
+	}
+
+	public JButton getBtnModify() {
+		return btnModify;
 	}
 
 }

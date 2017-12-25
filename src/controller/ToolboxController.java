@@ -91,8 +91,8 @@ public class ToolboxController implements Serializable {
 				frame.repaint();
 			}
 		} else {
-			if (DialogsHelper
-					.askUserToConfirm("You selected more than 1 shape, are you sure you want to delete them all?")) {
+			if (DialogsHelper.askUserToConfirm(String.format(
+					"You selected %d shapes, are you sure you want to delete them all?", shapesToDelete.size()))) {
 				for (Shape s : shapesToDelete) {
 					Command removePt = new RemovePoint(model, (Point) s);
 					ShapeModel.getUndoStack().offerLast(removePt);

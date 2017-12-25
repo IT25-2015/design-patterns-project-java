@@ -17,7 +17,6 @@ public class ShapeObserver implements Observer, Serializable {
 	private ShapeModel model = App.getModel();
 	private MainFrame frame = App.getFrame();
 	private Shape shape;
-	
 
 	/**
 	 * Callback which gets called when some shape changed selected state Will check
@@ -25,17 +24,17 @@ public class ShapeObserver implements Observer, Serializable {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("Callback!");
-		boolean foundSelected = false;
-		for (Shape s : model.getShapesList()) {
-			if (s.isSelected()) {
-				foundSelected = true;
-				break;
+		if (arg0 == shape) {
+			int foundCount = 0;
+			for (Shape s : model.getShapesList()) {
+				if (s.isSelected()) {
+					foundCount++;
+				}
 			}
+			frame.getHeaderWrapperView().getToolboxView().getBtnDelete().setEnabled(foundCount > 0);
+			frame.getHeaderWrapperView().getToolboxView().getBtnModify().setEnabled(foundCount == 1);
 		}
-		frame.getHeaderWrapperView().getToolboxView().getBtnDelete().setEnabled(foundSelected);
 	}
-
 
 	public void setShape(Shape shape) {
 		this.shape = shape;
