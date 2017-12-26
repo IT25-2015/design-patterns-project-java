@@ -20,12 +20,14 @@ import view.FooterWrapperView;
 import view.HeaderWrapperView;
 import view.InformationPaneView;
 import view.LoggerView;
+import view.ShapePickerView;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 	private HeaderWrapperView headerWrapperView = new HeaderWrapperView();
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
+	private ShapePickerView shapePickerView = new ShapePickerView();
 
 	private ToolboxController toolboxController;
 	private CanvasController canvasController;
@@ -134,14 +136,28 @@ public class MainFrame extends JFrame {
 		canvasView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()
+						&& shapePickerView.getRdbtnPoint().isSelected()) {
 					canvasController.handleCanvasClick(e,
 							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
 							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
-				else
+
+				} else if (headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()) {
 					toolboxController.handleSelect(e);
+				}
 			}
 		});
+		canvasView.addMouseMotionListener(new MouseMotionAdapter() {
+
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				System.out.println("Dragged!");
+			}
+
+		});
+
+		// ShapePicker related stuff
+		getContentPane().add(shapePickerView, BorderLayout.WEST);
 
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
@@ -196,6 +212,14 @@ public class MainFrame extends JFrame {
 
 	public MenuFileController getMfController() {
 		return mfController;
+	}
+
+	public ShapePickerView getShapePickerView() {
+		return shapePickerView;
+	}
+
+	public void setShapePickerView(ShapePickerView shapePickerView) {
+		this.shapePickerView = shapePickerView;
 	}
 
 }
