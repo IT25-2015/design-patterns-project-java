@@ -13,6 +13,8 @@ import app.MainFrame;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.line.Line;
+import shapes.line.RemoveLine;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
@@ -121,20 +123,43 @@ public class ToolboxController implements Serializable {
 		if (shapesToDelete.size() == 0)
 			return;
 		else if (shapesToDelete.size() == 1) {
-			if (DialogsHelper
-					.askUserToConfirm("Are you sure you want to remove this " + Point.class.getSimpleName() + "?")) {
-				Command removePt = new RemovePoint(model, (Point) shapesToDelete.get(0));
-				ShapeModel.getUndoStack().offerLast(removePt);
-				removePt.execute();
+
+			Command removeCmd = null;
+			Boolean confirmed = false;
+			// Detect what kind of shape is to be deleted
+			if (shapesToDelete.get(0) instanceof Point) {
+				removeCmd = new RemovePoint(model, (Point) shapesToDelete.get(0));
+				confirmed = DialogsHelper
+						.askUserToConfirm("Are you sure you want to remove this " + Point.class.getSimpleName() + "?");
+			} else if (shapesToDelete.get(0) instanceof Line) {
+				removeCmd = new RemoveLine(model, (Line) shapesToDelete.get(0));
+				confirmed = DialogsHelper
+						.askUserToConfirm("Are you sure you want to remove this " + Line.class.getSimpleName() + "?");
+			}
+
+			// If user confirmed popup (JOptionPane)
+			if (confirmed) {
+				shapesToDelete.get(0).setSelected(false);
+				ShapeModel.getUndoStack().offerLast(removeCmd);
+				removeCmd.execute();
 				frame.repaint();
 			}
-		} else {
+
+		} else { // Will get to else if there are more than 1 shapes to remove
+
 			if (DialogsHelper.askUserToConfirm(String.format(
 					"You selected %d shapes, are you sure you want to delete them all?", shapesToDelete.size()))) {
+				Command removeCmd = null;
 				for (Shape s : shapesToDelete) {
-					Command removePt = new RemovePoint(model, (Point) s);
-					ShapeModel.getUndoStack().offerLast(removePt);
-					removePt.execute();
+					s.setSelected(false); // Fix UNDO getting selected shape
+					if (s instanceof Point) {
+						removeCmd = new RemovePoint(model, (Point) s);
+					} else if (s instanceof Line) {
+						removeCmd = new RemoveLine(model, (Line) s);
+					}
+
+					ShapeModel.getUndoStack().offerLast(removeCmd);
+					removeCmd.execute();
 				}
 				frame.repaint();
 			}
