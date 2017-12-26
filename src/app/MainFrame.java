@@ -136,8 +136,7 @@ public class MainFrame extends JFrame {
 		canvasView.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()
-						&& shapePickerView.getRdbtnPoint().isSelected()) {
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()) {
 					canvasController.handleCanvasClick(e,
 							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
 							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
@@ -146,12 +145,24 @@ public class MainFrame extends JFrame {
 					toolboxController.handleSelect(e);
 				}
 			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()) { 
+					canvasController.handleCanvasRelease(e,
+							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
+							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
+				}
+			}
 		});
 		canvasView.addMouseMotionListener(new MouseMotionAdapter() {
 
 			@Override
-			public void mouseDragged(MouseEvent arg0) {
-				System.out.println("Dragged!");
+			public void mouseDragged(MouseEvent e) {
+				if(!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
+				canvasController.handleCanvasDrag(e,
+						headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
+						headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
 			}
 
 		});

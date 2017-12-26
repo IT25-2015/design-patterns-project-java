@@ -4,20 +4,32 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import shapes.Shape;
+import shapes.ShapeObserver;
 import shapes.point.Point;
 
 public class Line extends Shape {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2677129039763167445L;
 	private Point ptStart;
 	private Point ptEnd;
+	private ShapeObserver observer;
 
 	public Line(Point ptStart, Point ptEnd) {
 		this.ptStart = ptStart;
 		this.ptEnd = ptEnd;
+		observer = new ShapeObserver();
+		observer.setShape(this);
+		addObserver(observer);
 	}
 
 	public Line(Point ptStart, Point ptEnd, Color color) {
 		this(ptStart, ptEnd);
 		setColor(color);
+		observer = new ShapeObserver();
+		observer.setShape(this);
+		addObserver(observer);
 	}
 
 	public Point lineCenter() {
@@ -32,7 +44,7 @@ public class Line extends Shape {
 
 	@Override
 	public String toString() {
-		return String.format("Line(startX=%d,startY=%d,endX=%d,endY=$d,color=%s)", ptStart.getX(), ptStart.getY(),
+		return String.format("Line(startX=%d,startY=%d,endX=%d,endY=%d,color=%s)", ptStart.getX(), ptStart.getY(),
 				ptEnd.getX(), ptEnd.getY(), getColor());
 	}
 
