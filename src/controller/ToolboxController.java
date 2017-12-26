@@ -15,12 +15,14 @@ import shapes.Command;
 import shapes.Shape;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
+import shapes.line.UpdateLine;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
+import util.modifyDialogs.LineModifyDialog;
 import util.modifyDialogs.PointModifyDialog;
 
 public class ToolboxController implements Serializable {
@@ -100,11 +102,20 @@ public class ToolboxController implements Serializable {
 				Point selectedPt = (Point) selected;
 				PointModifyDialog modifyDialog = new PointModifyDialog(selectedPt);
 				Point modifiedPt = modifyDialog.getPt();
-				if (selectedPt.getX() != modifiedPt.getX() || selectedPt.getY() != modifiedPt.getY()
-						|| selectedPt.getColor() != modifiedPt.getColor()) {
+				if (!selectedPt.equals(modifiedPt) || selectedPt.getColor() != modifiedPt.getColor()) {
 					Command updatePt = new UpdatePoint(selectedPt, modifiedPt);
 					ShapeModel.getUndoStack().offerLast(updatePt);
 					updatePt.execute();
+					frame.repaint();
+				}
+			} else if (selected instanceof Line) {
+				Line selectedLine = (Line) selected;
+				LineModifyDialog modifyDialog = new LineModifyDialog(selectedLine);
+				Line modifiedLine = modifyDialog.getLine();
+				if (!selectedLine.equals(modifiedLine) || selectedLine.getColor() != modifiedLine.getColor()) {
+					Command updateLine = new UpdateLine(selectedLine, modifiedLine);
+					ShapeModel.getUndoStack().offerLast(updateLine);
+					updateLine.execute();
 					frame.repaint();
 				}
 			}

@@ -32,6 +32,10 @@ public class Line extends Shape {
 		addObserver(observer);
 	}
 
+	public Line() {
+		
+	}
+
 	public Point lineCenter() {
 		int centerX = (ptStart.getX() + ptEnd.getX()) / 2;
 		int centerY = (ptStart.getY() + ptEnd.getY()) / 2;
