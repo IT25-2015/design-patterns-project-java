@@ -42,7 +42,7 @@ public class UpdateLine implements Command {
 		original.getPtEnd().setX(oldState.getPtEnd().getX());
 		original.getPtEnd().setY(oldState.getPtEnd().getY());
 		original.setColor(oldState.getColor());
-		
+
 		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
 	}
 }
