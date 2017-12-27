@@ -51,6 +51,7 @@ public class ToolboxView extends JPanel {
 		add(btnRedo, gbc_btnRedo);
 
 		btnInnerColor = new JButton("");
+		btnInnerColor.setBackground(Color.WHITE);
 		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
 		gbc_btnInnerColor.insets = new Insets(0, 0, 0, 5);
 		gbc_btnInnerColor.gridx = 5;

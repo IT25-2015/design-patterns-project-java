@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 
 import model.ShapeModel;
 import shapes.Shape;
+import shapes.SurfaceShape;
+import shapes.circle.Circle;
 
 @SuppressWarnings("serial")
 public class CanvasView extends JPanel {

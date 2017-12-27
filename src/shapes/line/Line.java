@@ -27,9 +27,6 @@ public class Line extends Shape {
 	public Line(Point ptStart, Point ptEnd, Color color) {
 		this(ptStart, ptEnd);
 		setColor(color);
-		observer = new ShapeObserver();
-		observer.setShape(this);
-		addObserver(observer);
 	}
 
 	public Line() {

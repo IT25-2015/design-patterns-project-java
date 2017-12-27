@@ -5,6 +5,7 @@ import java.awt.Graphics;
 
 import shapes.Moveable;
 import shapes.Shape;
+import shapes.ShapeObserver;
 import shapes.SurfaceShape;
 import shapes.line.Line;
 import shapes.point.Point;
@@ -16,6 +17,7 @@ public class Circle extends SurfaceShape implements Moveable {
 	private static final long serialVersionUID = 5510713369353881462L;
 	private Point center;
 	private int r;
+	private ShapeObserver observer;
 
 	public Circle() {
 	}
@@ -23,6 +25,9 @@ public class Circle extends SurfaceShape implements Moveable {
 	public Circle(Point center, int r) {
 		this.center = center;
 		this.r = r;
+		observer = new ShapeObserver();
+		observer.setShape(this);
+		addObserver(observer);
 	}
 
 	public Circle(Point center, int r, Color color) {
@@ -54,7 +59,7 @@ public class Circle extends SurfaceShape implements Moveable {
 
 	@Override
 	public String toString() {
-		return String.format("Line(X=%d,Y=%,r=,outercolor=%s,innercolor=%s)", center.getX(), center.getY(), r,
+		return String.format("Circle(X=%d,Y=%d,r=%d,outercolor=%s,innercolor=%s)", center.getX(), center.getY(), r,
 				getColor(), getInnerColor());
 	}
 
@@ -89,6 +94,7 @@ public class Circle extends SurfaceShape implements Moveable {
 	public void draw(Graphics g) {
 		g.setColor(getColor());
 		g.drawOval(center.getX() - r, center.getY() - r, 2 * r, r * 2);
+		fill(g);
 		if (isSelected())
 			selected(g);
 	}

@@ -10,6 +10,8 @@ import app.MainFrame;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.circle.AddCircle;
+import shapes.circle.Circle;
 import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.point.AddPoint;
@@ -19,6 +21,7 @@ public class CanvasController implements Serializable {
 	private ButtonModel selectedShapeTypeModel;
 	private ButtonModel pointModel;
 	private ButtonModel lineModel;
+	private ButtonModel circleModel;
 	private Point startDrawingPoint;
 	private Shape draggedShape;
 
@@ -36,6 +39,7 @@ public class CanvasController implements Serializable {
 		// Get models for shape buttons
 		pointModel = frame.getShapePickerView().getRdbtnPoint().getModel();
 		lineModel = frame.getShapePickerView().getRdbtnLine().getModel();
+		circleModel = frame.getShapePickerView().getRdbtnCircle().getModel();
 	}
 
 	/**
@@ -56,7 +60,7 @@ public class CanvasController implements Serializable {
 			point.execute();
 			ShapeModel.getUndoStack().offerLast(point);
 			frame.repaint();
-		} else if (selectedShapeTypeModel == lineModel) {
+		} else if (selectedShapeTypeModel == lineModel || selectedShapeTypeModel == circleModel) {
 			if (startDrawingPoint == null) {
 				startDrawingPoint = new Point(e.getX(), e.getY());
 			} else {
@@ -74,51 +78,62 @@ public class CanvasController implements Serializable {
 	 * @param outer
 	 */
 	public void handleCanvasDrag(MouseEvent e, Color inner, Color outer) {
-		
+
 		selectedShapeTypeModel = frame.getShapePickerView().getShapesGrp().getSelection();
-		
+
 		if (draggedShape != null) {
 			model.remove(draggedShape);
 			draggedShape = null;
 		}
 		if (startDrawingPoint == null) {
-			startDrawingPoint = new Point(e.getX(), e.getY(), outer);
+			startDrawingPoint = new Point(e.getX(), e.getY());
 		}
 		if (selectedShapeTypeModel == lineModel && startDrawingPoint != null) {
 			draggedShape = new Line(startDrawingPoint, new Point(e.getX(), e.getY()), outer);
+			model.add(draggedShape);
+			frame.repaint();
+		} else if (selectedShapeTypeModel == circleModel && startDrawingPoint != null) {
+			int startR = Math.abs(startDrawingPoint.getY() - e.getY()); // calculate r for circle
+			draggedShape = new Circle(startDrawingPoint, startR, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
 		}
 	}
 
 	/**
-	 * Will draw final shape when mouse is released (MouseReleased event)
-	 * Order of events MousePressed -> MouseDragged -> MouseReleased
+	 * Will draw final shape when mouse is released (MouseReleased event) Order of
+	 * events MousePressed -> MouseDragged -> MouseReleased
+	 * 
 	 * @param e
 	 * @param inner
 	 * @param outer
 	 */
 	public void handleCanvasRelease(MouseEvent e, Color inner, Color outer) {
-		
+
 		selectedShapeTypeModel = frame.getShapePickerView().getShapesGrp().getSelection();
-		
+
 		// Make sure that we have both starting point and dragged shape
 		if (startDrawingPoint != null && draggedShape != null) {
-			// Check what shape is selected 
+			// Remove preview shape
+			model.remove(draggedShape);
+			frame.repaint();
+			// Check what shape is selected
 			if (selectedShapeTypeModel == lineModel) {
-				// Remove preview shape
-				model.remove(draggedShape);
-				frame.repaint();
 				// Create new command, execute it, add it to undo stack
-				Line finalLine = new Line(startDrawingPoint, new Point(e.getX(), e.getY()), outer);
-				Command addLine = new AddLine(model, finalLine);
+				Command addLine = new AddLine(model, (Line) draggedShape);
 				addLine.execute();
 				ShapeModel.getUndoStack().offerLast(addLine);
-				frame.repaint();
-				// Reset to null so we can draw new shape
-				startDrawingPoint = null;
-				draggedShape = null;
+				
+			} else if (selectedShapeTypeModel == circleModel){
+				Command addCircle = new AddCircle(model, (Circle) draggedShape);
+				addCircle.execute();
+				ShapeModel.getUndoStack().offerLast(addCircle);
 			}
+			// re-draw frame
+			frame.repaint();
+			// Reset to null so we can draw new shape
+			startDrawingPoint = null;
+			draggedShape = null;
 		}
 	}
 }
