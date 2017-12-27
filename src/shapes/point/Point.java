@@ -55,8 +55,8 @@ public class Point extends Shape implements Moveable {
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Point) {
-			Point castedPt = (Point) obj;
-			return x == castedPt.getX() && y == castedPt.getY();
+			Point castedObj = (Point) obj;
+			return x == castedObj.getX() && y == castedObj.getY();
 		}
 		return false;
 	}
