@@ -13,6 +13,8 @@ import app.MainFrame;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.circle.Circle;
+import shapes.circle.RemoveCircle;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
 import shapes.line.UpdateLine;
@@ -146,6 +148,10 @@ public class ToolboxController implements Serializable {
 				removeCmd = new RemoveLine(model, (Line) shapesToDelete.get(0));
 				confirmed = DialogsHelper
 						.askUserToConfirm("Are you sure you want to remove this " + Line.class.getSimpleName() + "?");
+			} else if (shapesToDelete.get(0) instanceof Circle) {
+				removeCmd = new RemoveCircle(model, (Circle) shapesToDelete.get(0));
+				confirmed = DialogsHelper
+						.askUserToConfirm("Are you sure you want to remove this " + Circle.class.getSimpleName() + "?");
 			}
 
 			// If user confirmed popup (JOptionPane)
@@ -167,6 +173,8 @@ public class ToolboxController implements Serializable {
 						removeCmd = new RemovePoint(model, (Point) s);
 					} else if (s instanceof Line) {
 						removeCmd = new RemoveLine(model, (Line) s);
+					} else if (s instanceof Circle) {
+						removeCmd = new RemoveCircle(model, (Circle) s);
 					}
 
 					ShapeModel.getUndoStack().offerLast(removeCmd);
