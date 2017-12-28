@@ -14,6 +14,11 @@ public class UpdateCircle implements Command {
 	private Circle newState;
 	private Circle oldState = new Circle(new Point(), 0);
 
+	public UpdateCircle(Circle original, Circle newState) {
+		this.original = original;
+		this.newState = newState;
+	}
+
 	@Override
 	public void execute() {
 		oldState.getCenter().setX(original.getCenter().getX());

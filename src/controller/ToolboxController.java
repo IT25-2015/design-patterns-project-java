@@ -15,6 +15,7 @@ import shapes.Command;
 import shapes.Shape;
 import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
+import shapes.circle.UpdateCircle;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
 import shapes.line.UpdateLine;
@@ -24,6 +25,7 @@ import shapes.point.UpdatePoint;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
+import util.modifyDialogs.CircleModifyDialog;
 import util.modifyDialogs.LineModifyDialog;
 import util.modifyDialogs.PointModifyDialog;
 
@@ -118,6 +120,17 @@ public class ToolboxController implements Serializable {
 					Command updateLine = new UpdateLine(selectedLine, modifiedLine);
 					ShapeModel.getUndoStack().offerLast(updateLine);
 					updateLine.execute();
+					frame.repaint();
+				}
+			} else if (selected instanceof Circle) {
+				Circle selectedCircle = (Circle) selected;
+				CircleModifyDialog modifyDialog = new CircleModifyDialog(selectedCircle);
+				Circle modifiedCircle = modifyDialog.getCircle();
+				if (!selectedCircle.equals(modifiedCircle) || selectedCircle.getColor() != modifiedCircle.getColor()
+						|| selectedCircle.getInnerColor() != modifiedCircle.getInnerColor()) {
+					Command updateCircle = new UpdateCircle(selectedCircle, modifiedCircle);
+					ShapeModel.getUndoStack().offerLast(updateCircle);
+					updateCircle.execute();
 					frame.repaint();
 				}
 			}

@@ -148,7 +148,7 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()) { 
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected()) {
 					canvasController.handleCanvasRelease(e,
 							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
 							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
@@ -159,10 +159,10 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				if(!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
-				canvasController.handleCanvasDrag(e,
-						headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
-						headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
+				if (!headerWrapperView.getToolboxView().getTglBtnSelect().isSelected())
+					canvasController.handleCanvasDrag(e,
+							headerWrapperView.getToolboxView().getBtnInnerColor().getBackground(),
+							headerWrapperView.getToolboxView().getBtnOuterColor().getBackground());
 			}
 
 		});
