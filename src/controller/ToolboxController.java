@@ -5,7 +5,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -23,6 +22,8 @@ import shapes.line.UpdateLine;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
+import shapes.square.RemoveSquare;
+import shapes.square.Square;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
@@ -168,6 +169,10 @@ public class ToolboxController implements Serializable {
 				removeCmd = new RemoveCircle(model, (Circle) shapesToDelete.get(0));
 				confirmed = DialogsHelper
 						.askUserToConfirm("Are you sure you want to remove this " + Circle.class.getSimpleName() + "?");
+			} else if (shapesToDelete.get(0) instanceof Square) {
+				removeCmd = new RemoveSquare(model, (Square) shapesToDelete.get(0));
+				confirmed = DialogsHelper
+						.askUserToConfirm("Are you sure you want to remove this " + Square.class.getSimpleName() + "?");
 			}
 
 			// If user confirmed popup (JOptionPane)
@@ -191,6 +196,8 @@ public class ToolboxController implements Serializable {
 						removeCmd = new RemoveLine(model, (Line) s);
 					} else if (s instanceof Circle) {
 						removeCmd = new RemoveCircle(model, (Circle) s);
+					} else if (s instanceof Square) {
+						removeCmd = new RemoveSquare(model, (Square) s);
 					}
 
 					ShapeModel.getUndoStack().offerLast(removeCmd);
