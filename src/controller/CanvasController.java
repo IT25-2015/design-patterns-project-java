@@ -16,12 +16,15 @@ import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.point.AddPoint;
 import shapes.point.Point;
+import shapes.square.AddSquare;
+import shapes.square.Square;
 
 public class CanvasController implements Serializable {
 	private ButtonModel selectedShapeTypeModel;
 	private ButtonModel pointModel;
 	private ButtonModel lineModel;
 	private ButtonModel circleModel;
+	private ButtonModel squareModel;
 	private Point startDrawingPoint;
 	private Shape draggedShape;
 
@@ -40,6 +43,7 @@ public class CanvasController implements Serializable {
 		pointModel = frame.getShapePickerView().getRdbtnPoint().getModel();
 		lineModel = frame.getShapePickerView().getRdbtnLine().getModel();
 		circleModel = frame.getShapePickerView().getRdbtnCircle().getModel();
+		squareModel = frame.getShapePickerView().getRdbtnSquare().getModel();
 	}
 
 	/**
@@ -60,7 +64,7 @@ public class CanvasController implements Serializable {
 			point.execute();
 			ShapeModel.getUndoStack().offerLast(point);
 			frame.repaint();
-		} else if (selectedShapeTypeModel == lineModel || selectedShapeTypeModel == circleModel) {
+		} else {
 			if (startDrawingPoint == null) {
 				startDrawingPoint = new Point(e.getX(), e.getY());
 			} else {
@@ -97,6 +101,11 @@ public class CanvasController implements Serializable {
 			draggedShape = new Circle(startDrawingPoint, startR, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
+		} else if (selectedShapeTypeModel == squareModel && startDrawingPoint != null) {
+			int startSide = Math.abs(startDrawingPoint.getY() - e.getY());
+			draggedShape = new Square(startDrawingPoint, startSide, outer, inner);
+			model.add(draggedShape);
+			frame.repaint();
 		}
 	}
 
@@ -123,11 +132,15 @@ public class CanvasController implements Serializable {
 				Command addLine = new AddLine(model, (Line) draggedShape);
 				addLine.execute();
 				ShapeModel.getUndoStack().offerLast(addLine);
-				
-			} else if (selectedShapeTypeModel == circleModel){
+
+			} else if (selectedShapeTypeModel == circleModel) {
 				Command addCircle = new AddCircle(model, (Circle) draggedShape);
 				addCircle.execute();
 				ShapeModel.getUndoStack().offerLast(addCircle);
+			} else if (selectedShapeTypeModel == squareModel) {
+				Command addSquare = new AddSquare(model, (Square) draggedShape);
+				addSquare.execute();
+				ShapeModel.getUndoStack().offerLast(addSquare);
 			}
 			// re-draw frame
 			frame.repaint();
