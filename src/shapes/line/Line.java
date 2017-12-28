@@ -33,12 +33,20 @@ public class Line extends Shape {
 
 	}
 
+	/**
+	 * Will return point which is on center of line
+	 * @return
+	 */
 	public Point lineCenter() {
 		int centerX = (ptStart.getX() + ptEnd.getX()) / 2;
 		int centerY = (ptStart.getY() + ptEnd.getY()) / 2;
 		return new Point(centerX, centerY);
 	}
 
+	/**
+	 * Will return length of Line
+	 * @return
+	 */
 	public double length() {
 		return ptStart.distance(ptEnd);
 	}

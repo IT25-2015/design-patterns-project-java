@@ -40,10 +40,18 @@ public class Circle extends SurfaceShape implements Moveable {
 		setInnerColor(innerColor);
 	}
 
+	/**
+	 * Will calculate surface area of circle
+	 * @return
+	 */
 	public double surfaceArea() {
 		return Math.pow(r, 2) * Math.PI;
 	}
 
+	/**
+	 * Will calculate volume of circle
+	 * @return
+	 */
 	public double volume() {
 		return 2 * r * Math.PI;
 	}
