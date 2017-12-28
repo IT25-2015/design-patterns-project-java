@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -66,12 +67,14 @@ public class ToolboxController implements Serializable {
 	 */
 	public void handleSelect(MouseEvent e) {
 		boolean shapeFound = false;
-		for (Shape s : model.getShapesList()) {
+		for (int i = model.getShapesList().size() - 1; i >= 0; i--) {
+			Shape s = model.getShapesList().get(i);
 			if (s.contains(e.getX(), e.getY()) && !s.isSelected()) {
 				s.setSelected(true);
 				Logger.getInstance().log("SELECTED", s.toString(), true);
 				frame.repaint();
 				shapeFound = true;
+				break;
 			}
 		}
 		if (!shapeFound) {
