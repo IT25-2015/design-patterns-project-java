@@ -24,12 +24,14 @@ import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
 import shapes.square.RemoveSquare;
 import shapes.square.Square;
+import shapes.square.UpdateSquare;
 import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
 import util.modifyDialogs.CircleModifyDialog;
 import util.modifyDialogs.LineModifyDialog;
 import util.modifyDialogs.PointModifyDialog;
+import util.modifyDialogs.SquareModifyDialog;
 
 public class ToolboxController implements Serializable {
 
@@ -135,6 +137,17 @@ public class ToolboxController implements Serializable {
 					Command updateCircle = new UpdateCircle(selectedCircle, modifiedCircle);
 					ShapeModel.getUndoStack().offerLast(updateCircle);
 					updateCircle.execute();
+					frame.repaint();
+				}
+			} else if (selected instanceof Square) {
+				Square selectedSquare = (Square) selected;
+				SquareModifyDialog modifyDialog = new SquareModifyDialog(selectedSquare);
+				Square modifiedSquare = modifyDialog.getSquare();
+				if (!selectedSquare.equals(modifiedSquare) || selectedSquare.getColor() != modifiedSquare.getColor()
+						|| selectedSquare.getInnerColor() != modifiedSquare.getInnerColor()) {
+					Command updateSquare = new UpdateSquare(selectedSquare, modifiedSquare);
+					ShapeModel.getUndoStack().offerLast(updateSquare);
+					updateSquare.execute();
 					frame.repaint();
 				}
 			}

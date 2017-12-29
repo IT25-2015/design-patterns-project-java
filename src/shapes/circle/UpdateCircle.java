@@ -23,11 +23,13 @@ public class UpdateCircle implements Command {
 	public void execute() {
 		oldState.getCenter().setX(original.getCenter().getX());
 		oldState.getCenter().setY(original.getCenter().getY());
+		oldState.setR(original.getR());
 		oldState.setColor(original.getColor());
 		oldState.setInnerColor(original.getInnerColor());
 
 		original.getCenter().setX(newState.getCenter().getX());
 		original.getCenter().setY(newState.getCenter().getY());
+		original.setR(newState.getR());
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
@@ -38,6 +40,7 @@ public class UpdateCircle implements Command {
 	public void unexecute() {
 		original.getCenter().setX(oldState.getCenter().getX());
 		original.getCenter().setY(oldState.getCenter().getY());
+		original.setR(oldState.getR());
 		original.setColor(oldState.getColor());
 		original.setInnerColor(oldState.getInnerColor());
 
