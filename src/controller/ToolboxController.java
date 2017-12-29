@@ -22,6 +22,8 @@ import shapes.line.UpdateLine;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
+import shapes.rectangle.Rectangle;
+import shapes.rectangle.RemoveRectangle;
 import shapes.square.RemoveSquare;
 import shapes.square.Square;
 import shapes.square.UpdateSquare;
@@ -182,6 +184,10 @@ public class ToolboxController implements Serializable {
 				removeCmd = new RemoveCircle(model, (Circle) shapesToDelete.get(0));
 				confirmed = DialogsHelper
 						.askUserToConfirm("Are you sure you want to remove this " + Circle.class.getSimpleName() + "?");
+			} else if (shapesToDelete.get(0) instanceof Rectangle) {
+				removeCmd = new RemoveRectangle(model, (Rectangle) shapesToDelete.get(0));
+				confirmed = DialogsHelper.askUserToConfirm(
+						"Are you sure you want to remove this " + Rectangle.class.getSimpleName() + "?");
 			} else if (shapesToDelete.get(0) instanceof Square) {
 				removeCmd = new RemoveSquare(model, (Square) shapesToDelete.get(0));
 				confirmed = DialogsHelper
@@ -209,6 +215,8 @@ public class ToolboxController implements Serializable {
 						removeCmd = new RemoveLine(model, (Line) s);
 					} else if (s instanceof Circle) {
 						removeCmd = new RemoveCircle(model, (Circle) s);
+					} else if (s instanceof Rectangle) {
+						removeCmd = new RemoveRectangle(model, (Rectangle) s);
 					} else if (s instanceof Square) {
 						removeCmd = new RemoveSquare(model, (Square) s);
 					}
