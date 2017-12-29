@@ -10,6 +10,7 @@ public class RemoveSquare implements Command {
 	 * 
 	 */
 	private static final long serialVersionUID = -4714585572854547179L;
+
 	private ShapeModel model;
 	private Square square;
 
