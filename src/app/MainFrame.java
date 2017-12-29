@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import controller.CanvasController;
 import controller.InformationPaneController;
 import controller.MenuFileController;
+import controller.MenuHelpController;
 import controller.ToolboxController;
 import view.CanvasView;
 import view.FooterWrapperView;
@@ -33,6 +34,7 @@ public class MainFrame extends JFrame {
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
 	private MenuFileController mfController;
+	private MenuHelpController mhController;
 
 	/**
 	 * Initialize frame and all its properties
@@ -49,7 +51,7 @@ public class MainFrame extends JFrame {
 
 		// HeaderWrapper and its components related stuff
 		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
-		// HeaderWrapper - Main Menu
+		// HeaderWrapper - File Menu
 		headerWrapperView.getMntmUndo().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -84,6 +86,19 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				mfController.handleImportFromFile();
+			}
+		});
+		// HeaderWrapper - Help menu
+		headerWrapperView.getMntmAbout().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mhController.handleAbout();
+			}
+		});
+		headerWrapperView.getMntmViewCode().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mhController.showSrcGithub();
 			}
 		});
 
@@ -231,6 +246,14 @@ public class MainFrame extends JFrame {
 
 	public void setShapePickerView(ShapePickerView shapePickerView) {
 		this.shapePickerView = shapePickerView;
+	}
+
+	public MenuHelpController getMhController() {
+		return mhController;
+	}
+
+	public void setMhController(MenuHelpController mhController) {
+		this.mhController = mhController;
 	}
 
 }

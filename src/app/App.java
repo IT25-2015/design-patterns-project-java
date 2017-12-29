@@ -5,6 +5,7 @@ import javax.swing.DefaultListModel;
 import controller.CanvasController;
 import controller.InformationPaneController;
 import controller.MenuFileController;
+import controller.MenuHelpController;
 import controller.ToolboxController;
 import model.ShapeModel;
 import util.Logger;
@@ -31,6 +32,7 @@ public class App {
 		frame.setInformationPaneController(new InformationPaneController());
 		frame.setToolboxController(new ToolboxController(model, frame));
 		frame.setMfController(new MenuFileController(frame, model, logger.getLoggerModel()));
+		frame.setMhController(new MenuHelpController());
 
 		frame.getCanvasView().setModel(model);
 	}
