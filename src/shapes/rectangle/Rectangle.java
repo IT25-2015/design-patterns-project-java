@@ -75,6 +75,15 @@ public class Rectangle extends Square {
 	}
 
 	@Override
+	public void selected(Graphics g) {
+		g.setColor(Color.BLUE);
+		new Line(upperLeft, new Point(upperLeft.getX() + sideLength, upperLeft.getY())).selected(g);
+		new Line(upperLeft, new Point(upperLeft.getX(), upperLeft.getY() + width)).selected(g);
+		new Line(new Point(upperLeft.getX() + sideLength, upperLeft.getY()), diagonal().getPtEnd()).selected(g);
+		new Line(new Point(upperLeft.getX(), upperLeft.getY() + width), diagonal().getPtEnd()).selected(g);
+	}
+
+	@Override
 	public void fill(Graphics g) {
 		g.setColor(getInnerColor());
 		g.fillRect(upperLeft.getX() + 1, upperLeft.getY() + 1, sideLength - 1, width - 1);

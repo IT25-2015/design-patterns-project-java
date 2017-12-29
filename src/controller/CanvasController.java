@@ -16,6 +16,8 @@ import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.point.AddPoint;
 import shapes.point.Point;
+import shapes.rectangle.AddRectangle;
+import shapes.rectangle.Rectangle;
 import shapes.square.AddSquare;
 import shapes.square.Square;
 
@@ -25,6 +27,7 @@ public class CanvasController implements Serializable {
 	private ButtonModel lineModel;
 	private ButtonModel circleModel;
 	private ButtonModel squareModel;
+	private ButtonModel rectangleModel;
 	private Point startDrawingPoint;
 	private Shape draggedShape;
 
@@ -44,6 +47,7 @@ public class CanvasController implements Serializable {
 		lineModel = frame.getShapePickerView().getRdbtnLine().getModel();
 		circleModel = frame.getShapePickerView().getRdbtnCircle().getModel();
 		squareModel = frame.getShapePickerView().getRdbtnSquare().getModel();
+		rectangleModel = frame.getShapePickerView().getRdbtnRectangle().getModel();
 	}
 
 	/**
@@ -105,6 +109,12 @@ public class CanvasController implements Serializable {
 			draggedShape = new Circle(startDrawingPoint, startDist, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
+		} else if (selectedShapeTypeModel == rectangleModel && startDrawingPoint != null) {
+			int startXDist = Math.abs(startDrawingPoint.getX() - e.getX());
+			int startYDist = Math.abs(startDrawingPoint.getY() - e.getY());
+			draggedShape = new Rectangle(startDrawingPoint, startXDist, startYDist, outer, inner);
+			model.add(draggedShape);
+			frame.repaint();
 		} else if (selectedShapeTypeModel == squareModel && startDrawingPoint != null) {
 			draggedShape = new Square(startDrawingPoint, startDist, outer, inner);
 			model.add(draggedShape);
@@ -140,6 +150,10 @@ public class CanvasController implements Serializable {
 				Command addCircle = new AddCircle(model, (Circle) draggedShape);
 				addCircle.execute();
 				ShapeModel.getUndoStack().offerLast(addCircle);
+			} else if (selectedShapeTypeModel == rectangleModel) {
+				Command addRectangle = new AddRectangle(model, (Rectangle) draggedShape);
+				addRectangle.execute();
+				ShapeModel.getUndoStack().offerLast(addRectangle);
 			} else if (selectedShapeTypeModel == squareModel) {
 				Command addSquare = new AddSquare(model, (Square) draggedShape);
 				addSquare.execute();
