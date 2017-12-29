@@ -17,6 +17,8 @@ public class UndoRedoHelper {
 			Command previousAction = undoStack.pollLast();
 			redoStack.offerLast(previousAction);
 			previousAction.unexecute();
+		} else {
+			DialogsHelper.showErrorMessage("Undo stack is empty, nothing to undo.");
 		}
 	}
 
@@ -28,6 +30,8 @@ public class UndoRedoHelper {
 			Command previousAction = redoStack.pollLast();
 			undoStack.offerLast(previousAction);
 			previousAction.execute();
+		} else {
+			DialogsHelper.showErrorMessage("Redo stack is empty, nothing to redo.");
 		}
 	}
 }
