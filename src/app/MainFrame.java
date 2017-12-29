@@ -16,6 +16,7 @@ import controller.InformationPaneController;
 import controller.MenuFileController;
 import controller.MenuHelpController;
 import controller.ToolboxController;
+import view.AdditionalActionsView;
 import view.CanvasView;
 import view.FooterWrapperView;
 import view.HeaderWrapperView;
@@ -29,6 +30,7 @@ public class MainFrame extends JFrame {
 	private CanvasView canvasView = new CanvasView();
 	private FooterWrapperView footerWrapperView = new FooterWrapperView(new LoggerView(), new InformationPaneView());
 	private ShapePickerView shapePickerView = new ShapePickerView();
+	private AdditionalActionsView additionalActionsView = new AdditionalActionsView();
 
 	private ToolboxController toolboxController;
 	private CanvasController canvasController;
@@ -184,6 +186,9 @@ public class MainFrame extends JFrame {
 
 		// ShapePicker related stuff
 		getContentPane().add(shapePickerView, BorderLayout.WEST);
+		
+		// AdditionalAaction related stuff
+		getContentPane().add(additionalActionsView, BorderLayout.EAST);
 
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
@@ -254,6 +259,14 @@ public class MainFrame extends JFrame {
 
 	public void setMhController(MenuHelpController mhController) {
 		this.mhController = mhController;
+	}
+
+	public AdditionalActionsView getAdditionalActionsView() {
+		return additionalActionsView;
+	}
+
+	public void setAdditionalActionsView(AdditionalActionsView additionalActionsView) {
+		this.additionalActionsView = additionalActionsView;
 	}
 
 }
