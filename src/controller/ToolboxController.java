@@ -24,6 +24,7 @@ import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
 import shapes.rectangle.Rectangle;
 import shapes.rectangle.RemoveRectangle;
+import shapes.rectangle.UpdateRectangle;
 import shapes.square.RemoveSquare;
 import shapes.square.Square;
 import shapes.square.UpdateSquare;
@@ -33,6 +34,7 @@ import util.UndoRedoHelper;
 import util.modifyDialogs.CircleModifyDialog;
 import util.modifyDialogs.LineModifyDialog;
 import util.modifyDialogs.PointModifyDialog;
+import util.modifyDialogs.RectangleModifyDialog;
 import util.modifyDialogs.SquareModifyDialog;
 
 public class ToolboxController implements Serializable {
@@ -141,6 +143,19 @@ public class ToolboxController implements Serializable {
 					updateCircle.execute();
 					frame.repaint();
 				}
+			} else if (selected instanceof Rectangle) {
+				Rectangle selectedRectangle = (Rectangle) selected;
+				RectangleModifyDialog modifyDialog = new RectangleModifyDialog(selectedRectangle);
+				Rectangle modifiedRectangle = modifyDialog.getRectangle();
+				if (!selectedRectangle.equals(modifiedRectangle)
+						|| selectedRectangle.getColor() != modifiedRectangle.getColor()
+						|| selectedRectangle.getInnerColor() != modifiedRectangle.getInnerColor()) {
+					Command updateRectangle = new UpdateRectangle(selectedRectangle, modifiedRectangle);
+					ShapeModel.getUndoStack().offerLast(updateRectangle);
+					updateRectangle.execute();
+					frame.repaint();
+				}
+
 			} else if (selected instanceof Square) {
 				Square selectedSquare = (Square) selected;
 				SquareModifyDialog modifyDialog = new SquareModifyDialog(selectedSquare);

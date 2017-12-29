@@ -20,11 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import shapes.circle.Circle;
 import shapes.point.Point;
+import shapes.rectangle.Rectangle;
+import shapes.square.Square;
 import util.DialogsHelper;
 
-public class CircleModifyDialog extends JDialog {
+public class RectangleModifyDialog extends JDialog {
 
 	/**
 	 * 
@@ -35,7 +36,7 @@ public class CircleModifyDialog extends JDialog {
 	private JButton okButton;
 	private JButton cancelButton;
 
-	private Circle circle;
+	private Rectangle rectangle;
 
 	private JLabel lblX;
 	private JLabel lblY;
@@ -45,15 +46,17 @@ public class CircleModifyDialog extends JDialog {
 	private JLabel lblOuterColor;
 	private JTextField textFieldX;
 	private JTextField textFieldY;
-	private JLabel lblR;
-	private JTextField textFieldR;
+	private JLabel lblSideLength;
+	private JTextField textFieldSideLength;
+	private JLabel labelWidth;
+	private JTextField textFieldWidth;
 
 	/**
 	 * Create the dialog.
 	 */
-	public CircleModifyDialog(Circle circle) {
-		this.circle = new Circle(new Point(circle.getCenter().getX(), circle.getCenter().getY()), circle.getR(),
-				circle.getColor(), circle.getInnerColor());
+	public RectangleModifyDialog(Rectangle rectangle) {
+		this.rectangle = new Rectangle(new Point(rectangle.getUpperLeft().getX(), rectangle.getUpperLeft().getY()),
+				rectangle.getSideLength(), rectangle.getWidth(), rectangle.getColor(), rectangle.getInnerColor());
 
 		setModalityType(DEFAULT_MODALITY_TYPE); // Make dialog modal
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -67,37 +70,48 @@ public class CircleModifyDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		{
-			lblX = new JLabel("Center X coordinate:");
+			lblX = new JLabel("Upper left X coordinate:");
 			lblX.setFont(new Font("Dialog", Font.BOLD, 11));
 			contentPanel.add(lblX);
 		}
 		{
 			textFieldX = new JTextField();
-			textFieldX.setText(Integer.toString(circle.getCenter().getX()));
+			textFieldX.setText(Integer.toString(rectangle.getUpperLeft().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
 		}
 		{
-			lblY = new JLabel("Circle Y coordinate:");
+			lblY = new JLabel("Upper left Y coordinate:");
 			lblY.setFont(new Font("Dialog", Font.BOLD, 11));
 			contentPanel.add(lblY);
 		}
 		{
 			textFieldY = new JTextField();
-			textFieldY.setText(Integer.toString(circle.getCenter().getY()));
+			textFieldY.setText(Integer.toString(rectangle.getUpperLeft().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
 		}
 		{
-			lblR = new JLabel("r:");
-			lblR.setFont(new Font("Dialog", Font.BOLD, 11));
-			contentPanel.add(lblR);
+			lblSideLength = new JLabel("Height:");
+			lblSideLength.setFont(new Font("Dialog", Font.BOLD, 11));
+			contentPanel.add(lblSideLength);
 		}
 		{
-			textFieldR = new JTextField();
-			textFieldR.setText(Integer.toString(circle.getR()));
-			textFieldR.setColumns(10);
-			contentPanel.add(textFieldR);
+			textFieldSideLength = new JTextField();
+			textFieldSideLength.setText(Integer.toString(rectangle.getSideLength()));
+			textFieldSideLength.setColumns(10);
+			contentPanel.add(textFieldSideLength);
+		}
+		{
+			labelWidth = new JLabel("Width:");
+			labelWidth.setFont(new Font("Dialog", Font.BOLD, 11));
+			contentPanel.add(labelWidth);
+		}
+		{
+			textFieldWidth = new JTextField();
+			textFieldWidth.setText(Integer.toString(rectangle.getWidth()));
+			textFieldWidth.setColumns(10);
+			contentPanel.add(textFieldWidth);
 		}
 		{
 			lblInnerColor = new JLabel("Inner Color:");
@@ -115,7 +129,7 @@ public class CircleModifyDialog extends JDialog {
 				}
 			});
 			contentPanel.add(btnInnerColor);
-			btnInnerColor.setBackground(circle.getInnerColor());
+			btnInnerColor.setBackground(rectangle.getInnerColor());
 		}
 		{
 			lblOuterColor = new JLabel("Outer Color:");
@@ -133,7 +147,7 @@ public class CircleModifyDialog extends JDialog {
 				}
 			});
 			contentPanel.add(btnOuterColor);
-			btnOuterColor.setBackground(circle.getColor());
+			btnOuterColor.setBackground(rectangle.getColor());
 		}
 		{
 			buttonPane = new JPanel();
@@ -186,11 +200,12 @@ public class CircleModifyDialog extends JDialog {
 	 */
 	public void ok() {
 		try {
-			circle.getCenter().setX(Integer.parseInt(textFieldX.getText()));
-			circle.getCenter().setY(Integer.parseInt(textFieldY.getText()));
-			circle.setR(Integer.parseInt(textFieldR.getText()));
-			circle.setColor(btnOuterColor.getBackground());
-			circle.setInnerColor(btnInnerColor.getBackground());
+			rectangle.getUpperLeft().setX(Integer.parseInt(textFieldX.getText()));
+			rectangle.getUpperLeft().setY(Integer.parseInt(textFieldY.getText()));
+			rectangle.setSideLength(Integer.parseInt(textFieldSideLength.getText()));
+			rectangle.setWidth(Integer.parseInt(textFieldWidth.getText()));
+			rectangle.setColor(btnOuterColor.getBackground());
+			rectangle.setInnerColor(btnInnerColor.getBackground());
 			setVisible(false);
 			dispose();
 		} catch (NumberFormatException ex) {
@@ -206,8 +221,8 @@ public class CircleModifyDialog extends JDialog {
 		dispose();
 	}
 
-	public Circle getCircle() {
-		return circle;
+	public Rectangle getRectangle() {
+		return rectangle;
 	}
 
 	public JButton getBtnInnerColor() {

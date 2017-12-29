@@ -112,7 +112,7 @@ public class CanvasController implements Serializable {
 		} else if (selectedShapeTypeModel == rectangleModel && startDrawingPoint != null) {
 			int startXDist = Math.abs(startDrawingPoint.getX() - e.getX());
 			int startYDist = Math.abs(startDrawingPoint.getY() - e.getY());
-			draggedShape = new Rectangle(startDrawingPoint, startXDist, startYDist, outer, inner);
+			draggedShape = new Rectangle(startDrawingPoint, startYDist, startXDist, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
 		} else if (selectedShapeTypeModel == squareModel && startDrawingPoint != null) {

@@ -34,7 +34,7 @@ public class Rectangle extends Square {
 
 	@Override
 	public Line diagonal() {
-		return new Line(upperLeft, new Point(upperLeft.getX() + sideLength, upperLeft.getY() + width));
+		return new Line(upperLeft, new Point(upperLeft.getX() + width, upperLeft.getY() + sideLength));
 	}
 
 	@Override
@@ -70,29 +70,30 @@ public class Rectangle extends Square {
 
 	@Override
 	public boolean contains(int x, int y) {
-		return upperLeft.getX() <= x && x <= (upperLeft.getX() + sideLength) && upperLeft.getY() <= y
-				&& y <= (upperLeft.getY() + width);
+		return upperLeft.getX() <= x && x <= (upperLeft.getX() + width) && upperLeft.getY() <= y
+				&& y <= (upperLeft.getY() + sideLength);
 	}
 
 	@Override
 	public void selected(Graphics g) {
 		g.setColor(Color.BLUE);
-		new Line(upperLeft, new Point(upperLeft.getX() + sideLength, upperLeft.getY())).selected(g);
-		new Line(upperLeft, new Point(upperLeft.getX(), upperLeft.getY() + width)).selected(g);
-		new Line(new Point(upperLeft.getX() + sideLength, upperLeft.getY()), diagonal().getPtEnd()).selected(g);
-		new Line(new Point(upperLeft.getX(), upperLeft.getY() + width), diagonal().getPtEnd()).selected(g);
+		new Line(upperLeft, new Point(upperLeft.getX() + width, upperLeft.getY())).selected(g);
+		new Line(upperLeft, new Point(upperLeft.getX(), upperLeft.getY() + sideLength)).selected(g);
+		new Line(new Point(upperLeft.getX() + width, upperLeft.getY()), diagonal().getPtEnd()).selected(g);
+		new Line(new Point(upperLeft.getX(), upperLeft.getY() + sideLength), diagonal().getPtEnd()).selected(g);
 	}
 
 	@Override
 	public void fill(Graphics g) {
 		g.setColor(getInnerColor());
-		g.fillRect(upperLeft.getX() + 1, upperLeft.getY() + 1, sideLength - 1, width - 1);
+		g.fillRect(upperLeft.getX() + 1, upperLeft.getY() + 1, width - 1, sideLength - 1);
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(getColor());
-		g.drawRect(upperLeft.getX(), upperLeft.getY(), sideLength, width);
+		g.drawRect(upperLeft.getX(), upperLeft.getY(), width, sideLength);
+		fill(g);
 		if (isSelected())
 			selected(g);
 	}
