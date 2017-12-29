@@ -82,8 +82,13 @@ public class CanvasController implements Serializable {
 	 * @param outer
 	 */
 	public void handleCanvasDrag(MouseEvent e, Color inner, Color outer) {
-
 		selectedShapeTypeModel = frame.getShapePickerView().getShapesGrp().getSelection();
+
+		int startDist = 0;
+		double rawDist = (startDrawingPoint != null) ? startDrawingPoint.distance(new Point(e.getX(), e.getY())) : 0;
+		if (rawDist > 0) {
+			startDist = (int) rawDist; // distance from initial mouse click
+		}
 
 		if (draggedShape != null) {
 			model.remove(draggedShape);
@@ -97,13 +102,11 @@ public class CanvasController implements Serializable {
 			model.add(draggedShape);
 			frame.repaint();
 		} else if (selectedShapeTypeModel == circleModel && startDrawingPoint != null) {
-			int startR = Math.abs(startDrawingPoint.getY() - e.getY()); // calculate r for circle
-			draggedShape = new Circle(startDrawingPoint, startR, outer, inner);
+			draggedShape = new Circle(startDrawingPoint, startDist, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
 		} else if (selectedShapeTypeModel == squareModel && startDrawingPoint != null) {
-			int startSide = Math.abs(startDrawingPoint.getY() - e.getY());
-			draggedShape = new Square(startDrawingPoint, startSide, outer, inner);
+			draggedShape = new Square(startDrawingPoint, startDist, outer, inner);
 			model.add(draggedShape);
 			frame.repaint();
 		}
