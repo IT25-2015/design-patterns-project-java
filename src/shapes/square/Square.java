@@ -60,8 +60,16 @@ public class Square extends SurfaceShape implements Moveable {
 	 * 
 	 * @return
 	 */
-	public int SurfaceArea() {
+	public int surfaceArea() {
 		return sideLength * sideLength;
+	}
+	
+	/**
+	 * Will calculate volume of square
+	 * @return
+	 */
+	public int volume() {
+		return 4 * sideLength;
 	}
 
 	@Override
@@ -83,7 +91,7 @@ public class Square extends SurfaceShape implements Moveable {
 	public int compareTo(Shape o) {
 		if (o instanceof Square) {
 			Square castedObj = (Square) o;
-			return SurfaceArea() - castedObj.SurfaceArea();
+			return surfaceArea() - castedObj.surfaceArea();
 		}
 		return 0;
 	}
