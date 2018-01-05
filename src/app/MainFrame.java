@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionAdapter;
 
 import javax.swing.JFrame;
 
+import controller.AdditionalActionsController;
 import controller.CanvasController;
 import controller.InformationPaneController;
 import controller.MenuFileController;
@@ -35,6 +36,7 @@ public class MainFrame extends JFrame {
 	private ToolboxController toolboxController;
 	private CanvasController canvasController;
 	private InformationPaneController informationPaneController;
+	private AdditionalActionsController additionalActionsController;
 	private MenuFileController mfController;
 	private MenuHelpController mhController;
 
@@ -189,6 +191,30 @@ public class MainFrame extends JFrame {
 		
 		// AdditionalAaction related stuff
 		getContentPane().add(additionalActionsView, BorderLayout.EAST);
+		additionalActionsView.getBtnBringToFront().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				additionalActionsController.doBringToFront();
+			}
+		});
+		additionalActionsView.getBtnBringToBack().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				additionalActionsController.doBringToBack();
+			}
+		});
+		additionalActionsView.getBtnToFront().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				additionalActionsController.doToFront();
+			}
+		});
+		additionalActionsView.getBtnToBack().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				additionalActionsController.doToBack();
+			}
+		});
 
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);
@@ -267,6 +293,14 @@ public class MainFrame extends JFrame {
 
 	public void setAdditionalActionsView(AdditionalActionsView additionalActionsView) {
 		this.additionalActionsView = additionalActionsView;
+	}
+
+	public AdditionalActionsController getAdditionalActionsController() {
+		return additionalActionsController;
+	}
+
+	public void setAdditionalActionsController(AdditionalActionsController additionalActionsController) {
+		this.additionalActionsController = additionalActionsController;
 	}
 
 }

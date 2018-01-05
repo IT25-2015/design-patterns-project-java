@@ -22,7 +22,6 @@ import javax.swing.border.EmptyBorder;
 
 import shapes.point.Point;
 import shapes.rectangle.Rectangle;
-import shapes.square.Square;
 import util.DialogsHelper;
 
 public class RectangleModifyDialog extends JDialog {

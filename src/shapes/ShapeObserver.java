@@ -31,8 +31,13 @@ public class ShapeObserver implements Observer, Serializable {
 					foundCount++;
 				}
 			}
+			int shapeCount = model.getShapesList().size();
 			frame.getHeaderWrapperView().getToolboxView().getBtnDelete().setEnabled(foundCount > 0);
 			frame.getHeaderWrapperView().getToolboxView().getBtnModify().setEnabled(foundCount == 1);
+			frame.getAdditionalActionsView().getBtnBringToBack().setEnabled(foundCount == 1 && shapeCount > 1);
+			frame.getAdditionalActionsView().getBtnBringToFront().setEnabled(foundCount == 1 && shapeCount > 1);
+			frame.getAdditionalActionsView().getBtnToBack().setEnabled(foundCount == 1 && shapeCount > 1);
+			frame.getAdditionalActionsView().getBtnToFront().setEnabled(foundCount == 1 && shapeCount > 1);
 		}
 	}
 

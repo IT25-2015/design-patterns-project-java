@@ -23,6 +23,7 @@ public class AdditionalActionsView extends JPanel {
 		setLayout(gridBagLayout);
 		
 		btnBringToFront = new JButton("Bring To Front");
+		btnBringToFront.setEnabled(false);
 		GridBagConstraints gbc_btnBringToFront = new GridBagConstraints();
 		gbc_btnBringToFront.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnBringToFront.insets = new Insets(0, 0, 5, 0);
@@ -31,6 +32,7 @@ public class AdditionalActionsView extends JPanel {
 		add(btnBringToFront, gbc_btnBringToFront);
 		
 		btnBringToBack = new JButton("Bring To Back");
+		btnBringToBack.setEnabled(false);
 		GridBagConstraints gbc_btnBringToBack = new GridBagConstraints();
 		gbc_btnBringToBack.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnBringToBack.gridx = 0;
@@ -38,6 +40,7 @@ public class AdditionalActionsView extends JPanel {
 		add(btnBringToBack, gbc_btnBringToBack);
 		
 		btnToFront = new JButton("To Front");
+		btnToFront.setEnabled(false);
 		GridBagConstraints gbc_btnToFront = new GridBagConstraints();
 		gbc_btnToFront.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnToFront.insets = new Insets(0, 0, 5, 0);
@@ -46,6 +49,7 @@ public class AdditionalActionsView extends JPanel {
 		add(btnToFront, gbc_btnToFront);
 		
 		btnToBack = new JButton("To Back");
+		btnToBack.setEnabled(false);
 		GridBagConstraints gbc_btnToBack = new GridBagConstraints();
 		gbc_btnToBack.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnToBack.insets = new Insets(0, 0, 5, 0);
