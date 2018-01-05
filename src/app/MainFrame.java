@@ -188,7 +188,7 @@ public class MainFrame extends JFrame {
 
 		// ShapePicker related stuff
 		getContentPane().add(shapePickerView, BorderLayout.WEST);
-		
+
 		// AdditionalAaction related stuff
 		getContentPane().add(additionalActionsView, BorderLayout.EAST);
 		additionalActionsView.getBtnBringToFront().addMouseListener(new MouseAdapter() {
