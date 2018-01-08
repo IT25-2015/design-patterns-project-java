@@ -66,19 +66,18 @@ public class HexagonAdapter extends SurfaceShape implements Moveable {
 	}
 
 	@Override
-	public void fill(Graphics g) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void draw(Graphics g) {
 		hexagon.paint(g);
 	}
 
 	@Override
+	public void fill(Graphics g) {
+		// Do nothing, paint is already doing fill
+	}
+
+	@Override
 	public void selected(Graphics g) {
-		// TODO Auto-generated method stub
+		// Do nothing, paint is already selecting shape if needed
 
 	}
 

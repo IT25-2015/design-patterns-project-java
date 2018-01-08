@@ -21,7 +21,10 @@ public class CanvasView extends JPanel {
 		if (model != null) {
 			Iterator<Shape> it = model.getShapesList().iterator();
 			while (it.hasNext()) {
-				it.next().draw(g);
+				Shape s = it.next();
+				if(s != null) {
+					s.draw(g);
+				}
 			}
 		}
 	}

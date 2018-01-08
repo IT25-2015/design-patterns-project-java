@@ -7,11 +7,14 @@ import java.io.Serializable;
 import javax.swing.ButtonModel;
 
 import app.MainFrame;
+import hexagon.Hexagon;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
 import shapes.circle.AddCircle;
 import shapes.circle.Circle;
+import shapes.hexagon.AddHexagonAdapter;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.point.AddPoint;
@@ -28,6 +31,7 @@ public class CanvasController implements Serializable {
 	private ButtonModel circleModel;
 	private ButtonModel squareModel;
 	private ButtonModel rectangleModel;
+	private ButtonModel hexagonModel;
 	private Point startDrawingPoint;
 	private Shape draggedShape;
 
@@ -48,6 +52,7 @@ public class CanvasController implements Serializable {
 		circleModel = frame.getShapePickerView().getRdbtnCircle().getModel();
 		squareModel = frame.getShapePickerView().getRdbtnSquare().getModel();
 		rectangleModel = frame.getShapePickerView().getRdbtnRectangle().getModel();
+		hexagonModel = frame.getShapePickerView().getRdbtnHexagon().getModel();
 	}
 
 	/**
@@ -103,23 +108,21 @@ public class CanvasController implements Serializable {
 		}
 		if (selectedShapeTypeModel == lineModel && startDrawingPoint != null) {
 			draggedShape = new Line(startDrawingPoint, new Point(e.getX(), e.getY()), outer);
-			model.add(draggedShape);
-			frame.repaint();
+
 		} else if (selectedShapeTypeModel == circleModel && startDrawingPoint != null) {
 			draggedShape = new Circle(startDrawingPoint, startDist, outer, inner);
-			model.add(draggedShape);
-			frame.repaint();
 		} else if (selectedShapeTypeModel == rectangleModel && startDrawingPoint != null) {
 			int startXDist = Math.abs(startDrawingPoint.getX() - e.getX());
 			int startYDist = Math.abs(startDrawingPoint.getY() - e.getY());
 			draggedShape = new Rectangle(startDrawingPoint, startYDist, startXDist, outer, inner);
-			model.add(draggedShape);
-			frame.repaint();
 		} else if (selectedShapeTypeModel == squareModel && startDrawingPoint != null) {
 			draggedShape = new Square(startDrawingPoint, startDist, outer, inner);
-			model.add(draggedShape);
-			frame.repaint();
+		} else if (selectedShapeTypeModel == hexagonModel && startDrawingPoint != null) {
+			draggedShape = new HexagonAdapter(
+					new Hexagon(startDrawingPoint.getX(), startDrawingPoint.getY(), startDist), outer, inner);
 		}
+		model.add(draggedShape);
+		frame.repaint();
 	}
 
 	/**
@@ -158,6 +161,10 @@ public class CanvasController implements Serializable {
 				Command addSquare = new AddSquare(model, (Square) draggedShape);
 				addSquare.execute();
 				ShapeModel.getUndoStack().offerLast(addSquare);
+			} else if (selectedShapeTypeModel == hexagonModel) {
+				Command addHexagonAdapter = new AddHexagonAdapter(model, (HexagonAdapter) draggedShape);
+				addHexagonAdapter.execute();
+				ShapeModel.getUndoStack().offerLast(addHexagonAdapter);
 			}
 			// re-draw frame
 			frame.repaint();
