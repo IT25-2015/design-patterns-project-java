@@ -16,6 +16,8 @@ import shapes.Shape;
 import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
 import shapes.circle.UpdateCircle;
+import shapes.hexagon.HexagonAdapter;
+import shapes.hexagon.RemoveHexagonAdapter;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
 import shapes.line.UpdateLine;
@@ -207,6 +209,10 @@ public class ToolboxController implements Serializable {
 				removeCmd = new RemoveSquare(model, (Square) shapesToDelete.get(0));
 				confirmed = DialogsHelper
 						.askUserToConfirm("Are you sure you want to remove this " + Square.class.getSimpleName() + "?");
+			} else if (shapesToDelete.get(0) instanceof HexagonAdapter) {
+				removeCmd = new RemoveHexagonAdapter(model, (HexagonAdapter) shapesToDelete.get(0));
+				confirmed = DialogsHelper.askUserToConfirm("Are you sure you want to remove this "
+						+ ((HexagonAdapter) shapesToDelete.get(0)).getHexagon().getClass().getSimpleName() + "?");
 			}
 
 			// If user confirmed popup (JOptionPane)
@@ -234,6 +240,8 @@ public class ToolboxController implements Serializable {
 						removeCmd = new RemoveRectangle(model, (Rectangle) s);
 					} else if (s instanceof Square) {
 						removeCmd = new RemoveSquare(model, (Square) s);
+					} else if (s instanceof HexagonAdapter) {
+						removeCmd = new RemoveHexagonAdapter(model, (HexagonAdapter) s);
 					}
 
 					ShapeModel.getUndoStack().offerLast(removeCmd);
