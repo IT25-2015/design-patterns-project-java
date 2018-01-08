@@ -15,6 +15,7 @@ import model.LoggerModel;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.ShapeObserver;
 import util.FileOperationsHelper;
 import util.Logger;
 
@@ -40,8 +41,6 @@ public class MenuFileController implements Serializable {
 	public void handleExportToFile() {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(model.getShapesList());
-		bundle.add(ShapeModel.getUndoStack());
-		bundle.add(ShapeModel.getRedoStack());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
 		String path = FileOperationsHelper.showFileDialog("drwg");
 		if (path != null)
@@ -87,9 +86,13 @@ public class MenuFileController implements Serializable {
 		String path = FileOperationsHelper.showFileDialog("drwg");
 		if (path != null) {
 			ArrayList<Object> bundle = manager.importData(path);
-			model.setShapesList((ArrayList<Shape>) bundle.get(0));
-			ShapeModel.setUndoStack((Deque<Command>) bundle.get(1));
-			ShapeModel.setRedoStack((Deque<Command>) bundle.get(2));
+			// If ArrayList setter was used observers wouldn't work at all
+			for (Shape s : (ArrayList<Shape>) bundle.get(0)) {
+				ShapeObserver observer = new ShapeObserver();
+				observer.setShape(s);
+				s.addObserver(observer);
+				model.add(s);
+			}
 			Logger.getInstance().log("Imported drawing from " + path, true);
 			frame.repaint();
 		}
