@@ -2,7 +2,6 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Deque;
 
 import app.MainFrame;
 import io.exporter.ExportManager;
@@ -13,7 +12,6 @@ import io.importer.LoadDrawingFromFile;
 import io.importer.LoadLogFromFile;
 import model.LoggerModel;
 import model.ShapeModel;
-import shapes.Command;
 import shapes.Shape;
 import shapes.ShapeObserver;
 import util.FileOperationsHelper;
@@ -96,6 +94,14 @@ public class MenuFileController implements Serializable {
 			Logger.getInstance().log("Imported drawing from " + path, true);
 			frame.repaint();
 		}
+	}
+	
+	/**
+	 * Exits process with given code
+	 * @param code
+	 */
+	public void exitApp(int code) {
+		System.exit(code);
 	}
 
 }

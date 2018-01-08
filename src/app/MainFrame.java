@@ -3,13 +3,16 @@ package app;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 
 import controller.AdditionalActionsController;
 import controller.CanvasController;
@@ -55,43 +58,70 @@ public class MainFrame extends JFrame {
 
 		// HeaderWrapper and its components related stuff
 		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
-		// HeaderWrapper - File Menu
-		headerWrapperView.getMntmUndo().addMouseListener(new MouseAdapter() {
+
+		headerWrapperView.getMntmUndo().setAction(new AbstractAction("Undo") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				toolboxController.handleUndoBtn();
 			}
 		});
-		headerWrapperView.getMntmRedo().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmUndo()
+				.setAccelerator(KeyStroke.getKeyStroke('Z', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Z
+
+		headerWrapperView.getMntmRedo().setAction(new AbstractAction("Redo") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				toolboxController.handleRedoBtn();
 			}
 		});
-		headerWrapperView.getMntmExportFile().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmRedo()
+				.setAccelerator(KeyStroke.getKeyStroke('Y', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Y
+
+		headerWrapperView.getMntmExportFile().setAction(new AbstractAction("Export to drawing file") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				mfController.handleExportToFile();
 			}
 		});
-		headerWrapperView.getMntmExportLog().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmExportFile()
+				.setAccelerator(KeyStroke.getKeyStroke('S', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+S
+
+		headerWrapperView.getMntmExportLog().setAction(new AbstractAction("Export to log file") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				mfController.handleExportToLog();
 			}
 		});
-		headerWrapperView.getMntmImportLog().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmExportLog()
+				.setAccelerator(KeyStroke.getKeyStroke('S', ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK)); // Ctrl+Shift+S
+
+		headerWrapperView.getMntmImportLog().setAction(new AbstractAction("Import from log file") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				mfController.handleImportFromLog();
 			}
 		});
-		headerWrapperView.getMntmImportFile().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmImportLog()
+				.setAccelerator(KeyStroke.getKeyStroke('O', ActionEvent.CTRL_MASK + ActionEvent.SHIFT_MASK)); // Ctrl+Shift+O
+
+		headerWrapperView.getMntmImportFile().setAction(new AbstractAction("Import from drawing file") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				mfController.handleImportFromFile();
 			}
 		});
+		headerWrapperView.getMntmImportFile()
+				.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+O
+
+		headerWrapperView.getMntmExit().setAction(new AbstractAction("Import from log file") {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mfController.exitApp(0);
+			}
+		});
+		headerWrapperView.getMntmExit()
+				.setAccelerator(KeyStroke.getKeyStroke('Q', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Q
+
 		// HeaderWrapper - Help menu
 		headerWrapperView.getMntmAbout().addMouseListener(new MouseAdapter() {
 			@Override

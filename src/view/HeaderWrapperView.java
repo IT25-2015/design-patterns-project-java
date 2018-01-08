@@ -1,10 +1,11 @@
 package view;
 
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
@@ -42,7 +43,7 @@ public class HeaderWrapperView extends JPanel {
 
 		mntmImportLog = new JMenuItem("Import from log file");
 		mnFile.add(mntmImportLog);
-		
+
 		mntmExportFile = new JMenuItem("Export to file");
 		mnFile.add(mntmExportFile);
 
@@ -66,7 +67,7 @@ public class HeaderWrapperView extends JPanel {
 
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
-		
+
 		mntmViewCode = new JMenuItem("View GitHub repository");
 		mnHelp.add(mntmViewCode);
 
