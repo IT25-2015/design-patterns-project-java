@@ -18,6 +18,7 @@ import shapes.circle.RemoveCircle;
 import shapes.circle.UpdateCircle;
 import shapes.hexagon.HexagonAdapter;
 import shapes.hexagon.RemoveHexagonAdapter;
+import shapes.hexagon.UpdateHexagonAdapter;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
 import shapes.line.UpdateLine;
@@ -34,6 +35,7 @@ import util.DialogsHelper;
 import util.Logger;
 import util.UndoRedoHelper;
 import util.modifyDialogs.CircleModifyDialog;
+import util.modifyDialogs.HexagonModifyDialog;
 import util.modifyDialogs.LineModifyDialog;
 import util.modifyDialogs.PointModifyDialog;
 import util.modifyDialogs.RectangleModifyDialog;
@@ -167,6 +169,18 @@ public class ToolboxController implements Serializable {
 					Command updateSquare = new UpdateSquare(selectedSquare, modifiedSquare);
 					ShapeModel.getUndoStack().offerLast(updateSquare);
 					updateSquare.execute();
+					frame.repaint();
+				}
+			} else if (selected instanceof HexagonAdapter) {
+				HexagonAdapter selectedHexagon = (HexagonAdapter) selected;
+				HexagonModifyDialog modifyDialog = new HexagonModifyDialog(selectedHexagon);
+				HexagonAdapter modifiedHexagonAdapter = modifyDialog.getHexagonAdapter();
+				if (!selectedHexagon.equals(modifiedHexagonAdapter)
+						|| selectedHexagon.getColor() != modifiedHexagonAdapter.getColor()
+						|| selectedHexagon.getInnerColor() != modifiedHexagonAdapter.getInnerColor()) {
+					Command updateHexagonAdapter = new UpdateHexagonAdapter(selectedHexagon, modifiedHexagonAdapter);
+					ShapeModel.getUndoStack().offerLast(updateHexagonAdapter);
+					updateHexagonAdapter.execute();
 					frame.repaint();
 				}
 			}
