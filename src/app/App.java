@@ -26,6 +26,7 @@ public class App {
 		DefaultListModel<String> dlmLogger = logger.getDlmLogger();
 
 		frame = new MainFrame(800, 600);
+
 		CanvasController canvasController = new CanvasController(frame, model);
 		frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
 

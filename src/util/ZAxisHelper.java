@@ -74,7 +74,7 @@ public class ZAxisHelper {
 	 */
 	public static void moveShapeToIndex(int newIndex, Shape shape, ShapeModel model) {
 		if (model.getShapesList().remove(shape)) {
-			if(newIndex < model.getShapesList().size() - 1) {
+			if (newIndex < model.getShapesList().size() - 1) {
 				model.getShapesList().add(newIndex, shape);
 			} else {
 				model.getShapesList().add(shape);
@@ -104,7 +104,7 @@ public class ZAxisHelper {
 	public static int getSelectedShapeIndex(ShapeModel model) {
 		int listSize = model.getShapesList().size() - 1;
 		for (int i = 0; i <= listSize; i++) {
-			if (model.getShapesList().get(i).isSelected()) {
+			if (model.getShapesList().get(i) != null && model.getShapesList().get(i).isSelected()) {
 				return i;
 			}
 		}

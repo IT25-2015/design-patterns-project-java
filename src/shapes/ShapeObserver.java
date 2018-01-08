@@ -27,7 +27,7 @@ public class ShapeObserver implements Observer, Serializable {
 		if (arg0 == shape) {
 			int foundCount = 0;
 			for (Shape s : model.getShapesList()) {
-				if (s.isSelected()) {
+				if (s != null && s.isSelected()) {
 					foundCount++;
 				}
 			}
