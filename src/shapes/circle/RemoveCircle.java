@@ -20,14 +20,16 @@ public class RemoveCircle implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(circle),
+				circle.toString(), true);
 		model.remove(circle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", circle.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(circle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", circle.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(circle),
+				circle.toString(), true);
 	}
 
 }

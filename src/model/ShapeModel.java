@@ -46,6 +46,16 @@ public class ShapeModel implements Serializable {
 		return shapesList.remove(s);
 	}
 
+	/**
+	 * Returns integer index of given shape in shape list
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public int getShapeIndex(Shape s) {
+		return shapesList.indexOf(s);
+	}
+
 	public ArrayList<Shape> getShapesList() {
 		return shapesList;
 	}

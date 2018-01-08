@@ -20,14 +20,16 @@ public class RemoveHexagonAdapter implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(hexAdapter),
+				hexAdapter.toString(), true);
 		model.remove(hexAdapter);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", hexAdapter.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(hexAdapter);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", hexAdapter.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(hexAdapter),
+				hexAdapter.toString(), true);
 	}
 
 }

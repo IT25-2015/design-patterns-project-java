@@ -22,12 +22,14 @@ public class AddRectangle implements Command {
 	@Override
 	public void execute() {
 		model.add(rectangle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", rectangle.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(rectangle),
+				rectangle.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(rectangle),
+				rectangle.toString(), true);
 		model.remove(rectangle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", rectangle.toString(), true);
 	}
 }

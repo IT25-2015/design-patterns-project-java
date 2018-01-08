@@ -53,5 +53,16 @@ public class DialogsHelper {
 		}
 
 	}
+	
+	/**
+	 * Will show JOptionPane asking user to input value, returns user's input
+	 * @param message
+	 * @param title
+	 * @param icon
+	 * @return
+	 */
+	public static String getUserInput(String message, String title, int icon) {
+		return JOptionPane.showInputDialog(null, message, title, icon);
+	}
 
 }

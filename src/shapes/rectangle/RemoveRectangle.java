@@ -9,7 +9,7 @@ public class RemoveRectangle implements Command {
 	 * 
 	 */
 	private static final long serialVersionUID = 7085566820551696079L;
-	
+
 	private ShapeModel model;
 	private Rectangle rectangle;
 
@@ -20,13 +20,15 @@ public class RemoveRectangle implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(rectangle),
+				rectangle.toString(), true);
 		model.remove(rectangle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", rectangle.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(rectangle);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", rectangle.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(rectangle),
+				rectangle.toString(), true);
 	}
 }

@@ -19,13 +19,15 @@ public class RemoveLine implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(line), line.toString(),
+				true);
 		model.remove(line);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", line.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(line);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", line.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(line), line.toString(),
+				true);
 	}
 }

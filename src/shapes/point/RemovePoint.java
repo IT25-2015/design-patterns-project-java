@@ -19,13 +19,15 @@ public class RemovePoint implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(point), point.toString(),
+				true);
 		model.remove(point);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", point.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(point);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", point.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(point),
+				point.toString(), true);
 	}
 }

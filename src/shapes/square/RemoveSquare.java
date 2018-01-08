@@ -21,14 +21,16 @@ public class RemoveSquare implements Command {
 
 	@Override
 	public void execute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(square),
+				square.toString(), true);
 		model.remove(square);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", square.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
 		model.add(square);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", square.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(square),
+				square.toString(), true);
 	}
 
 }

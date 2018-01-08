@@ -21,13 +21,15 @@ public class AddSquare implements Command {
 	@Override
 	public void execute() {
 		model.add(square);
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", square.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.getShapeIndex(square),
+				square.toString(), true);
 	}
 
 	@Override
 	public void unexecute() {
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.getShapeIndex(square),
+				square.toString(), true);
 		model.remove(square);
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", square.toString(), true);
 	}
 
 }

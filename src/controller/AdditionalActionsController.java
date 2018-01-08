@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.Serializable;
+
 import app.MainFrame;
 import model.ShapeModel;
 import util.ZAxisHelper;
@@ -8,7 +10,8 @@ import zaxis.BringToFrontCommand;
 import zaxis.ToBackCommand;
 import zaxis.ToFrontCommand;
 
-public class AdditionalActionsController {
+@SuppressWarnings("serial")
+public class AdditionalActionsController implements Serializable {
 	private ShapeModel model;
 	private MainFrame frame;
 

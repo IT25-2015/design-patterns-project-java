@@ -33,7 +33,7 @@ public class UpdateCircle implements Command {
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", original.toString(), true);
 	}
 
 	@Override

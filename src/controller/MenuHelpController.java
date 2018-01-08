@@ -2,12 +2,14 @@ package controller;
 
 import java.awt.Desktop;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import util.DialogsHelper;
 
-public class MenuHelpController {
+@SuppressWarnings("serial")
+public class MenuHelpController implements Serializable {
 
 	/**
 	 * Will show JOptionPane with informations about this project and author
