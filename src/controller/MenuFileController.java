@@ -35,7 +35,7 @@ public class MenuFileController implements Serializable {
 	}
 
 	/**
-	 * Bundles all 3 shape collections to Object ArrayList, opens File Dialog and
+	 * Bundles shape collections to Object ArrayList, opens File Dialog and
 	 * calls export to file method
 	 */
 	public void handleExportToFile() {

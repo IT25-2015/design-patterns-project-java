@@ -21,31 +21,44 @@ public class Logger {
 	 * @param toConsole
 	 *            if true it will print to console as well
 	 */
-	public void log(String action,String s, boolean toConsole) {
+	public void log(String action, String s, boolean toConsole) {
 		loggerModel.add(action.toUpperCase() + "_" + s);
 		dlmLogger.addElement(loggerModel.peek());
-		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); //Scroll to bottom of log automatically
+		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
+																					// automatically
 		if (toConsole)
 			System.out.println(loggerModel.peek());
 	}
-	
-	public void log(String action,int shapeId, String s, boolean toConsole) {
-		loggerModel.add(action.toUpperCase() + "_sid="+ shapeId +  "_" + s);
+
+	/**
+	 * Will add given string to logger model (List), will also add shape id to
+	 * output
+	 * 
+	 * @param action
+	 * @param shapeId
+	 * @param s
+	 * @param toConsole
+	 */
+	public void log(String action, int shapeId, String s, boolean toConsole) {
+		loggerModel.add(action.toUpperCase() + "_sid=" + shapeId + "_" + s);
 		dlmLogger.addElement(loggerModel.peek());
-		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); //Scroll to bottom of log automatically
+		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
+																					// automatically
 		if (toConsole)
 			System.out.println(loggerModel.peek());
 	}
-	
+
 	/**
 	 * Will add given string to logger model (List)
+	 * 
 	 * @param s
 	 * @param toConsole
 	 */
 	public void log(String s, boolean toConsole) {
 		loggerModel.add(s);
 		dlmLogger.addElement(loggerModel.peek());
-		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); //Scroll to bottom of log automatically
+		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
+																					// automatically
 		if (toConsole)
 			System.out.println(loggerModel.peek());
 	}
