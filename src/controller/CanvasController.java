@@ -72,6 +72,7 @@ public class CanvasController implements Serializable {
 			Command point = new AddPoint(model, new Point(e.getX(), e.getY(), outer));
 			point.execute();
 			ShapeModel.getUndoStack().offerLast(point);
+
 			frame.repaint();
 		} else {
 			if (startDrawingPoint == null) {

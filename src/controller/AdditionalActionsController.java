@@ -21,6 +21,8 @@ public class AdditionalActionsController implements Serializable {
 	}
 
 	public void doBringToFront() {
+		if(!frame.getAdditionalActionsView().getBtnBringToFront().isEnabled()) return;
+		
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		BringToFrontCommand btfCommand = new BringToFrontCommand(selectedIndex, model, frame);
 		btfCommand.execute();
@@ -28,6 +30,8 @@ public class AdditionalActionsController implements Serializable {
 	}
 
 	public void doBringToBack() {
+		if(!frame.getAdditionalActionsView().getBtnBringToBack().isEnabled()) return;
+		
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		BringToBackCommand btbCommand = new BringToBackCommand(selectedIndex, model, frame);
 		btbCommand.execute();
@@ -35,6 +39,8 @@ public class AdditionalActionsController implements Serializable {
 	}
 
 	public void doToFront() {
+		if(!frame.getAdditionalActionsView().getBtnToFront().isEnabled()) return;
+		
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		ToFrontCommand tfCommand = new ToFrontCommand(selectedIndex, model, frame);
 		tfCommand.execute();
@@ -42,6 +48,8 @@ public class AdditionalActionsController implements Serializable {
 	}
 
 	public void doToBack() {
+		if(!frame.getAdditionalActionsView().getBtnToBack().isEnabled()) return;
+		
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		ToBackCommand tbCommand = new ToBackCommand(selectedIndex, model, frame);
 		tbCommand.execute();
