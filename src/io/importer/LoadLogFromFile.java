@@ -22,6 +22,7 @@ public class LoadLogFromFile implements Importer {
 			stream.forEach(logLines::add); // Fancy new Java 8 way
 			bundle.add(logLines);
 			Logger.getInstance().log("Log from path " + path + " has been imported successfully", true);
+			Logger.getInstance().log("Detected " + logLines.size() + " log lines.", false);
 		} catch (IOException e) {
 			String msg = "Error while importing log from path " + path + " , Error message : " + e.getMessage();
 			e.printStackTrace();

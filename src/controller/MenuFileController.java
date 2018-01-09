@@ -72,11 +72,6 @@ public class MenuFileController implements Serializable {
 		ImportManager manager = new ImportManager(new LoadLogFromFile());
 		String path = FileOperationsHelper.showFileDialog("log");
 
-		if (model.getShapesList().size() != 0) {
-			DialogsHelper.showErrorMessage("Log can be only imported when there are no shapes drawn.");
-			return;
-		}
-
 		if (path != null) {
 			ArrayList<Object> bundle = manager.importData(path);
 
