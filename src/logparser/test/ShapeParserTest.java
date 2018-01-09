@@ -9,8 +9,10 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import hexagon.Hexagon;
 import logparser.ShapeParser;
 import shapes.circle.Circle;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.Line;
 import shapes.point.Point;
 import shapes.rectangle.Rectangle;
@@ -120,6 +122,16 @@ public class ShapeParserTest {
 		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor())
 				&& expected.getInnerColor().equals(actual.getInnerColor()));
 
+	}
+
+	@Test
+	public void testCreateHexagonFromString() {
+		Hexagon hexa = new Hexagon(373, 108, 62);
+		HexagonAdapter expected = new HexagonAdapter(hexa, new Color(0, 0, 0), new Color(255, 255, 255));
+		String s = "ADDHEXAGONADAPTER_EXECUTE_sid=5_Hexagon(X=373,Y=108,r=62,outercolor=[0-0-0],innercolor=[255-255-255])";
+		HexagonAdapter actual = (HexagonAdapter) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor())
+				&& expected.getInnerColor().equals(actual.getInnerColor()));
 	}
 
 }

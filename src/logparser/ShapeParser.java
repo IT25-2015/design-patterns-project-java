@@ -2,9 +2,11 @@ package logparser;
 
 import java.util.HashMap;
 
+import hexagon.Hexagon;
 import logparser.util.LogParserUtils;
 import shapes.Shape;
 import shapes.circle.Circle;
+import shapes.hexagon.HexagonAdapter;
 import shapes.line.Line;
 import shapes.point.Point;
 import shapes.rectangle.Rectangle;
@@ -58,6 +60,12 @@ public class ShapeParser {
 			return new Rectangle(upperLeftPt, Integer.parseInt(properties.get("height")),
 					Integer.parseInt(properties.get("width")),
 					LogParserUtils.createColorFromString(properties.get("outercolor")),
+					LogParserUtils.createColorFromString(properties.get("innercolor")));
+		}
+		case "hexagon": {
+			Hexagon hexa = new Hexagon(Integer.parseInt(properties.get("X")), Integer.parseInt(properties.get("Y")),
+					Integer.parseInt(properties.get("r")));
+			return new HexagonAdapter(hexa, LogParserUtils.createColorFromString(properties.get("outercolor")),
 					LogParserUtils.createColorFromString(properties.get("innercolor")));
 		}
 		}
