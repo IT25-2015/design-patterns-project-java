@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import logparser.util.LogParserUtils;
 import shapes.Shape;
+import shapes.line.Line;
 import shapes.point.Point;
 
 public class ShapeParser {
@@ -22,10 +23,17 @@ public class ShapeParser {
 		String shapeType = parseType(s);
 		switch (shapeType) {
 		case "point": {
-			HashMap<String, String> properties = parsePointProperties(s); // Get all Point properties
+			HashMap<String, String> properties = parseShapeProperties(s); // Get all Point properties
 			// Return new point that is created from properties above
 			return new Point(Integer.parseInt(properties.get("x")), Integer.parseInt(properties.get("y")),
 					LogParserUtils.createColorFromString(properties.get("color")));
+		}
+		case "line": {
+			HashMap<String, String> properties = parseShapeProperties(s); // Get all Line properties
+			Point startPt = new Point(Integer.parseInt(properties.get("startX")),
+					Integer.parseInt(properties.get("startY")));
+			Point endPt = new Point(Integer.parseInt(properties.get("endX")), Integer.parseInt(properties.get("endY")));
+			return new Line(startPt, endPt, LogParserUtils.createColorFromString(properties.get("color")));
 		}
 		}
 		return null;
@@ -50,7 +58,7 @@ public class ShapeParser {
 	 * @param s
 	 * @return
 	 */
-	public HashMap<String, String> parsePointProperties(String s) {
+	public HashMap<String, String> parseShapeProperties(String s) {
 		String propertiesString = s.split("\\(")[1]; // Gets shape properties within parentheses
 		propertiesString = propertiesString.substring(0, propertiesString.length() - 1); // Remove closing ) from
 																							// original string

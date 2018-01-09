@@ -10,6 +10,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import logparser.ShapeParser;
+import shapes.line.Line;
 import shapes.point.Point;
 
 public class ShapeParserTest {
@@ -69,7 +70,7 @@ public class ShapeParserTest {
 		expected.put("y", "62");
 		expected.put("color", "[0-0-0]");
 		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=66,y=62,color=[0-0-0])";
-		Map<String, String> actual = ShapeParser.getInstance().parsePointProperties(s);
+		Map<String, String> actual = ShapeParser.getInstance().parseShapeProperties(s);
 		assertEquals(expected, actual);
 	}
 
@@ -78,6 +79,14 @@ public class ShapeParserTest {
 		Point expected = new Point(128, 256, new Color(255, 255, 0));
 		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=128,y=256,color=[255-255-0])";
 		Point actual = (Point) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor()));
+	}
+
+	@Test
+	public void testCreateLineFromString() {
+		Line expected = new Line(new Point(60, 110), new Point(141, 80), new Color(0, 0, 0));
+		String s = "ADDLINE_EXECUTE_sid=1_Line(startX=60,startY=110,endX=141,endY=80,color=[0-0-0])";
+		Line actual = (Line) ShapeParser.getInstance().parse(s);
 		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor()));
 	}
 
