@@ -96,20 +96,16 @@ public class MenuFileController implements Serializable {
 				|| !frame.getAdditionalActionsView().getBtnParseLog().isEnabled())
 			return;
 
-		// Disable button if there are no more log lines to parse, reset current line to
-		// 0
-		if (logFileLineProgress > logFileList.size() - 1) {
-			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(false);
-			logFileLineProgress = 0;
-		}
-
 		// Get current log line
 		String s = logFileList.get(logFileLineProgress);
 
 		// Get Command from log line
 		Command cmd = cmdParser.parse(s, model);
-		// Put new command in undo stack
-		ShapeModel.getUndoStack().offerLast(cmd);
+
+		if (!ShapeModel.getUndoStack().contains(cmd)) {
+			// Put new command in undo stack
+			ShapeModel.getUndoStack().offerLast(cmd);
+		}
 
 		// Check if command should be executed or unexecuted
 		if (cmdParser.isExecuted(s)) {
@@ -121,6 +117,13 @@ public class MenuFileController implements Serializable {
 		// Increase log file line progress so next time this function is called we
 		// process next line
 		logFileLineProgress++;
+
+		// Disable button if there are no more log lines to parse, reset current line to
+		// 0
+		if (logFileLineProgress > logFileList.size() - 1) {
+			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(false);
+			logFileLineProgress = 0;
+		}
 
 		frame.repaint();
 	}
