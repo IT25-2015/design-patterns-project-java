@@ -24,6 +24,7 @@ public class ShapeParser {
 	 * 
 	 * @param s
 	 *            - String from LOG file
+	 * 
 	 * @return Shape - shape that is parsed from given string
 	 */
 	public Shape parse(String s) {
@@ -79,8 +80,8 @@ public class ShapeParser {
 	 * @return
 	 */
 	public String parseType(String s) {
-		String prefix = s.split("\\(")[0]; // Will get everything before Shape type
-		String[] prefixArray = prefix.split("_"); // Split prefix by _
+		String prefix = s.split("\\(")[0]; // Will get everything before Shape properties
+		String[] prefixArray = prefix.split("_");
 		String type = prefixArray[prefixArray.length - 1].toLowerCase(); // Get Shape type
 		return type;
 	}
