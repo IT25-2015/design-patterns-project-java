@@ -1,5 +1,7 @@
 package logparser;
 
+import java.io.Serializable;
+
 import model.ShapeModel;
 import shapes.Command;
 import shapes.circle.AddCircle;
@@ -15,7 +17,11 @@ import shapes.rectangle.Rectangle;
 import shapes.square.AddSquare;
 import shapes.square.Square;
 
-public class CommandParser {
+public class CommandParser implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5446880322409643478L;
 	private static CommandParser instance;
 
 	private CommandParser() {

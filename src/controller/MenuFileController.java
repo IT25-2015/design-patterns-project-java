@@ -81,7 +81,7 @@ public class MenuFileController implements Serializable {
 			// Put log file lines from bundle to its array list
 			logFileList = (ArrayList<String>) bundle.get(0);
 
-			// Log is imported so enable log parse button
+			// Log is imported so enable log parse buttons
 			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(true);
 			frame.getHeaderWrapperView().getMntmParseNext().setEnabled(true);
 		}
@@ -147,7 +147,7 @@ public class MenuFileController implements Serializable {
 				s.addObserver(observer);
 				model.add(s);
 			}
-			Logger.getInstance().log("Imported drawing from " + path, true);
+			Logger.getInstance().log("Imported drawing with "+ ((ArrayList<Shape>) bundle.get(0)).size() +" shapes from " + path, true);
 			frame.repaint();
 		}
 	}

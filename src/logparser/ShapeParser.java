@@ -1,5 +1,6 @@
 package logparser;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import hexagon.Hexagon;
@@ -12,7 +13,11 @@ import shapes.point.Point;
 import shapes.rectangle.Rectangle;
 import shapes.square.Square;
 
-public class ShapeParser {
+public class ShapeParser implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -418593081440280081L;
 	private static ShapeParser instance;
 
 	private ShapeParser() {
