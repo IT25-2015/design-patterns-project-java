@@ -76,6 +76,15 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmRedo()
 				.setAccelerator(KeyStroke.getKeyStroke('Y', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Y
+		
+		headerWrapperView.getMntmParseNext().setAction(new AbstractAction("Parse next log line") {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mfController.parseNextLogLine();
+			}
+		});
+		headerWrapperView.getMntmParseNext()
+				.setAccelerator(KeyStroke.getKeyStroke('P', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+P
 
 		headerWrapperView.getMntmExportFile().setAction(new AbstractAction("Export to drawing file") {
 			@Override
@@ -113,7 +122,7 @@ public class MainFrame extends JFrame {
 		headerWrapperView.getMntmImportFile()
 				.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+O
 
-		headerWrapperView.getMntmExit().setAction(new AbstractAction("Import from log file") {
+		headerWrapperView.getMntmExit().setAction(new AbstractAction("Quit app") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				mfController.exitApp(0);

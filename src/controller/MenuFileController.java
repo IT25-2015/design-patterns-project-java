@@ -83,6 +83,7 @@ public class MenuFileController implements Serializable {
 
 			// Log is imported so enable log parse button
 			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(true);
+			frame.getHeaderWrapperView().getMntmParseNext().setEnabled(true);
 		}
 	}
 
@@ -93,7 +94,8 @@ public class MenuFileController implements Serializable {
 
 		// Make sure that log is actually loaded and that button is enabled
 		if (logFileList == null || logFileList.size() == 0
-				|| !frame.getAdditionalActionsView().getBtnParseLog().isEnabled())
+				|| !frame.getAdditionalActionsView().getBtnParseLog().isEnabled()
+				|| !frame.getHeaderWrapperView().getMntmParseNext().isEnabled())
 			return;
 
 		// Get current log line
@@ -122,6 +124,7 @@ public class MenuFileController implements Serializable {
 		// 0
 		if (logFileLineProgress > logFileList.size() - 1) {
 			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(false);
+			frame.getHeaderWrapperView().getMntmParseNext().setEnabled(false);
 			logFileLineProgress = 0;
 		}
 

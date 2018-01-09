@@ -23,6 +23,7 @@ public class HeaderWrapperView extends JPanel {
 	private ToolboxView toolboxView;
 	private JMenuItem mntmUndo;
 	private JMenuItem mntmRedo;
+	private JMenuItem mntmParseNext;
 	private JMenuItem mntmViewCode;
 	private JMenuItem mntmAbout;
 
@@ -64,6 +65,10 @@ public class HeaderWrapperView extends JPanel {
 
 		mntmRedo = new JMenuItem("Redo action");
 		mnEdit.add(mntmRedo);
+		
+		mntmParseNext = new JMenuItem("Parse next log line");
+		mntmParseNext.setEnabled(false);
+		mnEdit.add(mntmParseNext);
 
 		mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
@@ -145,6 +150,10 @@ public class HeaderWrapperView extends JPanel {
 
 	public JMenuItem getMntmAbout() {
 		return mntmAbout;
+	}
+
+	public JMenuItem getMntmParseNext() {
+		return mntmParseNext;
 	}
 
 }
