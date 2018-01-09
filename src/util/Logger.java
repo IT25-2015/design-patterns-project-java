@@ -42,8 +42,11 @@ public class Logger {
 	public void log(String action, int shapeId, String s, boolean toConsole) {
 		loggerModel.add(action.toUpperCase() + "_sid=" + shapeId + "_" + s);
 		dlmLogger.addElement(loggerModel.peek());
-		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
-																					// automatically
+		if (LoggerView.getLstLogger() != null) {
+			LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
+			// automatically
+		}
+
 		if (toConsole)
 			System.out.println(loggerModel.peek());
 	}
