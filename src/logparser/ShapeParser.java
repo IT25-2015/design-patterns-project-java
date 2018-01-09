@@ -2,7 +2,9 @@ package logparser;
 
 import java.util.HashMap;
 
+import logparser.util.LogParserUtils;
 import shapes.Shape;
+import shapes.point.Point;
 
 public class ShapeParser {
 	private static ShapeParser instance;
@@ -20,7 +22,10 @@ public class ShapeParser {
 		String shapeType = parseType(s);
 		switch (shapeType) {
 		case "point": {
-			HashMap<String, String> properties = parsePointProperties(s);
+			HashMap<String, String> properties = parsePointProperties(s); // Get all Point properties
+			// Return new point that is created from properties above
+			return new Point(Integer.parseInt(properties.get("x")), Integer.parseInt(properties.get("y")),
+					LogParserUtils.createColorFromString(properties.get("color")));
 		}
 		}
 		return null;
@@ -53,7 +58,7 @@ public class ShapeParser {
 		// Split string to get each property
 		for (String property : propertiesString.split(",")) {
 
-			String[] keyValue = property.split("="); //Split key - value
+			String[] keyValue = property.split("="); // Split key value pair
 			properties.put(keyValue[0], keyValue[1]);
 
 		}

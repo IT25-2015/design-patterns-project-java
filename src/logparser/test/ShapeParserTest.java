@@ -1,13 +1,16 @@
 package logparser.test;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import logparser.ShapeParser;
-
-import static org.junit.Assert.*;
-
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
+
+import logparser.ShapeParser;
+import shapes.point.Point;
 
 public class ShapeParserTest {
 
@@ -58,7 +61,7 @@ public class ShapeParserTest {
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
-	
+
 	@Test
 	public void testParsePropertiesFromStringIntoHashMap() {
 		Map<String, String> expected = new HashMap<String, String>();
@@ -69,4 +72,13 @@ public class ShapeParserTest {
 		Map<String, String> actual = ShapeParser.getInstance().parsePointProperties(s);
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void testCreatePointFromString() {
+		Point expected = new Point(128, 256, new Color(255, 255, 0));
+		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=128,y=256,color=[255-255-0])";
+		Point actual = (Point) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor()));
+	}
+
 }
