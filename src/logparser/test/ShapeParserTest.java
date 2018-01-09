@@ -10,8 +10,11 @@ import java.util.Map;
 import org.junit.Test;
 
 import logparser.ShapeParser;
+import shapes.circle.Circle;
 import shapes.line.Line;
 import shapes.point.Point;
+import shapes.rectangle.Rectangle;
+import shapes.square.Square;
 
 public class ShapeParserTest {
 
@@ -88,6 +91,35 @@ public class ShapeParserTest {
 		String s = "ADDLINE_EXECUTE_sid=1_Line(startX=60,startY=110,endX=141,endY=80,color=[0-0-0])";
 		Line actual = (Line) ShapeParser.getInstance().parse(s);
 		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor()));
+	}
+
+	@Test
+	public void testCreateCircleFromString() {
+		Circle expected = new Circle(new Point(227, 122), 44, new Color(0, 0, 0), new Color(255, 255, 255));
+		String s = "ADDCIRCLE_EXECUTE_sid=2_Circle(X=227,Y=122,r=44,outercolor=[0-0-0],innercolor=[255-255-255])";
+		Circle actual = (Circle) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor())
+				&& expected.getInnerColor().equals(actual.getInnerColor()));
+	}
+
+	@Test
+	public void testCreateSquareFromString() {
+		Square expected = new Square(new Point(51, 208), 56, new Color(0, 0, 0), new Color(255, 255, 255));
+		String s = "ADDSQUARE_EXECUTE_sid=3_Square(UpperX=51,UpperY=208,a=56,outercolor=[0-0-0],innercolor=[255-255-255])";
+		Square actual = (Square) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor())
+				&& expected.getInnerColor().equals(actual.getInnerColor()));
+
+	}
+
+	@Test
+	public void testCreateRectangleFromString() {
+		Square expected = new Rectangle(new Point(189, 233), 36, 132, new Color(0, 0, 0), new Color(255, 255, 255));
+		String s = "ADDRECTANGLE_EXECUTE_sid=4_Rectangle(UpperX=189,UpperY=233,height=36,width=132,outercolor=[0-0-0],innercolor=[255-255-255])";
+		Square actual = (Rectangle) ShapeParser.getInstance().parse(s);
+		assertTrue(expected.equals(actual) && expected.getColor().equals(actual.getColor())
+				&& expected.getInnerColor().equals(actual.getInnerColor()));
+
 	}
 
 }
