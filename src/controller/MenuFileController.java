@@ -2,6 +2,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import app.MainFrame;
 import io.exporter.ExportManager;
@@ -43,6 +44,11 @@ public class MenuFileController implements Serializable {
 	 * export to file method
 	 */
 	public void handleExportToFile() {
+		if (model.getShapesList().size() == 0) {
+			DialogsHelper.showErrorMessage("You cannot export empty drawing!");
+			return;
+		}
+
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(model.getShapesList());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
@@ -56,6 +62,10 @@ public class MenuFileController implements Serializable {
 	 * method
 	 */
 	public void handleExportToLog() {
+		if (model.getShapesList().size() == 0) {
+			DialogsHelper.showErrorMessage("You cannot export empty drawing!");
+			return;
+		}
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
@@ -80,6 +90,16 @@ public class MenuFileController implements Serializable {
 
 			// Put log file lines from bundle to its array list
 			logFileList = (ArrayList<String>) bundle.get(0);
+
+			Iterator<String> iterator = logFileList.iterator();
+
+			// Remove log lines that have [INFO] prefix
+			while (iterator.hasNext()) {
+				String next = iterator.next();
+				if (next.contains("[INFO]")) {
+					iterator.remove();
+				}
+			}
 
 			// Log is imported so enable log parse buttons
 			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(true);
@@ -147,7 +167,9 @@ public class MenuFileController implements Serializable {
 				s.addObserver(observer);
 				model.add(s);
 			}
-			Logger.getInstance().log("Imported drawing with "+ ((ArrayList<Shape>) bundle.get(0)).size() +" shapes from " + path, true);
+			Logger.getInstance().log(
+					"Imported drawing with " + ((ArrayList<Shape>) bundle.get(0)).size() + " shapes from " + path, true,
+					true);
 			frame.repaint();
 		}
 	}

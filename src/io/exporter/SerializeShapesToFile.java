@@ -19,13 +19,13 @@ public class SerializeShapesToFile implements Exporter {
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))) {
 
 			oos.writeObject(objects);
-			Logger.getInstance().log("All shapes have been exported to path " + path, true);
+			Logger.getInstance().log("All shapes have been exported to path " + path, true, true);
 
 		} catch (Exception ex) {
 			String msg = "Error while exporting shapes, error message:" + ex.getMessage();
 			ex.printStackTrace();
 			DialogsHelper.showErrorMessage(msg);
-			Logger.getInstance().log(msg, true);
+			Logger.getInstance().log(msg, true, true);
 		}
 	}
 

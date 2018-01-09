@@ -38,15 +38,15 @@ public class SaveLogToFile implements Exporter {
 				} catch (IOException e) {
 					String msg = "Error while exporting log file, error message: " + e.getMessage();
 					DialogsHelper.showErrorMessage(msg);
-					Logger.getInstance().log(msg, true);
+					Logger.getInstance().log(msg, true, true);
 					e.printStackTrace();
 				}
 			}
-			Logger.getInstance().log("Log has been exported to " + path, true);
+			Logger.getInstance().log("Log has been exported to " + path, true, true);
 		} catch (Exception e) {
 			String msg = "Error while exporting log file, error message: " + e.getMessage();
 			DialogsHelper.showErrorMessage(msg);
-			Logger.getInstance().log(msg, true);
+			Logger.getInstance().log(msg, true, true);
 			e.printStackTrace();
 		}
 

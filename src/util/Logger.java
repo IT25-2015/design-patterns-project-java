@@ -52,12 +52,16 @@ public class Logger {
 	}
 
 	/**
-	 * Will add given string to logger model (List)
+	 * Will add given string to logger model (List), if info is true it will add
+	 * [INFO] prefix
 	 * 
 	 * @param s
 	 * @param toConsole
 	 */
-	public void log(String s, boolean toConsole) {
+	public void log(String s, boolean toConsole, boolean info) {
+		if (info) {
+			s = "[INFO] " + s;
+		}
 		loggerModel.add(s);
 		dlmLogger.addElement(loggerModel.peek());
 		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log

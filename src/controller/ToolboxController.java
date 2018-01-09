@@ -82,14 +82,14 @@ public class ToolboxController implements Serializable {
 			Shape s = model.getShapesList().get(i);
 			if (s.contains(e.getX(), e.getY()) && !s.isSelected()) {
 				s.setSelected(true);
-				Logger.getInstance().log("SELECTED", s.toString(), true);
+				Logger.getInstance().log("[INFO] SELECTED", s.toString(), true);
 				frame.repaint();
 				shapeFound = true;
 				break;
 			}
 		}
 		if (!shapeFound) {
-			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()), true);
+			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()), true, true);
 			for (Shape s : model.getShapesList()) {
 				s.setSelected(false);
 				frame.repaint();
@@ -274,14 +274,14 @@ public class ToolboxController implements Serializable {
 	 */
 	public void handleSelectBtnStateChange(ItemEvent ev) {
 		if (ev.getStateChange() == ItemEvent.SELECTED) {
-			Logger.getInstance().log("Entering select mode", true);
+			Logger.getInstance().log("Entering select mode", true, true);
 		} else if (ev.getStateChange() == ItemEvent.DESELECTED) {
-			Logger.getInstance().log("Exiting select mode", true);
+			Logger.getInstance().log("Exiting select mode", true, true);
 			for (Shape s : model.getShapesList()) {
 				s.setSelected(false);
 				frame.repaint();
 			}
-			Logger.getInstance().log("All shapes have been de-selected", true);
+			Logger.getInstance().log("All shapes have been de-selected", true, true);
 		}
 	}
 

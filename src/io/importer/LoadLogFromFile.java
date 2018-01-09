@@ -21,13 +21,13 @@ public class LoadLogFromFile implements Importer {
 		try (Stream<String> stream = Files.lines(Paths.get(path))) {
 			stream.forEach(logLines::add); // Fancy new Java 8 way
 			bundle.add(logLines);
-			Logger.getInstance().log("Log from path " + path + " has been imported successfully", true);
-			Logger.getInstance().log("Detected " + logLines.size() + " log lines.", false);
+			Logger.getInstance().log("Log from path " + path + " has been imported successfully", true, true);
+			Logger.getInstance().log("Detected " + logLines.size() + " log lines.", false, true);
 		} catch (IOException e) {
 			String msg = "Error while importing log from path " + path + " , Error message : " + e.getMessage();
 			e.printStackTrace();
 			DialogsHelper.showErrorMessage(msg);
-			Logger.getInstance().log(msg, true);
+			Logger.getInstance().log(msg, true, true);
 		}
 		return bundle;
 	}

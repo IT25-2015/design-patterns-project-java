@@ -22,7 +22,7 @@ public class LoadDrawingFromFile implements Importer {
 			String msg = "Error while importing shapes, error message:" + ex.getMessage();
 			ex.printStackTrace();
 			DialogsHelper.showErrorMessage(msg);
-			Logger.getInstance().log(msg, true);
+			Logger.getInstance().log(msg, true, true);
 		}
 		return null;
 	}
