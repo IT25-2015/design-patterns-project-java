@@ -245,6 +245,13 @@ public class MainFrame extends JFrame {
 				additionalActionsController.doToBack();
 			}
 		});
+		
+		additionalActionsView.getBtnParseLog().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mfController.parseNextLogLine();
+			}
+		});
 
 		// FooterWrapper and its components related stuff
 		getContentPane().add(footerWrapperView, BorderLayout.SOUTH);

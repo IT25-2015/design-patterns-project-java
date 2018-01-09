@@ -10,10 +10,13 @@ import io.exporter.SerializeShapesToFile;
 import io.importer.ImportManager;
 import io.importer.LoadDrawingFromFile;
 import io.importer.LoadLogFromFile;
+import logparser.CommandParser;
 import model.LoggerModel;
 import model.ShapeModel;
+import shapes.Command;
 import shapes.Shape;
 import shapes.ShapeObserver;
+import util.DialogsHelper;
 import util.FileOperationsHelper;
 import util.Logger;
 
@@ -25,6 +28,9 @@ public class MenuFileController implements Serializable {
 	private MainFrame frame;
 	private ShapeModel model;
 	private LoggerModel loggerModel;
+	private CommandParser cmdParser = CommandParser.getInstance();
+	private ArrayList<String> logFileList;
+	private int logFileLineProgress = 0;
 
 	public MenuFileController(MainFrame frame, ShapeModel model, LoggerModel loggerModel) {
 		this.frame = frame;
@@ -33,8 +39,8 @@ public class MenuFileController implements Serializable {
 	}
 
 	/**
-	 * Bundles shape collections to Object ArrayList, opens File Dialog and
-	 * calls export to file method
+	 * Bundles shape collections to Object ArrayList, opens File Dialog and calls
+	 * export to file method
 	 */
 	public void handleExportToFile() {
 		ArrayList<Object> bundle = new ArrayList<Object>();
@@ -65,14 +71,63 @@ public class MenuFileController implements Serializable {
 	public void handleImportFromLog() {
 		ImportManager manager = new ImportManager(new LoadLogFromFile());
 		String path = FileOperationsHelper.showFileDialog("log");
-		if (path != null) {
 
-			ArrayList<Object> bundle = manager.importData(path);
-			for (String s : (ArrayList<String>) bundle.get(0)) {
-				// TODO Implement this function fully
-				Logger.getInstance().log("IMPORT", s, false);
-			}
+		if (model.getShapesList().size() != 0) {
+			DialogsHelper.showErrorMessage("Log can be only imported when there are no shapes drawn.");
+			return;
 		}
+
+		if (path != null) {
+			ArrayList<Object> bundle = manager.importData(path);
+
+			// Reset log file line progress to 0
+			logFileLineProgress = 0;
+
+			// Put log file lines from bundle to its array list
+			logFileList = (ArrayList<String>) bundle.get(0);
+
+			// Log is imported so enable log parse button
+			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(true);
+		}
+	}
+
+	/**
+	 * Parses next line from imported log
+	 */
+	public void parseNextLogLine() {
+
+		// Make sure that log is actually loaded and that button is enabled
+		if (logFileList == null || logFileList.size() == 0
+				|| !frame.getAdditionalActionsView().getBtnParseLog().isEnabled())
+			return;
+
+		// Disable button if there are no more log lines to parse, reset current line to
+		// 0
+		if (logFileLineProgress > logFileList.size() - 1) {
+			frame.getAdditionalActionsView().getBtnParseLog().setEnabled(false);
+			logFileLineProgress = 0;
+		}
+
+		// Get current log line
+		String s = logFileList.get(logFileLineProgress);
+
+		// Get Command from log line
+		Command cmd = cmdParser.parse(s, model);
+		// Put new command in undo stack
+		ShapeModel.getUndoStack().offerLast(cmd);
+
+		// Check if command should be executed or unexecuted
+		if (cmdParser.isExecuted(s)) {
+			cmd.execute();
+		} else {
+			cmd.unexecute();
+		}
+
+		// Increase log file line progress so next time this function is called we
+		// process next line
+		logFileLineProgress++;
+
+		frame.repaint();
 	}
 
 	/**
@@ -95,9 +150,10 @@ public class MenuFileController implements Serializable {
 			frame.repaint();
 		}
 	}
-	
+
 	/**
 	 * Exits process with given code
+	 * 
 	 * @param code
 	 */
 	public void exitApp(int code) {

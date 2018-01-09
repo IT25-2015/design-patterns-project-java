@@ -9,17 +9,18 @@ import java.awt.Insets;
 @SuppressWarnings("serial")
 public class AdditionalActionsView extends JPanel {
 	GridBagLayout gridBagLayout;
-	JButton btnBringToFront;
-	JButton btnBringToBack;
-	JButton btnToFront;
-	JButton btnToBack;
+	private JButton btnBringToFront;
+	private JButton btnBringToBack;
+	private JButton btnToFront;
+	private JButton btnToBack;
+	private JButton btnParseLog;
 	
 	public AdditionalActionsView() {
 		gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		btnBringToFront = new JButton("Bring To Front");
@@ -34,6 +35,7 @@ public class AdditionalActionsView extends JPanel {
 		btnBringToBack = new JButton("Bring To Back");
 		btnBringToBack.setEnabled(false);
 		GridBagConstraints gbc_btnBringToBack = new GridBagConstraints();
+		gbc_btnBringToBack.insets = new Insets(0, 0, 5, 0);
 		gbc_btnBringToBack.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnBringToBack.gridx = 0;
 		gbc_btnBringToBack.gridy = 1;
@@ -56,6 +58,14 @@ public class AdditionalActionsView extends JPanel {
 		gbc_btnToBack.gridx = 0;
 		gbc_btnToBack.gridy = 3;
 		add(btnToBack, gbc_btnToBack);
+		
+		btnParseLog = new JButton("Parse log");
+		btnParseLog.setEnabled(false);
+		GridBagConstraints gbc_btnParseLog = new GridBagConstraints();
+		gbc_btnParseLog.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnParseLog.gridx = 0;
+		gbc_btnParseLog.gridy = 4;
+		add(btnParseLog, gbc_btnParseLog);
 	}
 
 	public GridBagLayout getGridBagLayout() {
@@ -76,6 +86,10 @@ public class AdditionalActionsView extends JPanel {
 
 	public JButton getBtnToBack() {
 		return btnToBack;
+	}
+
+	public JButton getBtnParseLog() {
+		return btnParseLog;
 	}
 
 }
