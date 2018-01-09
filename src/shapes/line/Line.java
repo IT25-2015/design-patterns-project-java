@@ -35,6 +35,7 @@ public class Line extends Shape {
 
 	/**
 	 * Will return point which is on center of line
+	 * 
 	 * @return
 	 */
 	public Point lineCenter() {
@@ -45,6 +46,7 @@ public class Line extends Shape {
 
 	/**
 	 * Will return length of Line
+	 * 
 	 * @return
 	 */
 	public double length() {
@@ -53,8 +55,9 @@ public class Line extends Shape {
 
 	@Override
 	public String toString() {
-		return String.format("Line(startX=%d,startY=%d,endX=%d,endY=%d,color=%s)", ptStart.getX(), ptStart.getY(),
-				ptEnd.getX(), ptEnd.getY(), getColor());
+		return String.format("Line(startX=%d,startY=%d,endX=%d,endY=%d,color=[%d-%d-%d])", ptStart.getX(),
+				ptStart.getY(), ptEnd.getX(), ptEnd.getY(), getColor().getRed(), getColor().getGreen(),
+				getColor().getBlue());
 	}
 
 	@Override

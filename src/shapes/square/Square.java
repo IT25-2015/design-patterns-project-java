@@ -63,9 +63,10 @@ public class Square extends SurfaceShape implements Moveable {
 	public int surfaceArea() {
 		return sideLength * sideLength;
 	}
-	
+
 	/**
 	 * Will calculate volume of square
+	 * 
 	 * @return
 	 */
 	public int volume() {
@@ -83,8 +84,9 @@ public class Square extends SurfaceShape implements Moveable {
 
 	@Override
 	public String toString() {
-		return String.format("Square(UpperX=%d,UpperY=%d,a=%d,outercolor=%s,innercolor=%s)", upperLeft.getX(),
-				upperLeft.getY(), sideLength, getColor(), getInnerColor());
+		return String.format("Square(UpperX=%d,UpperY=%d,a=%d,outercolor=[%d-%d-%d],innercolor=[%d-%d-%d])",
+				upperLeft.getX(), upperLeft.getY(), sideLength, getColor().getRed(), getColor().getGreen(),
+				getColor().getBlue(), getInnerColor().getRed(), getInnerColor().getGreen(), getInnerColor().getBlue());
 	}
 
 	@Override

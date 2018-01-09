@@ -6,12 +6,15 @@ import logparser.ShapeParser;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ShapeParserTest {
 
 	@Test
 	public void testGetShapeTypePoint() {
 		String expected = "point";
-		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=60,y=64,color=java.awt.Color[r=0,g=0,b=0])";
+		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=66,y=62,color=[0-0-0])";
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
@@ -19,7 +22,7 @@ public class ShapeParserTest {
 	@Test
 	public void testGetShapeTypeLine() {
 		String expected = "line";
-		String s = "ADDLINE_EXECUTE_sid=1_Line(startX=96,startY=101,endX=161,endY=67,color=java.awt.Color[r=0,g=0,b=0])";
+		String s = "ADDLINE_EXECUTE_sid=1_Line(startX=60,startY=110,endX=141,endY=80,color=[0-0-0])";
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
@@ -27,7 +30,7 @@ public class ShapeParserTest {
 	@Test
 	public void testGetShapeTypeCircle() {
 		String expected = "circle";
-		String s = "ADDCIRCLE_EXECUTE_sid=2_Circle(X=208,Y=113,r=45,outercolor=java.awt.Color[r=0,g=0,b=0],innercolor=java.awt.Color[r=255,g=255,b=255])";
+		String s = "ADDCIRCLE_EXECUTE_sid=2_Circle(X=227,Y=122,r=44,outercolor=[0-0-0],innercolor=[255-255-255])";
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
@@ -35,7 +38,7 @@ public class ShapeParserTest {
 	@Test
 	public void testGetShapeTypeSquare() {
 		String expected = "square";
-		String s = "ADDSQUARE_EXECUTE_sid=3_Square(UpperX=302,UpperY=178,a=62,outercolor=java.awt.Color[r=0,g=0,b=0],innercolor=java.awt.Color[r=255,g=255,b=255])";
+		String s = "ADDSQUARE_EXECUTE_sid=3_Square(UpperX=51,UpperY=208,a=56,outercolor=[0-0-0],innercolor=[255-255-255])";
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
@@ -43,7 +46,7 @@ public class ShapeParserTest {
 	@Test
 	public void testGetShapeTypeRectangle() {
 		String expected = "rectangle";
-		String s = "ADDRECTANGLE_EXECUTE_sid=4_Rectangle(UpperX=125,UpperY=206,height=69,width=64,outercolor=java.awt.Color[r=0,g=0,b=0],innercolor=java.awt.Color[r=255,g=255,b=255])";
+		String s = "ADDRECTANGLE_EXECUTE_sid=4_Rectangle(UpperX=189,UpperY=233,height=36,width=132,outercolor=[0-0-0],innercolor=[255-255-255])";
 		String actual = ShapeParser.getInstance().parseType(s);
 		assertEquals(expected, actual);
 	}
@@ -51,8 +54,19 @@ public class ShapeParserTest {
 	@Test
 	public void testGetShapeTypeHexagon() {
 		String expected = "hexagon";
-		String s = "ADDHEXAGONADAPTER_EXECUTE_sid=5_Hexagon(X=40,Y=152,r=45,outercolor=java.awt.Color[r=0,g=0,b=0],innercolor=java.awt.Color[r=255,g=255,b=255])";
+		String s = "ADDHEXAGONADAPTER_EXECUTE_sid=5_Hexagon(X=373,Y=108,r=62,outercolor=[0-0-0],innercolor=[255-255-255])";
 		String actual = ShapeParser.getInstance().parseType(s);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testParsePropertiesFromStringIntoHashMap() {
+		Map<String, String> expected = new HashMap<String, String>();
+		expected.put("x", "66");
+		expected.put("y", "62");
+		expected.put("color", "[0-0-0]");
+		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=66,y=62,color=[0-0-0])";
+		Map<String, String> actual = ShapeParser.getInstance().parsePointProperties(s);
 		assertEquals(expected, actual);
 	}
 }

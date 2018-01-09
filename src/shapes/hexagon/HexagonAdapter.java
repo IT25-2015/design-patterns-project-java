@@ -47,8 +47,9 @@ public class HexagonAdapter extends SurfaceShape implements Moveable {
 
 	@Override
 	public String toString() {
-		return String.format("Hexagon(X=%d,Y=%d,r=%d,outercolor=%s,innercolor=%s)", hexagon.getX(), hexagon.getY(),
-				hexagon.getR(), getColor(), getInnerColor());
+		return String.format("Hexagon(X=%d,Y=%d,r=%d,outercolor=[%d-%d-%d],innercolor=[%d-%d-%d])", hexagon.getX(),
+				hexagon.getY(), hexagon.getR(), getColor().getRed(), getColor().getGreen(), getColor().getBlue(),
+				getInnerColor().getRed(), getInnerColor().getGreen(), getInnerColor().getBlue());
 	}
 
 	@Override

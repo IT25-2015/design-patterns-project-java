@@ -64,8 +64,10 @@ public class Rectangle extends Square {
 
 	@Override
 	public String toString() {
-		return String.format("Rectangle(UpperX=%d,UpperY=%d,height=%d,width=%d,outercolor=%s,innercolor=%s)",
-				upperLeft.getX(), upperLeft.getY(), sideLength, width, getColor(), getInnerColor());
+		return String.format(
+				"Rectangle(UpperX=%d,UpperY=%d,height=%d,width=%d,outercolor=[%d-%d-%d],innercolor=[%d-%d-%d])",
+				upperLeft.getX(), upperLeft.getY(), sideLength, width, getColor().getRed(), getColor().getGreen(),
+				getColor().getBlue(), getInnerColor().getRed(), getInnerColor().getGreen(), getInnerColor().getBlue());
 	}
 
 	@Override

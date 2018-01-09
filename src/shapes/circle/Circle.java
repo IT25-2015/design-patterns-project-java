@@ -42,6 +42,7 @@ public class Circle extends SurfaceShape implements Moveable {
 
 	/**
 	 * Will calculate surface area of circle
+	 * 
 	 * @return
 	 */
 	public double surfaceArea() {
@@ -50,6 +51,7 @@ public class Circle extends SurfaceShape implements Moveable {
 
 	/**
 	 * Will calculate volume of circle
+	 * 
 	 * @return
 	 */
 	public double volume() {
@@ -67,8 +69,9 @@ public class Circle extends SurfaceShape implements Moveable {
 
 	@Override
 	public String toString() {
-		return String.format("Circle(X=%d,Y=%d,r=%d,outercolor=%s,innercolor=%s)", center.getX(), center.getY(), r,
-				getColor(), getInnerColor());
+		return String.format("Circle(X=%d,Y=%d,r=%d,outercolor=[%d-%d-%d],innercolor=[%d-%d-%d])", center.getX(),
+				center.getY(), r, getColor().getRed(), getColor().getGreen(), getColor().getBlue(),
+				getInnerColor().getRed(), getInnerColor().getGreen(), getInnerColor().getBlue());
 	}
 
 	@Override

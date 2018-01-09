@@ -1,5 +1,7 @@
 package logparser;
 
+import java.util.HashMap;
+
 import shapes.Shape;
 
 public class ShapeParser {
@@ -15,7 +17,12 @@ public class ShapeParser {
 	 * @return Shape
 	 */
 	public Shape parse(String s) {
-		// TODO Implement
+		String shapeType = parseType(s);
+		switch (shapeType) {
+		case "point": {
+			HashMap<String, String> properties = parsePointProperties(s);
+		}
+		}
 		return null;
 	}
 
@@ -30,6 +37,27 @@ public class ShapeParser {
 		String[] prefixArray = prefix.split("_"); // Split prefix by _
 		String type = prefixArray[prefixArray.length - 1].toLowerCase(); // Get Shape type
 		return type;
+	}
+
+	/**
+	 * Will return HashMap with Shape properties from given string
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public HashMap<String, String> parsePointProperties(String s) {
+		String propertiesString = s.split("\\(")[1]; // Gets shape properties within parentheses
+		propertiesString = propertiesString.substring(0, propertiesString.length() - 1); // Remove closing ) from
+																							// original string
+		HashMap<String, String> properties = new HashMap<String, String>();
+		// Split string to get each property
+		for (String property : propertiesString.split(",")) {
+
+			String[] keyValue = property.split("="); //Split key - value
+			properties.put(keyValue[0], keyValue[1]);
+
+		}
+		return properties;
 	}
 
 	/**
