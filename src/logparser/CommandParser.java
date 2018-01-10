@@ -6,15 +6,21 @@ import model.ShapeModel;
 import shapes.Command;
 import shapes.circle.AddCircle;
 import shapes.circle.Circle;
+import shapes.circle.RemoveCircle;
 import shapes.hexagon.AddHexagonAdapter;
 import shapes.hexagon.HexagonAdapter;
+import shapes.hexagon.RemoveHexagonAdapter;
 import shapes.line.AddLine;
 import shapes.line.Line;
+import shapes.line.RemoveLine;
 import shapes.point.AddPoint;
 import shapes.point.Point;
+import shapes.point.RemovePoint;
 import shapes.rectangle.AddRectangle;
 import shapes.rectangle.Rectangle;
+import shapes.rectangle.RemoveRectangle;
 import shapes.square.AddSquare;
+import shapes.square.RemoveSquare;
 import shapes.square.Square;
 
 public class CommandParser implements Serializable {
@@ -37,6 +43,8 @@ public class CommandParser implements Serializable {
 	public Command parse(String s, ShapeModel model) {
 		if (parseCommandType(s).contains("add")) {
 			return buildAddCommandFromString(s, model);
+		} else if (parseCommandType(s).contains("remove")) {
+			return buildRemoveCommandFromString(s, model);
 		}
 		return null;
 	}
@@ -63,7 +71,7 @@ public class CommandParser implements Serializable {
 	}
 
 	/**
-	 * Will return Command object that is built from given String
+	 * Will return Add Command object that is built from given String
 	 * 
 	 * @param s
 	 * @return Command
@@ -83,6 +91,32 @@ public class CommandParser implements Serializable {
 			return new AddRectangle(model, ((Rectangle) ShapeParser.getInstance().parse(s)));
 		case "addhexagonadapter":
 			return new AddHexagonAdapter(model, ((HexagonAdapter) ShapeParser.getInstance().parse(s)));
+		}
+		return null;
+	}
+
+	/**
+	 * Will return Remove Command object taht is built from given String
+	 * 
+	 * @param s
+	 * @param model
+	 * @return
+	 */
+	public Command buildRemoveCommandFromString(String s, ShapeModel model) {
+		String commandClass = parseCommandType(s);
+		switch (commandClass) {
+		case "removepoint":
+			return new RemovePoint(model, ((Point) ShapeParser.getInstance().parse(s)));
+		case "removeline":
+			return new RemoveLine(model, ((Line) ShapeParser.getInstance().parse(s)));
+		case "removecircle":
+			return new RemoveCircle(model, ((Circle) ShapeParser.getInstance().parse(s)));
+		case "removesquare":
+			return new RemoveSquare(model, ((Square) ShapeParser.getInstance().parse(s)));
+		case "removerectangle":
+			return new RemoveRectangle(model, ((Rectangle) ShapeParser.getInstance().parse(s)));
+		case "removehexagonadapter":
+			return new RemoveHexagonAdapter(model, ((HexagonAdapter) ShapeParser.getInstance().parse(s)));
 		}
 		return null;
 	}
