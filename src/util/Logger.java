@@ -31,6 +31,26 @@ public class Logger {
 	}
 
 	/**
+	 * Will add given string to logger model (List) with [INFO] prefix
+	 * 
+	 * @param action
+	 * @param s
+	 * @param toConsole
+	 */
+	public void log(String action, String s, boolean toConsole, boolean info) {
+		if (info) {
+			loggerModel.add("[INFO]" + action.toUpperCase() + "_" + s);
+		} else {
+			loggerModel.add(action.toUpperCase() + "_" + s);
+		}
+		dlmLogger.addElement(loggerModel.peek());
+		LoggerView.getLstLogger().ensureIndexIsVisible(dlmLogger.getSize() - 1); // Scroll to bottom of log
+																					// automatically
+		if (toConsole)
+			System.out.println(loggerModel.peek());
+	}
+
+	/**
 	 * Will add given string to logger model (List), will also add shape id to
 	 * output
 	 * 

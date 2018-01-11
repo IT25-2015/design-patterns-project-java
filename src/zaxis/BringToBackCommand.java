@@ -30,14 +30,14 @@ public class BringToBackCommand implements Command {
 		//TODO Fix REDO getting null pointer exception here (2nd execution, with more than 3 shapes)
 		ZAxisHelper.doBringToBack(selectedIndex, model, frame);
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.get(selectedIndex).toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.get(selectedIndex).toString(), true, true);
 	}
 
 	@Override
 	public void unexecute() {
 		ZAxisHelper.moveShapeToIndex(selectedIndex, shape, model);
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.get(selectedIndex).toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.get(selectedIndex).toString(), true, true);
 	}
 
 }

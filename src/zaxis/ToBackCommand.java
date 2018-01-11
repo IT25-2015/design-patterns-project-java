@@ -26,14 +26,14 @@ public class ToBackCommand implements Command {
 	public void execute() {
 		ZAxisHelper.doToBack(selectedIndex, model, frame);
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.get(selectedIndex).toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", model.get(selectedIndex).toString(), true, true);
 	}
 
 	@Override
 	public void unexecute() {
 		ZAxisHelper.doToFront(selectedIndex, model, frame);
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.get(selectedIndex).toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", model.get(selectedIndex).toString(), true, true);
 	}
 
 }
