@@ -96,7 +96,7 @@ public class MenuFileController implements Serializable {
 			// Remove log lines that have [INFO] prefix
 			while (iterator.hasNext()) {
 				String next = iterator.next();
-				if (next.contains("[INFO]")) {
+				if (next.contains("[INFO]") || next.trim().isEmpty()) {
 					iterator.remove();
 				}
 			}
