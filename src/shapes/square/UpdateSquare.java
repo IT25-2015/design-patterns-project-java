@@ -13,10 +13,12 @@ public class UpdateSquare implements Command {
 	private Square original;
 	private Square newState;
 	private Square oldState = new Square(new Point(), 0);
+	private int shapeId;
 
-	public UpdateSquare(Square original, Square newState) {
+	public UpdateSquare(Square original, Square newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId;
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class UpdateSquare implements Command {
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, newState.toString(), true);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class UpdateSquare implements Command {
 		original.setColor(oldState.getColor());
 		original.setInnerColor(oldState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shapeId, original.toString(), true);
 	}
 
 }

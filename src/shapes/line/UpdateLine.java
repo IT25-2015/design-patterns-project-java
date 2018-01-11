@@ -12,10 +12,12 @@ public class UpdateLine implements Command {
 	private Line original;
 	private Line newState;
 	private Line oldState = new Line(new Point(), new Point());
+	private int shapeId;
 
-	public UpdateLine(Line original, Line newState) {
+	public UpdateLine(Line original, Line newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId;
 	}
 
 	@Override
@@ -32,7 +34,7 @@ public class UpdateLine implements Command {
 		original.getPtEnd().setY(newState.getPtEnd().getY());
 		original.setColor(newState.getColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, newState.toString(), true);
 	}
 
 	@Override
@@ -43,6 +45,6 @@ public class UpdateLine implements Command {
 		original.getPtEnd().setY(oldState.getPtEnd().getY());
 		original.setColor(oldState.getColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shapeId, original.toString(), true);
 	}
 }

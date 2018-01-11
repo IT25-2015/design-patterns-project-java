@@ -15,10 +15,12 @@ public class UpdateHexagonAdapter implements Command {
 	private HexagonAdapter original;
 	private HexagonAdapter newState;
 	private HexagonAdapter oldState = new HexagonAdapter(new Hexagon(0, 0, 0), Color.BLACK, Color.BLACK);
+	private int shapeId;
 
-	public UpdateHexagonAdapter(HexagonAdapter original, HexagonAdapter newState) {
+	public UpdateHexagonAdapter(HexagonAdapter original, HexagonAdapter newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId;
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class UpdateHexagonAdapter implements Command {
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, newState.toString(), true);
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class UpdateHexagonAdapter implements Command {
 		original.setColor(oldState.getColor());
 		original.setInnerColor(oldState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shapeId, original.toString(), true);
 	}
 
 }

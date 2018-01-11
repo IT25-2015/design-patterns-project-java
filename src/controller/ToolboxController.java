@@ -89,7 +89,8 @@ public class ToolboxController implements Serializable {
 			}
 		}
 		if (!shapeFound) {
-			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()), true, true);
+			Logger.getInstance().log(String.format("No shapes found at location (%d,%d)", e.getX(), e.getY()), true,
+					true);
 			for (Shape s : model.getShapesList()) {
 				s.setSelected(false);
 				frame.repaint();
@@ -121,7 +122,7 @@ public class ToolboxController implements Serializable {
 				PointModifyDialog modifyDialog = new PointModifyDialog(selectedPt);
 				Point modifiedPt = modifyDialog.getPt();
 				if (!selectedPt.equals(modifiedPt) || selectedPt.getColor() != modifiedPt.getColor()) {
-					Command updatePt = new UpdatePoint(selectedPt, modifiedPt);
+					Command updatePt = new UpdatePoint(selectedPt, modifiedPt, model.getShapeIndex(selectedPt));
 					ShapeModel.getUndoStack().offerLast(updatePt);
 					updatePt.execute();
 					frame.repaint();
@@ -131,7 +132,7 @@ public class ToolboxController implements Serializable {
 				LineModifyDialog modifyDialog = new LineModifyDialog(selectedLine);
 				Line modifiedLine = modifyDialog.getLine();
 				if (!selectedLine.equals(modifiedLine) || selectedLine.getColor() != modifiedLine.getColor()) {
-					Command updateLine = new UpdateLine(selectedLine, modifiedLine);
+					Command updateLine = new UpdateLine(selectedLine, modifiedLine, model.getShapeIndex(selectedLine));
 					ShapeModel.getUndoStack().offerLast(updateLine);
 					updateLine.execute();
 					frame.repaint();
@@ -142,7 +143,8 @@ public class ToolboxController implements Serializable {
 				Circle modifiedCircle = modifyDialog.getCircle();
 				if (!selectedCircle.equals(modifiedCircle) || selectedCircle.getColor() != modifiedCircle.getColor()
 						|| selectedCircle.getInnerColor() != modifiedCircle.getInnerColor()) {
-					Command updateCircle = new UpdateCircle(selectedCircle, modifiedCircle);
+					Command updateCircle = new UpdateCircle(selectedCircle, modifiedCircle,
+							model.getShapeIndex(selectedCircle));
 					ShapeModel.getUndoStack().offerLast(updateCircle);
 					updateCircle.execute();
 					frame.repaint();
@@ -154,7 +156,8 @@ public class ToolboxController implements Serializable {
 				if (!selectedRectangle.equals(modifiedRectangle)
 						|| selectedRectangle.getColor() != modifiedRectangle.getColor()
 						|| selectedRectangle.getInnerColor() != modifiedRectangle.getInnerColor()) {
-					Command updateRectangle = new UpdateRectangle(selectedRectangle, modifiedRectangle);
+					Command updateRectangle = new UpdateRectangle(selectedRectangle, modifiedRectangle,
+							model.getShapeIndex(selectedRectangle));
 					ShapeModel.getUndoStack().offerLast(updateRectangle);
 					updateRectangle.execute();
 					frame.repaint();
@@ -166,7 +169,8 @@ public class ToolboxController implements Serializable {
 				Square modifiedSquare = modifyDialog.getSquare();
 				if (!selectedSquare.equals(modifiedSquare) || selectedSquare.getColor() != modifiedSquare.getColor()
 						|| selectedSquare.getInnerColor() != modifiedSquare.getInnerColor()) {
-					Command updateSquare = new UpdateSquare(selectedSquare, modifiedSquare);
+					Command updateSquare = new UpdateSquare(selectedSquare, modifiedSquare,
+							model.getShapeIndex(selectedSquare));
 					ShapeModel.getUndoStack().offerLast(updateSquare);
 					updateSquare.execute();
 					frame.repaint();
@@ -178,7 +182,8 @@ public class ToolboxController implements Serializable {
 				if (!selectedHexagon.equals(modifiedHexagonAdapter)
 						|| selectedHexagon.getColor() != modifiedHexagonAdapter.getColor()
 						|| selectedHexagon.getInnerColor() != modifiedHexagonAdapter.getInnerColor()) {
-					Command updateHexagonAdapter = new UpdateHexagonAdapter(selectedHexagon, modifiedHexagonAdapter);
+					Command updateHexagonAdapter = new UpdateHexagonAdapter(selectedHexagon, modifiedHexagonAdapter,
+							model.getShapeIndex(selectedHexagon));
 					ShapeModel.getUndoStack().offerLast(updateHexagonAdapter);
 					updateHexagonAdapter.execute();
 					frame.repaint();

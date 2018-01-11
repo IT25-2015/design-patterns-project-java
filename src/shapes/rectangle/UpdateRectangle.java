@@ -14,10 +14,12 @@ public class UpdateRectangle implements Command {
 	private Rectangle original;
 	private Rectangle newState;
 	private Rectangle oldState = new Rectangle(new Point(), 0, 0);
+	private int shapeId;
 
-	public UpdateRectangle(Rectangle original, Rectangle newState) {
+	public UpdateRectangle(Rectangle original, Rectangle newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId;
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class UpdateRectangle implements Command {
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, newState.toString(), true);
 	}
 
 	@Override
@@ -48,6 +50,6 @@ public class UpdateRectangle implements Command {
 		original.setColor(oldState.getColor());
 		original.setInnerColor(oldState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shapeId, original.toString(), true);
 	}
 }

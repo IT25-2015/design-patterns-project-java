@@ -11,10 +11,12 @@ public class UpdatePoint implements Command {
 	private Point original;
 	private Point newState;
 	private Point oldState = new Point();
+	private int shapeId;
 
-	public UpdatePoint(Point original, Point newState) {
+	public UpdatePoint(Point original, Point newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId; 
 	}
 
 	@Override
@@ -27,7 +29,7 @@ public class UpdatePoint implements Command {
 		original.setY(newState.getY());
 		original.setColor(newState.getColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", newState.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, newState.toString(), true);
 	}
 
 	@Override
@@ -36,6 +38,6 @@ public class UpdatePoint implements Command {
 		original.setY(oldState.getY());
 		original.setColor(oldState.getColor());
 		
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute",shapeId, original.toString(), true);
 	}
 }

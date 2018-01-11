@@ -13,10 +13,12 @@ public class UpdateCircle implements Command {
 	private Circle original;
 	private Circle newState;
 	private Circle oldState = new Circle(new Point(), 0);
+	private int shapeId;
 
-	public UpdateCircle(Circle original, Circle newState) {
+	public UpdateCircle(Circle original, Circle newState, int shapeId) {
 		this.original = original;
 		this.newState = newState;
+		this.shapeId = shapeId;
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class UpdateCircle implements Command {
 		original.setColor(newState.getColor());
 		original.setInnerColor(newState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_execute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_execute", shapeId, original.toString(), true);
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class UpdateCircle implements Command {
 		original.setColor(oldState.getColor());
 		original.setInnerColor(oldState.getInnerColor());
 
-		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", original.toString(), true);
+		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shapeId, original.toString(), true);
 	}
 
 }
