@@ -20,7 +20,9 @@ import shapes.line.Line;
 import shapes.line.RemoveLine;
 import shapes.line.UpdateLine;
 import shapes.point.AddPoint;
+import shapes.point.Point;
 import shapes.point.RemovePoint;
+import shapes.point.UpdatePoint;
 import shapes.rectangle.AddRectangle;
 import shapes.rectangle.RemoveRectangle;
 import shapes.square.AddSquare;
@@ -257,6 +259,48 @@ public class CommandParserTest {
 		int actual = CommandParser.getInstance().parseShapeId(s);
 
 		assertEquals(1337, actual);
+	}
+
+	@Test
+	public void testIfUpdatePointIsParsedSimple() {
+		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=137,y=86,color=[0-0-0])";
+		AddPoint command = (AddPoint) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATEPOINT_EXECUTE_sid=0_Point(x=137,y=86,color=[255-0-51])";
+		UpdatePoint commandUpdate = (UpdatePoint) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		Color actual = fakeModel.getShapesList().get(0).getColor();
+		Color expected = new Color(255, 0, 51);
+		assertTrue(actual.equals(expected));
+	}
+
+	@Test
+	public void testIfUpdatePointIsParsedAdvanced() {
+		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=137,y=86,color=[0-0-0])";
+		AddPoint command = (AddPoint) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATEPOINT_EXECUTE_sid=0_Point(x=137,y=86,color=[255-0-51])";
+		UpdatePoint commandUpdate = (UpdatePoint) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		String sUpdateX = "UPDATEPOINT_EXECUTE_sid=0_Point(x=250,y=86,color=[255-0-51])";
+		UpdatePoint commandUpdateX = (UpdatePoint) CommandParser.getInstance().parse(sUpdateX, fakeModel);
+		commandUpdateX.execute();
+
+		String sUpdateY = "UPDATEPOINT_EXECUTE_sid=0_Point(x=250,y=456,color=[255-0-51])";
+		UpdatePoint commandUpdateY = (UpdatePoint) CommandParser.getInstance().parse(sUpdateY, fakeModel);
+		commandUpdateY.execute();
+
+		Color actualColor = fakeModel.getShapesList().get(0).getColor();
+		Color expectedColor = new Color(255, 0, 51);
+		int actualX = ((Point) fakeModel.getShapesList().get(0)).getX();
+		int expectedX = 250;
+		int actualY = ((Point) fakeModel.getShapesList().get(0)).getY();
+		int expectedY = 456;
+		assertTrue(actualColor.equals(expectedColor) && actualX == expectedX && actualY == expectedY);
 	}
 
 	@Test

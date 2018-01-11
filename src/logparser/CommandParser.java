@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import model.ShapeModel;
 import shapes.Command;
+import shapes.Shape;
 import shapes.circle.AddCircle;
 import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
@@ -17,6 +18,7 @@ import shapes.line.UpdateLine;
 import shapes.point.AddPoint;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
+import shapes.point.UpdatePoint;
 import shapes.rectangle.AddRectangle;
 import shapes.rectangle.Rectangle;
 import shapes.rectangle.RemoveRectangle;
@@ -149,12 +151,15 @@ public class CommandParser implements Serializable {
 	 */
 	public Command buildUpdateCommandFromString(String s, ShapeModel model) {
 		String commandClass = parseCommandType(s);
+		Shape originalShape = model.getShapesList().get(parseShapeId(s));
+		Shape modifiedShape = ShapeParser.getInstance().parse(s);
+		int shapeId = parseShapeId(s);
+
 		switch (commandClass) {
 		case "updatepoint":
-			return new RemovePoint(model, ((Point) ShapeParser.getInstance().parse(s)));
+			return new UpdatePoint((Point) originalShape, (Point) modifiedShape, shapeId);
 		case "updateline":
-			return new UpdateLine((Line) model.getShapesList().get(parseShapeId(s)),
-					(Line) ShapeParser.getInstance().parse(s), parseShapeId(s));
+			return new UpdateLine((Line) originalShape, (Line) modifiedShape, shapeId);
 		/*
 		 * case "updatecircle": return new RemoveCircle(model, ((Circle)
 		 * ShapeParser.getInstance().parse(s))); case "updatesquare": return new
