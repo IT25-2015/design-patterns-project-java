@@ -13,6 +13,7 @@ import shapes.hexagon.RemoveHexagonAdapter;
 import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
+import shapes.line.UpdateLine;
 import shapes.point.AddPoint;
 import shapes.point.Point;
 import shapes.point.RemovePoint;
@@ -45,6 +46,8 @@ public class CommandParser implements Serializable {
 			return buildAddCommandFromString(s, model);
 		} else if (parseCommandType(s).contains("remove")) {
 			return buildRemoveCommandFromString(s, model);
+		} else if (parseCommandType(s).contains("update")) {
+			return buildUpdateCommandFromString(s, model);
 		}
 		return null;
 	}
@@ -58,6 +61,22 @@ public class CommandParser implements Serializable {
 	public String parseCommandType(String s) {
 
 		return s.split("_")[0].toLowerCase();
+	}
+
+	/**
+	 * Will return index of shape based on given string
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public int parseShapeId(String s) {
+
+		// Will split and get sid=? , where ? is actual index
+		s = s.split("_")[2];
+		// Will get right side of equation, actual index
+		s = s.split("=")[1];
+
+		return Integer.parseInt(s);
 	}
 
 	/**
@@ -96,11 +115,11 @@ public class CommandParser implements Serializable {
 	}
 
 	/**
-	 * Will return Remove Command object taht is built from given String
+	 * Will return Remove Command object that is built from given String
 	 * 
 	 * @param s
 	 * @param model
-	 * @return
+	 * @return Command
 	 */
 	public Command buildRemoveCommandFromString(String s, ShapeModel model) {
 		String commandClass = parseCommandType(s);
@@ -117,6 +136,34 @@ public class CommandParser implements Serializable {
 			return new RemoveRectangle(model, ((Rectangle) ShapeParser.getInstance().parse(s)));
 		case "removehexagonadapter":
 			return new RemoveHexagonAdapter(model, ((HexagonAdapter) ShapeParser.getInstance().parse(s)));
+		}
+		return null;
+	}
+
+	/**
+	 * Will return Update Command object that is built from given String
+	 * 
+	 * @param s
+	 * @param model
+	 * @return Command
+	 */
+	public Command buildUpdateCommandFromString(String s, ShapeModel model) {
+		String commandClass = parseCommandType(s);
+		switch (commandClass) {
+		case "updatepoint":
+			return new RemovePoint(model, ((Point) ShapeParser.getInstance().parse(s)));
+		case "updateline":
+			return new UpdateLine((Line) model.getShapesList().get(parseShapeId(s)),
+					(Line) ShapeParser.getInstance().parse(s), parseShapeId(s));
+		/*
+		 * case "updatecircle": return new RemoveCircle(model, ((Circle)
+		 * ShapeParser.getInstance().parse(s))); case "updatesquare": return new
+		 * RemoveSquare(model, ((Square) ShapeParser.getInstance().parse(s))); case
+		 * "updaterectangle": return new RemoveRectangle(model, ((Rectangle)
+		 * ShapeParser.getInstance().parse(s))); case "updatehexagonadapter": return new
+		 * RemoveHexagonAdapter(model, ((HexagonAdapter)
+		 * ShapeParser.getInstance().parse(s)));
+		 */
 		}
 		return null;
 	}

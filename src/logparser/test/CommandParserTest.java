@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.awt.Color;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +16,9 @@ import shapes.circle.RemoveCircle;
 import shapes.hexagon.AddHexagonAdapter;
 import shapes.hexagon.RemoveHexagonAdapter;
 import shapes.line.AddLine;
+import shapes.line.Line;
 import shapes.line.RemoveLine;
+import shapes.line.UpdateLine;
 import shapes.point.AddPoint;
 import shapes.point.RemovePoint;
 import shapes.rectangle.AddRectangle;
@@ -180,7 +184,7 @@ public class CommandParserTest {
 		command.execute();
 		assertEquals(1, fakeModel.getShapesList().size());
 	}
-	
+
 	@Test
 	public void testIfRemovePointIsParsed() {
 		String s = "ADDPOINT_EXECUTE_sid=0_Point(x=66,y=62,color=[0-0-0])";
@@ -245,5 +249,55 @@ public class CommandParserTest {
 		command.execute();
 		commandRem.execute();
 		assertEquals(0, fakeModel.getShapesList().size());
+	}
+
+	@Test
+	public void testIfProperShapeIndexIsParsed() {
+		String s = "UPDATELINE_EXECUTE_sid=1337_Line(startX=150,startY=162,endX=223,endY=180,color=[255-51-51])";
+		int actual = CommandParser.getInstance().parseShapeId(s);
+
+		assertEquals(1337, actual);
+	}
+
+	@Test
+	public void testIfUpdateLineIsParsedSimple() {
+		String s = "ADDLINE_EXECUTE_sid=0_Line(startX=93,startY=162,endX=223,endY=93,color=[0-0-0])";
+		AddLine command = (AddLine) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATELINE_EXECUTE_sid=0_Line(startX=93,startY=162,endX=223,endY=93,color=[255-51-51])";
+		UpdateLine commandUpdate = (UpdateLine) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		Color actual = fakeModel.getShapesList().get(0).getColor();
+		Color expected = new Color(255, 51, 51);
+		assertTrue(actual.equals(expected));
+	}
+
+	@Test
+	public void testIfUpdateLineIsParsedAdvanced() {
+		String s = "ADDLINE_EXECUTE_sid=0_Line(startX=93,startY=162,endX=223,endY=93,color=[0-0-0])";
+		AddLine command = (AddLine) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATELINE_EXECUTE_sid=0_Line(startX=93,startY=162,endX=223,endY=93,color=[255-51-51])";
+		UpdateLine commandUpdate = (UpdateLine) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		String sUpdateX = "UPDATELINE_EXECUTE_sid=0_Line(startX=150,startY=162,endX=223,endY=93,color=[255-51-51])";
+		UpdateLine commandUpdateX = (UpdateLine) CommandParser.getInstance().parse(sUpdateX, fakeModel);
+		commandUpdateX.execute();
+
+		String sUpdateY = "UPDATELINE_EXECUTE_sid=0_Line(startX=150,startY=162,endX=223,endY=180,color=[255-51-51])";
+		UpdateLine commandUpdateY = (UpdateLine) CommandParser.getInstance().parse(sUpdateY, fakeModel);
+		commandUpdateY.execute();
+
+		Color actualColor = fakeModel.getShapesList().get(0).getColor();
+		Color expectedColor = new Color(255, 51, 51);
+		int actualX = ((Line) fakeModel.getShapesList().get(0)).getPtStart().getX();
+		int expectedX = 150;
+		int actualY = ((Line) fakeModel.getShapesList().get(0)).getPtEnd().getY();
+		int expectedY = 180;
+		assertTrue(actualColor.equals(expectedColor) && actualX == expectedX && actualY == expectedY);
 	}
 }
