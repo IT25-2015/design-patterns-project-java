@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -140,12 +141,14 @@ public class MainFrame extends JFrame {
 				.setAccelerator(KeyStroke.getKeyStroke('Q', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Q
 
 		// HeaderWrapper - Help menu
-		headerWrapperView.getMntmAbout().addMouseListener(new MouseAdapter() {
+		headerWrapperView.getMntmAbout().setAction(new AbstractAction("About") {
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void actionPerformed(ActionEvent arg0) {
 				mhController.handleAbout();
 			}
 		});
+		headerWrapperView.getMntmAbout()
+				.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)); // F1
 		headerWrapperView.getMntmViewCode().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
