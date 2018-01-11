@@ -53,7 +53,6 @@ public class MainFrame extends JFrame {
 		// Calculate center of screen and set frame there
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - getWidth() / 2,
 				(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - getHeight() / 2);
-		setVisible(true);
 		setTitle("Aleksandar Babic IT53/2015 - Dizajn Paterni");
 
 		// HeaderWrapper and its components related stuff
@@ -76,7 +75,7 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmRedo()
 				.setAccelerator(KeyStroke.getKeyStroke('Y', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Y
-		
+
 		headerWrapperView.getMntmParseNext().setAction(new AbstractAction("Parse next log line") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -86,7 +85,6 @@ public class MainFrame extends JFrame {
 		headerWrapperView.getMntmParseNext()
 				.setAccelerator(KeyStroke.getKeyStroke('P', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+P
 
-		
 		headerWrapperView.getMntmNew().setAction(new AbstractAction("New drawing") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -95,7 +93,7 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmNew()
 				.setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+N
-		
+
 		headerWrapperView.getMntmExportFile().setAction(new AbstractAction("Export to drawing file") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -264,7 +262,7 @@ public class MainFrame extends JFrame {
 				additionalActionsController.doToBack();
 			}
 		});
-		
+
 		additionalActionsView.getBtnParseLog().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -281,6 +279,10 @@ public class MainFrame extends JFrame {
 						footerWrapperView.getInformationPaneView().getLblCo());
 			}
 		});
+
+		// IMPORTANT : If setVisible is not on end of constructor some of components
+		// wont be visible on Windows/MacOS
+		setVisible(true);
 	}
 
 	public CanvasController getCanvasController() {

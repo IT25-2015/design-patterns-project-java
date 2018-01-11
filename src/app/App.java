@@ -21,9 +21,11 @@ public class App {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// Get Logger singleton object
+		Logger logger = Logger.getInstance();
+
 		// Init all collections
 		model = new ShapeModel();
-		Logger logger = Logger.getInstance();
 		DefaultListModel<String> dlmLogger = logger.getDlmLogger();
 
 		// Init main frame with resolution 800x600
