@@ -388,4 +388,8 @@ public class CommandParserTest {
 		int expectedY = 150;
 		assertTrue(actualColor.equals(expectedColor) && actualR == expectedR && actualY == expectedY);
 	}
+
+	// TODO Write Simple/Advanced tests for Square
+	// TODO Write Simple/Advanced tests for Rectangle
+	// TODO Write Simple/Advanced tests for Hexagon
 }
