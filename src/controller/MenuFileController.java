@@ -52,7 +52,7 @@ public class MenuFileController implements Serializable {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(model.getShapesList());
 		ExportManager manager = new ExportManager(new SerializeShapesToFile());
-		String path = FileOperationsHelper.showFileDialog("drwg");
+		String path = FileOperationsHelper.showFileDialogSave("drwg");
 		if (path != null)
 			manager.exportData(bundle, path);
 	}
@@ -69,7 +69,7 @@ public class MenuFileController implements Serializable {
 		ArrayList<Object> bundle = new ArrayList<Object>();
 		bundle.add(loggerModel.getLogLines());
 		ExportManager manager = new ExportManager(new SaveLogToFile());
-		String path = FileOperationsHelper.showFileDialog("log");
+		String path = FileOperationsHelper.showFileDialogSave("log");
 		if (path != null)
 			manager.exportData(bundle, path);
 	}
@@ -80,7 +80,7 @@ public class MenuFileController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void handleImportFromLog() {
 		ImportManager manager = new ImportManager(new LoadLogFromFile());
-		String path = FileOperationsHelper.showFileDialog("log");
+		String path = FileOperationsHelper.showFileDialogOpen("log");
 
 		if (path != null) {
 			ArrayList<Object> bundle = manager.importData(path);
@@ -157,7 +157,7 @@ public class MenuFileController implements Serializable {
 	@SuppressWarnings("unchecked")
 	public void handleImportFromFile() {
 		ImportManager manager = new ImportManager(new LoadDrawingFromFile());
-		String path = FileOperationsHelper.showFileDialog("drwg");
+		String path = FileOperationsHelper.showFileDialogOpen("drwg");
 		if (path != null) {
 			ArrayList<Object> bundle = manager.importData(path);
 			// If ArrayList setter was used observers wouldn't work at all
