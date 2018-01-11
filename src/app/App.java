@@ -29,7 +29,7 @@ public class App {
 		// Init main frame with resolution 800x600
 		frame = new MainFrame(800, 600);
 
-		// Set Logger DLM so actions can be logged in real time
+		// Set Logger DLM to Logger view so actions can be logged in real time
 		frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
 
 		// Set all controllers
