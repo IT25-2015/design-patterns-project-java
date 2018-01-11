@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import shapes.point.Point;
 import shapes.rectangle.Rectangle;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class RectangleModifyDialog extends JDialog {
 
@@ -75,6 +77,8 @@ public class RectangleModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(rectangle.getUpperLeft().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -86,6 +90,8 @@ public class RectangleModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(rectangle.getUpperLeft().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -97,6 +103,8 @@ public class RectangleModifyDialog extends JDialog {
 		}
 		{
 			textFieldSideLength = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldSideLength.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldSideLength.setText(Integer.toString(rectangle.getSideLength()));
 			textFieldSideLength.setColumns(10);
 			contentPanel.add(textFieldSideLength);
@@ -108,6 +116,8 @@ public class RectangleModifyDialog extends JDialog {
 		}
 		{
 			textFieldWidth = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldWidth.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldWidth.setText(Integer.toString(rectangle.getWidth()));
 			textFieldWidth.setColumns(10);
 			contentPanel.add(textFieldWidth);

@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import hexagon.Hexagon;
 import shapes.hexagon.HexagonAdapter;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class HexagonModifyDialog extends JDialog {
 	/**
@@ -72,6 +74,8 @@ public class HexagonModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(hexagonAdapter.getHexagon().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -83,6 +87,8 @@ public class HexagonModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(hexagonAdapter.getHexagon().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -94,6 +100,8 @@ public class HexagonModifyDialog extends JDialog {
 		}
 		{
 			textFieldR = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldR.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldR.setText(Integer.toString(hexagonAdapter.getHexagon().getR()));
 			textFieldR.setColumns(10);
 			contentPanel.add(textFieldR);

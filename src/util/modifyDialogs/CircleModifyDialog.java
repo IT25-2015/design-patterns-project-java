@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import shapes.circle.Circle;
 import shapes.point.Point;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class CircleModifyDialog extends JDialog {
 
@@ -73,6 +75,8 @@ public class CircleModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(circle.getCenter().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -84,6 +88,8 @@ public class CircleModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(circle.getCenter().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -95,6 +101,8 @@ public class CircleModifyDialog extends JDialog {
 		}
 		{
 			textFieldR = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldR.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldR.setText(Integer.toString(circle.getR()));
 			textFieldR.setColumns(10);
 			contentPanel.add(textFieldR);

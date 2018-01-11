@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import shapes.line.Line;
 import shapes.point.Point;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class LineModifyDialog extends JDialog {
 
@@ -72,6 +74,8 @@ public class LineModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(line.getPtStart().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -83,6 +87,8 @@ public class LineModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(line.getPtStart().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -94,6 +100,8 @@ public class LineModifyDialog extends JDialog {
 		}
 		{
 			textFieldXEnd = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldXEnd.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldXEnd.setText(Integer.toString(line.getPtEnd().getX()));
 			textFieldXEnd.setColumns(10);
 			contentPanel.add(textFieldXEnd);
@@ -105,6 +113,8 @@ public class LineModifyDialog extends JDialog {
 		}
 		{
 			textFieldYEnd = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldYEnd.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldYEnd.setText(Integer.toString(line.getPtEnd().getY()));
 			textFieldYEnd.setColumns(10);
 			contentPanel.add(textFieldYEnd);

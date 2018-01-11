@@ -19,9 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import shapes.point.Point;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class PointModifyDialog extends JDialog {
 
@@ -66,6 +68,8 @@ public class PointModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(pt.getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -77,6 +81,8 @@ public class PointModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(pt.getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -150,6 +156,7 @@ public class PointModifyDialog extends JDialog {
 	 */
 	public void ok() {
 		try {
+
 			getPt().setX(Integer.parseInt(textFieldX.getText()));
 			getPt().setY(Integer.parseInt(textFieldY.getText()));
 			getPt().setColor(btnInnerColor.getBackground());

@@ -19,10 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PlainDocument;
 
 import shapes.point.Point;
 import shapes.square.Square;
 import util.DialogsHelper;
+import util.PositiveIntFilter;
 
 public class SquareModifyDialog extends JDialog {
 
@@ -73,6 +75,8 @@ public class SquareModifyDialog extends JDialog {
 		}
 		{
 			textFieldX = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldX.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldX.setText(Integer.toString(square.getUpperLeft().getX()));
 			contentPanel.add(textFieldX);
 			textFieldX.setColumns(10);
@@ -84,6 +88,8 @@ public class SquareModifyDialog extends JDialog {
 		}
 		{
 			textFieldY = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldY.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldY.setText(Integer.toString(square.getUpperLeft().getY()));
 			contentPanel.add(textFieldY);
 			textFieldY.setColumns(10);
@@ -95,6 +101,8 @@ public class SquareModifyDialog extends JDialog {
 		}
 		{
 			textFieldSideLength = new JTextField();
+			PlainDocument doc = (PlainDocument) textFieldSideLength.getDocument();
+			doc.setDocumentFilter(new PositiveIntFilter());
 			textFieldSideLength.setText(Integer.toString(square.getSideLength()));
 			textFieldSideLength.setColumns(10);
 			contentPanel.add(textFieldSideLength);
