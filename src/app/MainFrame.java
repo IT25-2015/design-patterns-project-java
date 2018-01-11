@@ -86,6 +86,16 @@ public class MainFrame extends JFrame {
 		headerWrapperView.getMntmParseNext()
 				.setAccelerator(KeyStroke.getKeyStroke('P', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+P
 
+		
+		headerWrapperView.getMntmNew().setAction(new AbstractAction("New drawing") {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mfController.writeNewDrawing();
+			}
+		});
+		headerWrapperView.getMntmNew()
+				.setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+N
+		
 		headerWrapperView.getMntmExportFile().setAction(new AbstractAction("Export to drawing file") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

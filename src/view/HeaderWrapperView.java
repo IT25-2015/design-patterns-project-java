@@ -12,6 +12,7 @@ import javax.swing.JSeparator;
 public class HeaderWrapperView extends JPanel {
 	private JMenuBar menuBar;
 	private JMenu mnFile;
+	private JMenuItem mntmNew;
 	private JMenuItem mntmImportFile;
 	private JMenuItem mntmImportLog;
 	private JMenuItem mntmExportFile;
@@ -38,6 +39,9 @@ public class HeaderWrapperView extends JPanel {
 
 		mnFile = new JMenu("File");
 		menuBar.add(mnFile);
+		
+		mntmNew = new JMenuItem("New drawing");
+		mnFile.add(mntmNew);
 
 		mntmImportFile = new JMenuItem("Import from file");
 		mnFile.add(mntmImportFile);
@@ -154,6 +158,10 @@ public class HeaderWrapperView extends JPanel {
 
 	public JMenuItem getMntmParseNext() {
 		return mntmParseNext;
+	}
+
+	public JMenuItem getMntmNew() {
+		return mntmNew;
 	}
 
 }

@@ -183,4 +183,27 @@ public class MenuFileController implements Serializable {
 		System.exit(code);
 	}
 
+	/**
+	 * Create new empty drawing (will also ask user to confirm)
+	 */
+	public void writeNewDrawing() {
+		// If drawing is already empty do not create new one
+		if (model.getShapesList().size() == 0)
+			return;
+
+		if (DialogsHelper.askUserToConfirm("Are you sure? If you did not save current drawing it will be lost.")) {
+			// Clear all shapes, both undo and redo stacks
+			model.getShapesList().clear();
+			ShapeModel.getUndoStack().clear();
+			ShapeModel.getRedoStack().clear();
+
+			// Clear DLM (so real time log is wiped), clear LogLines ArrayList (where log is
+			// actually held)
+			Logger.getInstance().getDlmLogger().clear();
+			Logger.getInstance().getLoggerModel().getLogLines().clear();
+			frame.repaint();
+		}
+
+	}
+
 }
