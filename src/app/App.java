@@ -21,22 +21,26 @@ public class App {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// Init all collections
 		model = new ShapeModel();
 		Logger logger = Logger.getInstance();
 		DefaultListModel<String> dlmLogger = logger.getDlmLogger();
 
+		// Init main frame with resolution 800x600
 		frame = new MainFrame(800, 600);
 
-		CanvasController canvasController = new CanvasController(frame, model);
+		// Set Logger DLM so actions can be logged in real time
 		frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
 
-		frame.setCanvasController(canvasController);
+		// Set all controllers
+		frame.setCanvasController(new CanvasController(frame, model));
 		frame.setInformationPaneController(new InformationPaneController());
 		frame.setToolboxController(new ToolboxController(model, frame));
 		frame.setAdditionalActionsController(new AdditionalActionsController(model, frame));
 		frame.setMfController(new MenuFileController(frame, model, logger.getLoggerModel()));
 		frame.setMhController(new MenuHelpController());
 
+		// Set shape model for Canvas View (View where all shapes are drawn)
 		frame.getCanvasView().setModel(model);
 	}
 

@@ -20,36 +20,52 @@ public class AdditionalActionsController implements Serializable {
 		this.frame = frame;
 	}
 
+	/**
+	 * Will execute Bring To Front command if it can be done
+	 */
 	public void doBringToFront() {
-		if(!frame.getAdditionalActionsView().getBtnBringToFront().isEnabled()) return;
-		
+		if (!frame.getAdditionalActionsView().getBtnBringToFront().isEnabled())
+			return;
+
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		BringToFrontCommand btfCommand = new BringToFrontCommand(selectedIndex, model, frame);
 		btfCommand.execute();
 		ShapeModel.getUndoStack().offerLast(btfCommand);
 	}
 
+	/**
+	 * Will execute Bring To Back command if it can be done
+	 */
 	public void doBringToBack() {
-		if(!frame.getAdditionalActionsView().getBtnBringToBack().isEnabled()) return;
-		
+		if (!frame.getAdditionalActionsView().getBtnBringToBack().isEnabled())
+			return;
+
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		BringToBackCommand btbCommand = new BringToBackCommand(selectedIndex, model, frame);
 		btbCommand.execute();
 		ShapeModel.getUndoStack().offerLast(btbCommand);
 	}
 
+	/**
+	 * Will execute To Front command if it can be done
+	 */
 	public void doToFront() {
-		if(!frame.getAdditionalActionsView().getBtnToFront().isEnabled()) return;
-		
+		if (!frame.getAdditionalActionsView().getBtnToFront().isEnabled())
+			return;
+
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		ToFrontCommand tfCommand = new ToFrontCommand(selectedIndex, model, frame);
 		tfCommand.execute();
 		ShapeModel.getUndoStack().offerLast(tfCommand);
 	}
 
+	/**
+	 * Will execute To Back command if it can be done
+	 */
 	public void doToBack() {
-		if(!frame.getAdditionalActionsView().getBtnToBack().isEnabled()) return;
-		
+		if (!frame.getAdditionalActionsView().getBtnToBack().isEnabled())
+			return;
+
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
 		ToBackCommand tbCommand = new ToBackCommand(selectedIndex, model, frame);
 		tbCommand.execute();

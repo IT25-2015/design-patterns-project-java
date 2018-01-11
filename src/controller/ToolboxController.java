@@ -77,6 +77,9 @@ public class ToolboxController implements Serializable {
 	 * @param e
 	 */
 	public void handleSelect(MouseEvent e) {
+		if (!frame.getHeaderWrapperView().getToolboxView().getTglBtnSelect().isEnabled())
+			return;
+
 		boolean shapeFound = false;
 		for (int i = model.getShapesList().size() - 1; i >= 0; i--) {
 			Shape s = model.getShapesList().get(i);
@@ -115,6 +118,9 @@ public class ToolboxController implements Serializable {
 	 * Will handle event of shape modify
 	 */
 	public void handleModify() {
+		if (!frame.getHeaderWrapperView().getToolboxView().getBtnModify().isEnabled())
+			return;
+
 		Shape selected = getSelectedShape();
 		if (selected != null && selected instanceof Shape) {
 			if (selected instanceof Point) {
@@ -196,6 +202,9 @@ public class ToolboxController implements Serializable {
 	 * Will check if there are any selected shapes in list and delete them
 	 */
 	public void handleDelete() {
+		if (!frame.getHeaderWrapperView().getToolboxView().getBtnDelete().isEnabled())
+			return;
+
 		ArrayList<Shape> shapesToDelete = new ArrayList<Shape>();
 		for (Shape s : model.getShapesList()) {
 			if (s.isSelected())
