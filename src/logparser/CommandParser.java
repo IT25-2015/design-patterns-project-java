@@ -8,9 +8,11 @@ import shapes.Shape;
 import shapes.circle.AddCircle;
 import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
+import shapes.circle.UpdateCircle;
 import shapes.hexagon.AddHexagonAdapter;
 import shapes.hexagon.HexagonAdapter;
 import shapes.hexagon.RemoveHexagonAdapter;
+import shapes.hexagon.UpdateHexagonAdapter;
 import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
@@ -22,9 +24,11 @@ import shapes.point.UpdatePoint;
 import shapes.rectangle.AddRectangle;
 import shapes.rectangle.Rectangle;
 import shapes.rectangle.RemoveRectangle;
+import shapes.rectangle.UpdateRectangle;
 import shapes.square.AddSquare;
 import shapes.square.RemoveSquare;
 import shapes.square.Square;
+import shapes.square.UpdateSquare;
 
 public class CommandParser implements Serializable {
 	/**
@@ -160,15 +164,15 @@ public class CommandParser implements Serializable {
 			return new UpdatePoint((Point) originalShape, (Point) modifiedShape, shapeId);
 		case "updateline":
 			return new UpdateLine((Line) originalShape, (Line) modifiedShape, shapeId);
-		/*
-		 * case "updatecircle": return new RemoveCircle(model, ((Circle)
-		 * ShapeParser.getInstance().parse(s))); case "updatesquare": return new
-		 * RemoveSquare(model, ((Square) ShapeParser.getInstance().parse(s))); case
-		 * "updaterectangle": return new RemoveRectangle(model, ((Rectangle)
-		 * ShapeParser.getInstance().parse(s))); case "updatehexagonadapter": return new
-		 * RemoveHexagonAdapter(model, ((HexagonAdapter)
-		 * ShapeParser.getInstance().parse(s)));
-		 */
+		case "updatecircle":
+			return new UpdateCircle((Circle) originalShape, (Circle) modifiedShape, shapeId);
+		case "updatesquare":
+			return new UpdateSquare((Square) originalShape, (Square) modifiedShape, shapeId);
+		case "updaterectangle":
+			return new UpdateRectangle((Rectangle) originalShape, (Rectangle) modifiedShape, shapeId);
+		case "updatehexagonadapter":
+			return new UpdateHexagonAdapter((HexagonAdapter) originalShape, (HexagonAdapter) modifiedShape, shapeId);
+
 		}
 		return null;
 	}

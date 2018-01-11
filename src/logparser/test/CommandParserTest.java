@@ -12,7 +12,9 @@ import org.junit.Test;
 import logparser.CommandParser;
 import model.ShapeModel;
 import shapes.circle.AddCircle;
+import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
+import shapes.circle.UpdateCircle;
 import shapes.hexagon.AddHexagonAdapter;
 import shapes.hexagon.RemoveHexagonAdapter;
 import shapes.line.AddLine;
@@ -343,5 +345,47 @@ public class CommandParserTest {
 		int actualY = ((Line) fakeModel.getShapesList().get(0)).getPtEnd().getY();
 		int expectedY = 180;
 		assertTrue(actualColor.equals(expectedColor) && actualX == expectedX && actualY == expectedY);
+	}
+
+	@Test
+	public void testIfUpdateCircleIsParsedSimple() {
+		String s = "ADDCIRCLE_EXECUTE_sid=0_Circle(X=192,Y=130,r=67,outercolor=[0-0-0],innercolor=[255-255-255])";
+		AddCircle command = (AddCircle) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATECIRCLE_EXECUTE_sid=0_Circle(X=192,Y=130,r=67,outercolor=[0-0-0],innercolor=[204-0-102])";
+		UpdateCircle commandUpdate = (UpdateCircle) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		Color actual = ((Circle) fakeModel.getShapesList().get(0)).getInnerColor();
+		Color expected = new Color(204, 0, 102);
+		assertTrue(actual.equals(expected));
+	}
+
+	@Test
+	public void testIfUpdateCircleIsParsedAdvanced() {
+		String s = "ADDCIRCLE_EXECUTE_sid=0_Circle(X=192,Y=130,r=67,outercolor=[0-0-0],innercolor=[255-255-255])";
+		AddCircle command = (AddCircle) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdate = "UPDATECIRCLE_EXECUTE_sid=0_Circle(X=192,Y=130,r=67,outercolor=[0-0-0],innercolor=[204-0-102])";
+		UpdateCircle commandUpdate = (UpdateCircle) CommandParser.getInstance().parse(sUpdate, fakeModel);
+		commandUpdate.execute();
+
+		String sUpdateR = "UPDATECIRCLE_EXECUTE_sid=0_Circle(X=192,Y=130,r=75,outercolor=[0-0-0],innercolor=[204-0-102])";
+		UpdateCircle commandUpdateR = (UpdateCircle) CommandParser.getInstance().parse(sUpdateR, fakeModel);
+		commandUpdateR.execute();
+
+		String sUpdateY = "UPDATECIRCLE_EXECUTE_sid=0_Circle(X=192,Y=150,r=75,outercolor=[0-0-0],innercolor=[204-0-102])";
+		UpdateCircle commandUpdateY = (UpdateCircle) CommandParser.getInstance().parse(sUpdateY, fakeModel);
+		commandUpdateY.execute();
+
+		Color actualColor = ((Circle) fakeModel.getShapesList().get(0)).getInnerColor();
+		Color expectedColor = new Color(204, 0, 102);
+		int actualR = ((Circle) fakeModel.getShapesList().get(0)).getR();
+		int expectedR = 75;
+		int actualY = ((Circle) fakeModel.getShapesList().get(0)).getCenter().getY();
+		int expectedY = 150;
+		assertTrue(actualColor.equals(expectedColor) && actualR == expectedR && actualY == expectedY);
 	}
 }
