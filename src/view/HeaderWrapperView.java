@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class HeaderWrapperView extends JPanel {
@@ -84,6 +85,7 @@ public class HeaderWrapperView extends JPanel {
 		mnHelp.add(mntmAbout);
 
 		toolboxView = new ToolboxView();
+		toolboxView.getBtnOuterColor().setForeground(Color.WHITE);
 		add(toolboxView, BorderLayout.CENTER);
 
 	}

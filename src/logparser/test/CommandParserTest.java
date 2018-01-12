@@ -29,6 +29,8 @@ import shapes.rectangle.AddRectangle;
 import shapes.rectangle.RemoveRectangle;
 import shapes.square.AddSquare;
 import shapes.square.RemoveSquare;
+import shapes.square.Square;
+import shapes.square.UpdateSquare;
 
 public class CommandParserTest {
 
@@ -389,7 +391,32 @@ public class CommandParserTest {
 		assertTrue(actualColor.equals(expectedColor) && actualR == expectedR && actualY == expectedY);
 	}
 
-	// TODO Write Simple/Advanced tests for Square
+	@Test
+	public void testIfUpdateSquareIsParsedAdvanced() {
+		String s = "ADDSQUARE_EXECUTE_sid=0_Square(UpperX=176,UpperY=132,a=118,outercolor=[0-0-0],innercolor=[255-255-255])";
+		AddSquare command = (AddSquare) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdateColor = "UPDATESQUARE_EXECUTE_sid=0_Square(UpperX=176,UpperY=132,a=118,outercolor=[0-0-0],innercolor=[255-51-51])";
+		UpdateSquare commandUpdateColor = (UpdateSquare) CommandParser.getInstance().parse(sUpdateColor, fakeModel);
+		commandUpdateColor.execute();
+
+		String sUpdateA = "UPDATESQUARE_EXECUTE_sid=0_Square(UpperX=176,UpperY=132,a=150,outercolor=[0-0-0],innercolor=[255-51-51])";
+		UpdateSquare commandUpdateA = (UpdateSquare) CommandParser.getInstance().parse(sUpdateA, fakeModel);
+		commandUpdateA.execute();
+
+		String sUpdateX = "UPDATESQUARE_EXECUTE_sid=0_Square(UpperX=140,UpperY=132,a=150,outercolor=[0-0-0],innercolor=[255-51-51])";
+		UpdateSquare commandUpdateX = (UpdateSquare) CommandParser.getInstance().parse(sUpdateX, fakeModel);
+		commandUpdateX.execute();
+
+		Color actualColor = ((Square) fakeModel.getShapesList().get(0)).getInnerColor();
+		Color expectedColor = new Color(255, 51, 51);
+		int actualA = ((Square) fakeModel.getShapesList().get(0)).getSideLength();
+		int expectedA = 150;
+		int actualX = ((Square) fakeModel.getShapesList().get(0)).getUpperLeft().getX();
+		int expectedX = 140;
+		assertTrue(actualColor.equals(expectedColor) && actualA == expectedA && actualX == expectedX);
+	}
 	// TODO Write Simple/Advanced tests for Rectangle
 	// TODO Write Simple/Advanced tests for Hexagon
 }
