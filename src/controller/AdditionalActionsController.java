@@ -54,7 +54,7 @@ public class AdditionalActionsController implements Serializable {
 			return;
 
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
-		ToFrontCommand tfCommand = new ToFrontCommand(selectedIndex, model, frame);
+		ToFrontCommand tfCommand = new ToFrontCommand(model, frame);
 		tfCommand.execute();
 		ShapeModel.getUndoStack().offerLast(tfCommand);
 	}
@@ -67,7 +67,7 @@ public class AdditionalActionsController implements Serializable {
 			return;
 
 		int selectedIndex = ZAxisHelper.getSelectedShapeIndex(model);
-		ToBackCommand tbCommand = new ToBackCommand(selectedIndex, model, frame);
+		ToBackCommand tbCommand = new ToBackCommand(model, frame);
 		tbCommand.execute();
 		ShapeModel.getUndoStack().offerLast(tbCommand);
 	}

@@ -2,6 +2,7 @@ package util;
 
 import java.util.Collections;
 
+import app.App;
 import app.MainFrame;
 import model.ShapeModel;
 import shapes.Shape;
@@ -20,7 +21,7 @@ public class ZAxisHelper {
 	public static int doBringToFront(int selectedIndex, ShapeModel model, MainFrame frame) {
 		if (selectedIndex != -1 && selectedIndex != (model.getShapesList().size() - 1)) {
 			Shape selectedShape = getSelectedShape(model);
-			model.getShapesList().remove(selectedIndex);
+			model.getShapesList().remove(selectedShape);
 			model.getShapesList().add(selectedShape);
 		}
 		frame.repaint();
@@ -38,7 +39,7 @@ public class ZAxisHelper {
 	public static int doBringToBack(int selectedIndex, ShapeModel model, MainFrame frame) {
 		if (selectedIndex != -1 && selectedIndex != 0) {
 			Shape selectedShape = getSelectedShape(model);
-			model.getShapesList().remove(selectedIndex);
+			model.getShapesList().remove(selectedShape);
 			model.getShapesList().add(0, selectedShape);
 		}
 		frame.repaint();
@@ -80,6 +81,7 @@ public class ZAxisHelper {
 				model.getShapesList().add(shape);
 			}
 		}
+		App.getFrame().repaint();
 	}
 
 	/**
