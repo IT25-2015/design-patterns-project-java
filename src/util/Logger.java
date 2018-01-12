@@ -39,7 +39,7 @@ public class Logger {
 	 */
 	public void log(String action, String s, boolean toConsole, boolean info) {
 		if (info) {
-			loggerModel.add("[INFO]" + action.toUpperCase() + "_" + s);
+			loggerModel.add("[INFO] " + action.toUpperCase() + "_" + s);
 		} else {
 			loggerModel.add(action.toUpperCase() + "_" + s);
 		}
