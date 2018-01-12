@@ -18,12 +18,9 @@ public class ZAxisHelper {
 	 * @param frame
 	 * @return
 	 */
-	public static int doBringToFront(int selectedIndex, ShapeModel model, MainFrame frame) {
-		if (selectedIndex != -1 && selectedIndex != (model.getShapesList().size() - 1)) {
-			Shape selectedShape = getSelectedShape(model);
-			model.getShapesList().remove(selectedShape);
-			model.getShapesList().add(selectedShape);
-		}
+	public static int doBringToFront(Shape selectedShape, ShapeModel model, MainFrame frame) {
+		model.getShapesList().remove(selectedShape);
+		model.getShapesList().add(selectedShape);
 		frame.repaint();
 		return model.getShapesList().size() - 1;
 	}
@@ -36,12 +33,9 @@ public class ZAxisHelper {
 	 * @param frame
 	 * @return
 	 */
-	public static int doBringToBack(int selectedIndex, ShapeModel model, MainFrame frame) {
-		if (selectedIndex != -1 && selectedIndex != 0) {
-			Shape selectedShape = getSelectedShape(model);
-			model.getShapesList().remove(selectedShape);
-			model.getShapesList().add(0, selectedShape);
-		}
+	public static int doBringToBack(Shape selectedShape, ShapeModel model, MainFrame frame) {
+		model.getShapesList().remove(selectedShape);
+		model.getShapesList().add(0, selectedShape);
 		frame.repaint();
 		return 0;
 	}
