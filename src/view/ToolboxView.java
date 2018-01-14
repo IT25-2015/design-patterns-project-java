@@ -61,6 +61,7 @@ public class ToolboxView extends JPanel {
 
 		btnInnerColor = new JButton("Inner Color");
 		btnInnerColor.setBackground(Color.WHITE);
+		btnInnerColor.setEnabled(false);
 		GridBagConstraints gbc_btnInnerColor = new GridBagConstraints();
 		gbc_btnInnerColor.insets = new Insets(0, 0, 0, 5);
 		gbc_btnInnerColor.gridx = 5;

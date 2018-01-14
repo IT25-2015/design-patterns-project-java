@@ -306,7 +306,26 @@ public class ToolboxController implements Serializable {
 	 * @param btn
 	 */
 	public void handleColorButtonClick(JButton btn) {
+		if (!btn.isEnabled())
+			return;
+
 		Color newColor = JColorChooser.showDialog(btn, "Choose color", btn.getBackground());
 		btn.setBackground((newColor != null) ? newColor : btn.getBackground());
+	}
+
+	/**
+	 * Will disable Inner Color button if point or line is selected, because they
+	 * don't have inner color
+	 */
+	public void handleShapePickerChange() {
+		boolean isPointActive = frame.getShapePickerView().getRdbtnPoint().isSelected();
+		boolean isLineActive = frame.getShapePickerView().getRdbtnLine().isSelected();
+		if (isLineActive || isPointActive) {
+			frame.getHeaderWrapperView().getToolboxView().getBtnInnerColor().setEnabled(false);
+			frame.repaint();
+		} else {
+			frame.getHeaderWrapperView().getToolboxView().getBtnInnerColor().setEnabled(true);
+		}
+
 	}
 }

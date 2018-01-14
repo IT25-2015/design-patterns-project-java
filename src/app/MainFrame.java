@@ -147,8 +147,7 @@ public class MainFrame extends JFrame {
 				mhController.handleAbout();
 			}
 		});
-		headerWrapperView.getMntmAbout()
-				.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)); // F1
+		headerWrapperView.getMntmAbout().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0)); // F1
 		headerWrapperView.getMntmViewCode().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -238,6 +237,24 @@ public class MainFrame extends JFrame {
 
 		// ShapePicker related stuff
 		getContentPane().add(shapePickerView, BorderLayout.WEST);
+
+		shapePickerView.getRdbtnPoint().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
+
+		shapePickerView.getRdbtnLine().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
 
 		// AdditionalAaction related stuff
 		getContentPane().add(additionalActionsView, BorderLayout.EAST);
