@@ -59,6 +59,8 @@ public class ToolboxController implements Serializable {
 	 * Will handle event of clicking undo button
 	 */
 	public void handleUndoBtn() {
+		if (!frame.getHeaderWrapperView().getToolboxView().getBtnUndo().isEnabled())
+			return;
 		UndoRedoHelper.undoAction();
 		frame.repaint();
 	}
@@ -67,6 +69,8 @@ public class ToolboxController implements Serializable {
 	 * Will handle event of clicking redo button
 	 */
 	public void handleRedoBtn() {
+		if (!frame.getHeaderWrapperView().getToolboxView().getBtnRedo().isEnabled())
+			return;
 		UndoRedoHelper.redoAction();
 		frame.repaint();
 	}

@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
-import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -40,6 +39,7 @@ public class ToolboxView extends JPanel {
 		setLayout(gridBagLayout);
 
 		btnUndo = new JButton("Undo");
+		btnUndo.setEnabled(false);
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -52,6 +52,7 @@ public class ToolboxView extends JPanel {
 		add(btnUndo, gbc_btnUndo);
 
 		btnRedo = new JButton("Redo");
+		btnRedo.setEnabled(false);
 		gbc_btnRedo = new GridBagConstraints();
 		gbc_btnRedo.fill = GridBagConstraints.VERTICAL;
 		gbc_btnRedo.insets = new Insets(0, 0, 0, 5);

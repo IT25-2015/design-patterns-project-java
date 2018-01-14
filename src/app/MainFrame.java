@@ -67,7 +67,7 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmUndo()
 				.setAccelerator(KeyStroke.getKeyStroke('Z', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Z
-
+		headerWrapperView.getMntmUndo().setEnabled(false);
 		headerWrapperView.getMntmRedo().setAction(new AbstractAction("Redo") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -76,7 +76,7 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmRedo()
 				.setAccelerator(KeyStroke.getKeyStroke('Y', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+Y
-
+		headerWrapperView.getMntmRedo().setEnabled(false);
 		headerWrapperView.getMntmParseNext().setAction(new AbstractAction("Parse next log line") {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -85,6 +85,7 @@ public class MainFrame extends JFrame {
 		});
 		headerWrapperView.getMntmParseNext()
 				.setAccelerator(KeyStroke.getKeyStroke('P', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask())); // Ctrl+P
+		headerWrapperView.getMntmParseNext().setEnabled(false);
 
 		headerWrapperView.getMntmNew().setAction(new AbstractAction("New drawing") {
 			@Override

@@ -191,6 +191,11 @@ public class MenuFileController implements Serializable {
 		if (model.getShapesList().size() == 0)
 			return;
 
+		frame.getHeaderWrapperView().getToolboxView().getBtnUndo().setEnabled(false);
+		frame.getHeaderWrapperView().getToolboxView().getBtnRedo().setEnabled(false);
+		frame.getHeaderWrapperView().getMntmUndo().setEnabled(false);
+		frame.getHeaderWrapperView().getMntmRedo().setEnabled(false);
+
 		if (DialogsHelper.askUserToConfirm("Are you sure? If you did not save current drawing it will be lost.")) {
 			// Clear all shapes, both undo and redo stacks
 			model.getShapesList().clear();
