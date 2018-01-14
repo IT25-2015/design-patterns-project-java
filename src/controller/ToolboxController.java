@@ -296,9 +296,10 @@ public class ToolboxController implements Serializable {
 		} else if (ev.getStateChange() == ItemEvent.DESELECTED) {
 			Logger.getInstance().log("Exiting select mode", true, true);
 			for (Shape s : model.getShapesList()) {
-				s.setSelected(false);
-				frame.repaint();
+				if (s != null)
+					s.setSelected(false);
 			}
+			frame.repaint();
 			Logger.getInstance().log("All shapes have been de-selected", true, true);
 		}
 	}
