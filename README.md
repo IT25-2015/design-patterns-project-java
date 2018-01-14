@@ -1,4 +1,4 @@
-# Example screenshot
+# Example Screenshot
 ![alt text](https://raw.githubusercontent.com/aleksandar-babic/design-patterns-project-java/master/screenshots/screenshot.png)
 > App is using Nimbus LookNFeel for Swing.
 
