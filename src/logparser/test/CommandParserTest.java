@@ -16,7 +16,9 @@ import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
 import shapes.circle.UpdateCircle;
 import shapes.hexagon.AddHexagonAdapter;
+import shapes.hexagon.HexagonAdapter;
 import shapes.hexagon.RemoveHexagonAdapter;
+import shapes.hexagon.UpdateHexagonAdapter;
 import shapes.line.AddLine;
 import shapes.line.Line;
 import shapes.line.RemoveLine;
@@ -26,7 +28,9 @@ import shapes.point.Point;
 import shapes.point.RemovePoint;
 import shapes.point.UpdatePoint;
 import shapes.rectangle.AddRectangle;
+import shapes.rectangle.Rectangle;
 import shapes.rectangle.RemoveRectangle;
+import shapes.rectangle.UpdateRectangle;
 import shapes.square.AddSquare;
 import shapes.square.RemoveSquare;
 import shapes.square.Square;
@@ -417,6 +421,66 @@ public class CommandParserTest {
 		int expectedX = 140;
 		assertTrue(actualColor.equals(expectedColor) && actualA == expectedA && actualX == expectedX);
 	}
-	// TODO Write Simple/Advanced tests for Rectangle
-	// TODO Write Simple/Advanced tests for Hexagon
+
+	@Test
+	public void testIfUpdateRectangleIsParsedAdvanced() {
+		String s = "ADDRECTANGLE_EXECUTE_sid=0_Rectangle(UpperX=146,UpperY=138,height=72,width=323,outercolor=[0-0-0],innercolor=[255-255-255])";
+		AddRectangle command = (AddRectangle) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdateHeight = "UPDATERECTANGLE_EXECUTE_sid=0_Rectangle(UpperX=146,UpperY=138,height=100,width=323,outercolor=[0-0-0],innercolor=[255-255-255])";
+		UpdateRectangle commandUpdateHeight = (UpdateRectangle) CommandParser.getInstance().parse(sUpdateHeight,
+				fakeModel);
+		commandUpdateHeight.execute();
+
+		String sUpdateWidth = "UPDATERECTANGLE_EXECUTE_sid=0_Rectangle(UpperX=146,UpperY=138,height=100,width=350,outercolor=[0-0-0],innercolor=[255-255-255])";
+		UpdateRectangle commandUpdateWidth = (UpdateRectangle) CommandParser.getInstance().parse(sUpdateWidth,
+				fakeModel);
+		commandUpdateWidth.execute();
+
+		String sUpdateColor = "UPDATERECTANGLE_EXECUTE_sid=0_Rectangle(UpperX=146,UpperY=138,height=100,width=350,outercolor=[0-0-0],innercolor=[255-51-51])";
+		UpdateRectangle commandUpdateColor = (UpdateRectangle) CommandParser.getInstance().parse(sUpdateColor,
+				fakeModel);
+		commandUpdateColor.execute();
+
+		Color actualColor = ((Rectangle) fakeModel.getShapesList().get(0)).getInnerColor();
+		Color expectedColor = new Color(255, 51, 51);
+		int actualHeight = ((Rectangle) fakeModel.getShapesList().get(0)).getSideLength();
+		int expectedHeight = 100;
+		int actualWidth = ((Rectangle) fakeModel.getShapesList().get(0)).getWidth();
+		int expectedWidth = 350;
+		assertTrue(actualColor.equals(expectedColor) && actualHeight == expectedHeight && actualWidth == expectedWidth);
+
+	}
+
+	@Test
+	public void testIfUpdateHexagonIsParsedAdvanced() {
+		String s = "ADDHEXAGONADAPTER_EXECUTE_sid=0_Hexagon(X=347,Y=201,r=103,outercolor=[0-0-0],innercolor=[255-255-255])";
+		AddHexagonAdapter command = (AddHexagonAdapter) CommandParser.getInstance().parse(s, fakeModel);
+		command.execute();
+
+		String sUpdateR = "UPDATEHEXAGONADAPTER_EXECUTE_sid=0_Hexagon(X=347,Y=201,r=110,outercolor=[0-0-0],innercolor=[255-255-255])";
+		UpdateHexagonAdapter commandUpdateR = (UpdateHexagonAdapter) CommandParser.getInstance().parse(sUpdateR,
+				fakeModel);
+		commandUpdateR.execute();
+
+		String sUpdateInnerColor = "UPDATEHEXAGONADAPTER_EXECUTE_sid=0_Hexagon(X=347,Y=201,r=110,outercolor=[0-0-0],innercolor=[102-102-255])";
+		UpdateHexagonAdapter commandUpdateInnerColor = (UpdateHexagonAdapter) CommandParser.getInstance()
+				.parse(sUpdateInnerColor, fakeModel);
+		commandUpdateInnerColor.execute();
+
+		String sUpdateOuterColor = "UPDATEHEXAGONADAPTER_EXECUTE_sid=0_Hexagon(X=347,Y=201,r=110,outercolor=[255-0-0],innercolor=[102-102-255])";
+		UpdateHexagonAdapter commandUpdateOuterColor = (UpdateHexagonAdapter) CommandParser.getInstance()
+				.parse(sUpdateOuterColor, fakeModel);
+		commandUpdateOuterColor.execute();
+
+		Color actualInnterColor = ((HexagonAdapter) fakeModel.getShapesList().get(0)).getInnerColor();
+		Color expectedInnerColor = new Color(102, 102, 255);
+		Color actualColor = ((HexagonAdapter) fakeModel.getShapesList().get(0)).getColor();
+		Color expectedColor = new Color(255, 0, 0);
+		int actualR = ((HexagonAdapter) fakeModel.getShapesList().get(0)).getHexagon().getR();
+		int expectedR = 110;
+		assertTrue(actualColor.equals(expectedColor) && actualInnterColor.equals(expectedInnerColor)
+				&& actualR == expectedR);
+	}
 }
