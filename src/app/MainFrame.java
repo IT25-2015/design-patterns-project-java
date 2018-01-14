@@ -54,7 +54,7 @@ public class MainFrame extends JFrame {
 		// Calculate center of screen and set frame there
 		setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - getWidth() / 2,
 				(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - getHeight() / 2);
-		setTitle("Aleksandar Babic IT53/2015 - Dizajn Paterni");
+		setTitle("Aleksandar Babic IT53/2015 - Design Patterns Project");
 
 		// HeaderWrapper and its components related stuff
 		getContentPane().add(headerWrapperView, BorderLayout.NORTH);
