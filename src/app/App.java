@@ -12,8 +12,6 @@ import model.ShapeModel;
 import util.Logger;
 
 public class App {
-	/*private static MainFrame frame;
-	private static ShapeModel model;*/
 	/**
 	 * Initializes everything needed for app to start
 	 * 
@@ -46,10 +44,4 @@ public class App {
 		frame.getCanvasView().setModel(model);
 
 	}
-	/*public static MainFrame getFrame() {
-		return frame;
-	}
-	public static ShapeModel getModel() {
-		return model;
-	}*/
 }
