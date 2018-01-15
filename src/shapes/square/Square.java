@@ -5,7 +5,6 @@ import java.awt.Graphics;
 
 import shapes.Moveable;
 import shapes.Shape;
-import shapes.ShapeObserver;
 import shapes.SurfaceShape;
 import shapes.line.Line;
 import shapes.point.Point;
@@ -17,14 +16,10 @@ public class Square extends SurfaceShape implements Moveable {
 	private static final long serialVersionUID = 3852248466683549584L;
 	protected Point upperLeft;
 	protected int sideLength;
-	protected ShapeObserver observer;
 
 	public Square(Point upperLeft, int sideLength) {
 		this.upperLeft = upperLeft;
 		this.sideLength = sideLength;
-		observer = new ShapeObserver();
-		observer.setShape(this);
-		addObserver(observer);
 	}
 
 	public Square(Point upperLeft, int sideLength, Color outer) {
@@ -155,5 +150,4 @@ public class Square extends SurfaceShape implements Moveable {
 	public void setSideLength(int sideLength) {
 		this.sideLength = sideLength;
 	}
-
 }

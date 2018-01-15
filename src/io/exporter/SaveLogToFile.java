@@ -14,7 +14,7 @@ import util.Logger;
 public class SaveLogToFile implements Exporter {
 
 	/**
-	 * Will crate new empty file to save log to, save line by line into it
+	 * Will create new empty file to save log to, save line by line into it
 	 */
 	@SuppressWarnings("unchecked")
 	@Override

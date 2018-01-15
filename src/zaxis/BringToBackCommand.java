@@ -34,7 +34,7 @@ public class BringToBackCommand implements Command {
 
 	@Override
 	public void unexecute() {
-		ZAxisHelper.moveShapeToIndex(selectedIndex, shape, model);
+		ZAxisHelper.moveShapeToIndex(selectedIndex, shape, model, frame);
 
 		Logger.getInstance().log(getClass().getSimpleName() + "_unexecute", shape.toString(), true, true);
 	}

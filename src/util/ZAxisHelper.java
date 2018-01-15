@@ -2,7 +2,6 @@ package util;
 
 import java.util.Collections;
 
-import app.App;
 import app.MainFrame;
 import model.ShapeModel;
 import shapes.Shape;
@@ -67,7 +66,7 @@ public class ZAxisHelper {
 	 * @param shape
 	 * @param model
 	 */
-	public static void moveShapeToIndex(int newIndex, Shape shape, ShapeModel model) {
+	public static void moveShapeToIndex(int newIndex, Shape shape, ShapeModel model, MainFrame frame) {
 		if (model.getShapesList().remove(shape)) {
 			if (newIndex < model.getShapesList().size() - 1) {
 				model.getShapesList().add(newIndex, shape);
@@ -75,7 +74,7 @@ public class ZAxisHelper {
 				model.getShapesList().add(shape);
 			}
 		}
-		App.getFrame().repaint();
+		frame.repaint();
 	}
 
 	/**

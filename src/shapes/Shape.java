@@ -13,6 +13,7 @@ public abstract class Shape extends Observable implements Comparable<Shape>, Ser
 	private static final long serialVersionUID = -3322545285228451945L;
 	private Color color = Color.BLACK;
 	private boolean selected;
+	private ShapeObserver observer;
 
 	public Shape() {
 	}
@@ -61,6 +62,12 @@ public abstract class Shape extends Observable implements Comparable<Shape>, Ser
 		setChanged();
 		notifyObservers();
 		
+	}
+	
+	public void setObserver(ShapeObserver observer) {
+		this.observer = observer;
+		observer.setShape(this);
+		addObserver(this.observer);
 	}
 
 }

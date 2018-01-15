@@ -122,11 +122,11 @@ public class MenuFileController implements Serializable {
 		String s = logFileList.get(logFileLineProgress);
 
 		// Get Command from log line
-		Command cmd = cmdParser.parse(s, model);
+		Command cmd = cmdParser.parse(s, model, frame);
 
-		if (!ShapeModel.getUndoStack().contains(cmd)) {
+		if (!model.getUndoStack().contains(cmd)) {
 			// Put new command in undo stack
-			ShapeModel.getUndoStack().offerLast(cmd);
+			model.getUndoStack().offerLast(cmd);
 		}
 
 		// Check if command should be executed or unexecuted
@@ -162,9 +162,7 @@ public class MenuFileController implements Serializable {
 			ArrayList<Object> bundle = manager.importData(path);
 			// If ArrayList setter was used observers wouldn't work at all
 			for (Shape s : (ArrayList<Shape>) bundle.get(0)) {
-				ShapeObserver observer = new ShapeObserver();
-				observer.setShape(s);
-				s.addObserver(observer);
+				s.setObserver(new ShapeObserver(frame, model));
 				model.add(s);
 			}
 			Logger.getInstance().log(
@@ -199,8 +197,8 @@ public class MenuFileController implements Serializable {
 		if (DialogsHelper.askUserToConfirm("Are you sure? If you did not save current drawing it will be lost.")) {
 			// Clear all shapes, both undo and redo stacks
 			model.getShapesList().clear();
-			ShapeModel.getUndoStack().clear();
-			ShapeModel.getRedoStack().clear();
+			model.getUndoStack().clear();
+			model.getRedoStack().clear();
 
 			// Clear DLM (so real time log is wiped), clear LogLines ArrayList (where log is
 			// actually held)

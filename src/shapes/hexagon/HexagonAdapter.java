@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import hexagon.Hexagon;
 import shapes.Moveable;
 import shapes.Shape;
-import shapes.ShapeObserver;
 import shapes.SurfaceShape;
 
 public class HexagonAdapter extends SurfaceShape implements Moveable {
@@ -16,13 +15,9 @@ public class HexagonAdapter extends SurfaceShape implements Moveable {
 	 */
 	private static final long serialVersionUID = -2512401536592276622L;
 	private Hexagon hexagon;
-	private ShapeObserver observer;
 
 	public HexagonAdapter(Hexagon hexagon) {
 		this.hexagon = hexagon;
-		observer = new ShapeObserver();
-		observer.setShape(this);
-		addObserver(observer);
 	}
 
 	public HexagonAdapter(Hexagon hexagon, Color color) {

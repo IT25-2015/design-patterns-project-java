@@ -12,9 +12,8 @@ import model.ShapeModel;
 import util.Logger;
 
 public class App {
-	private static ShapeModel model;
-	private static MainFrame frame;
-
+	/*private static MainFrame frame;
+	private static ShapeModel model;*/
 	/**
 	 * Initializes everything needed for app to start
 	 * 
@@ -26,11 +25,11 @@ public class App {
 		Logger logger = Logger.getInstance();
 
 		// Init all collections
-		model = new ShapeModel();
+		ShapeModel model = new ShapeModel();
 		DefaultListModel<String> dlmLogger = logger.getDlmLogger();
 
 		// Init main frame with resolution 800x600
-		frame = new MainFrame(800, 600);
+		MainFrame frame = new MainFrame(800, 600);
 
 		// Set Logger DLM to Logger view so actions can be logged in real time
 		frame.getFooterWrapperView().getLoggerView().setDlm(dlmLogger);
@@ -47,13 +46,10 @@ public class App {
 		frame.getCanvasView().setModel(model);
 
 	}
-
-	public static ShapeModel getModel() {
-		return model;
-	}
-
-	public static MainFrame getFrame() {
+	/*public static MainFrame getFrame() {
 		return frame;
 	}
-
+	public static ShapeModel getModel() {
+		return model;
+	}*/
 }

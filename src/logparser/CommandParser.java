@@ -2,6 +2,7 @@ package logparser;
 
 import java.io.Serializable;
 
+import app.MainFrame;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
@@ -54,6 +55,26 @@ public class CommandParser implements Serializable {
 			return buildRemoveCommandFromString(s, model);
 		} else if (parseCommandType(s).contains("update")) {
 			return buildUpdateCommandFromString(s, model);
+		}
+		return null;
+	}
+
+	/**
+	 * Will detect exact command, shape it refers to, build it(with observer in it)
+	 * and return it
+	 * 
+	 * @param s
+	 * @param model
+	 * @param frame
+	 * @return
+	 */
+	public Command parse(String s, ShapeModel model, MainFrame frame) {
+		if (parseCommandType(s).contains("add")) {
+			return buildAddCommandFromString(s, frame, model);
+		} else if (parseCommandType(s).contains("remove")) {
+			return buildRemoveCommandFromString(s, frame, model);
+		} else if (parseCommandType(s).contains("update")) {
+			return buildUpdateCommandFromString(s, frame, model);
 		}
 		return null;
 	}
@@ -121,6 +142,34 @@ public class CommandParser implements Serializable {
 	}
 
 	/**
+	 * Will return Add Command object(with observer in it) that is built from given
+	 * String
+	 * 
+	 * @param s
+	 * @param frame
+	 * @param model
+	 * @return
+	 */
+	public Command buildAddCommandFromString(String s, MainFrame frame, ShapeModel model) {
+		String commandClass = parseCommandType(s);
+		switch (commandClass) {
+		case "addpoint":
+			return new AddPoint(model, ((Point) ShapeParser.getInstance().parse(s, model, frame)));
+		case "addline":
+			return new AddLine(model, ((Line) ShapeParser.getInstance().parse(s, model, frame)));
+		case "addcircle":
+			return new AddCircle(model, ((Circle) ShapeParser.getInstance().parse(s, model, frame)));
+		case "addsquare":
+			return new AddSquare(model, ((Square) ShapeParser.getInstance().parse(s, model, frame)));
+		case "addrectangle":
+			return new AddRectangle(model, ((Rectangle) ShapeParser.getInstance().parse(s, model, frame)));
+		case "addhexagonadapter":
+			return new AddHexagonAdapter(model, ((HexagonAdapter) ShapeParser.getInstance().parse(s, model, frame)));
+		}
+		return null;
+	}
+
+	/**
 	 * Will return Remove Command object that is built from given String
 	 * 
 	 * @param s
@@ -147,6 +196,34 @@ public class CommandParser implements Serializable {
 	}
 
 	/**
+	 * Will return Remove Command object(with observer in it) that is built from
+	 * given String
+	 * 
+	 * @param s
+	 * @param frame
+	 * @param model
+	 * @return
+	 */
+	public Command buildRemoveCommandFromString(String s, MainFrame frame, ShapeModel model) {
+		String commandClass = parseCommandType(s);
+		switch (commandClass) {
+		case "removepoint":
+			return new RemovePoint(model, ((Point) ShapeParser.getInstance().parse(s, model, frame)));
+		case "removeline":
+			return new RemoveLine(model, ((Line) ShapeParser.getInstance().parse(s, model, frame)));
+		case "removecircle":
+			return new RemoveCircle(model, ((Circle) ShapeParser.getInstance().parse(s, model, frame)));
+		case "removesquare":
+			return new RemoveSquare(model, ((Square) ShapeParser.getInstance().parse(s, model, frame)));
+		case "removerectangle":
+			return new RemoveRectangle(model, ((Rectangle) ShapeParser.getInstance().parse(s, model, frame)));
+		case "removehexagonadapter":
+			return new RemoveHexagonAdapter(model, ((HexagonAdapter) ShapeParser.getInstance().parse(s, model, frame)));
+		}
+		return null;
+	}
+
+	/**
 	 * Will return Update Command object that is built from given String
 	 * 
 	 * @param s
@@ -157,6 +234,39 @@ public class CommandParser implements Serializable {
 		String commandClass = parseCommandType(s);
 		Shape originalShape = model.getShapesList().get(parseShapeId(s));
 		Shape modifiedShape = ShapeParser.getInstance().parse(s);
+		int shapeId = parseShapeId(s);
+
+		switch (commandClass) {
+		case "updatepoint":
+			return new UpdatePoint((Point) originalShape, (Point) modifiedShape, shapeId);
+		case "updateline":
+			return new UpdateLine((Line) originalShape, (Line) modifiedShape, shapeId);
+		case "updatecircle":
+			return new UpdateCircle((Circle) originalShape, (Circle) modifiedShape, shapeId);
+		case "updatesquare":
+			return new UpdateSquare((Square) originalShape, (Square) modifiedShape, shapeId);
+		case "updaterectangle":
+			return new UpdateRectangle((Rectangle) originalShape, (Rectangle) modifiedShape, shapeId);
+		case "updatehexagonadapter":
+			return new UpdateHexagonAdapter((HexagonAdapter) originalShape, (HexagonAdapter) modifiedShape, shapeId);
+
+		}
+		return null;
+	}
+
+	/**
+	 * Will return Update Command object(with observer in it) that is built from
+	 * given String
+	 * 
+	 * @param s
+	 * @param frame
+	 * @param model
+	 * @return
+	 */
+	public Command buildUpdateCommandFromString(String s, MainFrame frame, ShapeModel model) {
+		String commandClass = parseCommandType(s);
+		Shape originalShape = model.getShapesList().get(parseShapeId(s));
+		Shape modifiedShape = ShapeParser.getInstance().parse(s, model, frame);
 		int shapeId = parseShapeId(s);
 
 		switch (commandClass) {

@@ -13,6 +13,7 @@ import app.MainFrame;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.ShapeObserver;
 import shapes.circle.Circle;
 import shapes.circle.RemoveCircle;
 import shapes.circle.UpdateCircle;
@@ -61,7 +62,7 @@ public class ToolboxController implements Serializable {
 	public void handleUndoBtn() {
 		if (!frame.getHeaderWrapperView().getToolboxView().getBtnUndo().isEnabled())
 			return;
-		UndoRedoHelper.undoAction();
+		UndoRedoHelper.undoAction(model.getUndoStack(), model.getRedoStack());
 		frame.repaint();
 	}
 
@@ -71,7 +72,7 @@ public class ToolboxController implements Serializable {
 	public void handleRedoBtn() {
 		if (!frame.getHeaderWrapperView().getToolboxView().getBtnRedo().isEnabled())
 			return;
-		UndoRedoHelper.redoAction();
+		UndoRedoHelper.redoAction(model.getUndoStack(), model.getRedoStack());
 		frame.repaint();
 	}
 
@@ -131,9 +132,10 @@ public class ToolboxController implements Serializable {
 				Point selectedPt = (Point) selected;
 				PointModifyDialog modifyDialog = new PointModifyDialog(selectedPt);
 				Point modifiedPt = modifyDialog.getPt();
+				modifiedPt.setObserver(new ShapeObserver(frame, model));
 				if (!selectedPt.equals(modifiedPt) || selectedPt.getColor() != modifiedPt.getColor()) {
 					Command updatePt = new UpdatePoint(selectedPt, modifiedPt, model.getShapeIndex(selectedPt));
-					ShapeModel.getUndoStack().offerLast(updatePt);
+					model.getUndoStack().offerLast(updatePt);
 					updatePt.execute();
 					frame.repaint();
 				}
@@ -141,9 +143,10 @@ public class ToolboxController implements Serializable {
 				Line selectedLine = (Line) selected;
 				LineModifyDialog modifyDialog = new LineModifyDialog(selectedLine);
 				Line modifiedLine = modifyDialog.getLine();
+				modifiedLine.setObserver(new ShapeObserver(frame, model));
 				if (!selectedLine.equals(modifiedLine) || selectedLine.getColor() != modifiedLine.getColor()) {
 					Command updateLine = new UpdateLine(selectedLine, modifiedLine, model.getShapeIndex(selectedLine));
-					ShapeModel.getUndoStack().offerLast(updateLine);
+					model.getUndoStack().offerLast(updateLine);
 					updateLine.execute();
 					frame.repaint();
 				}
@@ -151,11 +154,12 @@ public class ToolboxController implements Serializable {
 				Circle selectedCircle = (Circle) selected;
 				CircleModifyDialog modifyDialog = new CircleModifyDialog(selectedCircle);
 				Circle modifiedCircle = modifyDialog.getCircle();
+				modifiedCircle.setObserver(new ShapeObserver(frame, model));
 				if (!selectedCircle.equals(modifiedCircle) || selectedCircle.getColor() != modifiedCircle.getColor()
 						|| selectedCircle.getInnerColor() != modifiedCircle.getInnerColor()) {
 					Command updateCircle = new UpdateCircle(selectedCircle, modifiedCircle,
 							model.getShapeIndex(selectedCircle));
-					ShapeModel.getUndoStack().offerLast(updateCircle);
+					model.getUndoStack().offerLast(updateCircle);
 					updateCircle.execute();
 					frame.repaint();
 				}
@@ -168,7 +172,7 @@ public class ToolboxController implements Serializable {
 						|| selectedRectangle.getInnerColor() != modifiedRectangle.getInnerColor()) {
 					Command updateRectangle = new UpdateRectangle(selectedRectangle, modifiedRectangle,
 							model.getShapeIndex(selectedRectangle));
-					ShapeModel.getUndoStack().offerLast(updateRectangle);
+					model.getUndoStack().offerLast(updateRectangle);
 					updateRectangle.execute();
 					frame.repaint();
 				}
@@ -177,11 +181,12 @@ public class ToolboxController implements Serializable {
 				Square selectedSquare = (Square) selected;
 				SquareModifyDialog modifyDialog = new SquareModifyDialog(selectedSquare);
 				Square modifiedSquare = modifyDialog.getSquare();
+				modifiedSquare.setObserver(new ShapeObserver(frame, model));
 				if (!selectedSquare.equals(modifiedSquare) || selectedSquare.getColor() != modifiedSquare.getColor()
 						|| selectedSquare.getInnerColor() != modifiedSquare.getInnerColor()) {
 					Command updateSquare = new UpdateSquare(selectedSquare, modifiedSquare,
 							model.getShapeIndex(selectedSquare));
-					ShapeModel.getUndoStack().offerLast(updateSquare);
+					model.getUndoStack().offerLast(updateSquare);
 					updateSquare.execute();
 					frame.repaint();
 				}
@@ -189,12 +194,13 @@ public class ToolboxController implements Serializable {
 				HexagonAdapter selectedHexagon = (HexagonAdapter) selected;
 				HexagonModifyDialog modifyDialog = new HexagonModifyDialog(selectedHexagon);
 				HexagonAdapter modifiedHexagonAdapter = modifyDialog.getHexagonAdapter();
+				modifiedHexagonAdapter.setObserver(new ShapeObserver(frame, model));
 				if (!selectedHexagon.equals(modifiedHexagonAdapter)
 						|| selectedHexagon.getColor() != modifiedHexagonAdapter.getColor()
 						|| selectedHexagon.getInnerColor() != modifiedHexagonAdapter.getInnerColor()) {
 					Command updateHexagonAdapter = new UpdateHexagonAdapter(selectedHexagon, modifiedHexagonAdapter,
 							model.getShapeIndex(selectedHexagon));
-					ShapeModel.getUndoStack().offerLast(updateHexagonAdapter);
+					model.getUndoStack().offerLast(updateHexagonAdapter);
 					updateHexagonAdapter.execute();
 					frame.repaint();
 				}
@@ -250,7 +256,7 @@ public class ToolboxController implements Serializable {
 			// If user confirmed popup (JOptionPane)
 			if (confirmed) {
 				shapesToDelete.get(0).setSelected(false);
-				ShapeModel.getUndoStack().offerLast(removeCmd);
+				model.getUndoStack().offerLast(removeCmd);
 				removeCmd.execute();
 				frame.repaint();
 			}
@@ -276,7 +282,7 @@ public class ToolboxController implements Serializable {
 						removeCmd = new RemoveHexagonAdapter(model, (HexagonAdapter) s);
 					}
 
-					ShapeModel.getUndoStack().offerLast(removeCmd);
+					model.getUndoStack().offerLast(removeCmd);
 					removeCmd.execute();
 				}
 				frame.repaint();

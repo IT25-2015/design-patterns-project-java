@@ -11,6 +11,7 @@ import hexagon.Hexagon;
 import model.ShapeModel;
 import shapes.Command;
 import shapes.Shape;
+import shapes.ShapeObserver;
 import shapes.circle.AddCircle;
 import shapes.circle.Circle;
 import shapes.hexagon.AddHexagonAdapter;
@@ -69,9 +70,11 @@ public class CanvasController implements Serializable {
 		selectedShapeTypeModel = frame.getShapePickerView().getShapesGrp().getSelection();
 
 		if (selectedShapeTypeModel == pointModel) {
-			Command point = new AddPoint(model, new Point(e.getX(), e.getY(), outer));
+			Point pt = new Point(e.getX(), e.getY(), outer);
+			pt.setObserver(new ShapeObserver(frame, model));
+			Command point = new AddPoint(model, pt);
 			point.execute();
-			ShapeModel.getUndoStack().offerLast(point);
+			model.getUndoStack().offerLast(point);
 
 			frame.repaint();
 		} else {
@@ -122,6 +125,7 @@ public class CanvasController implements Serializable {
 			draggedShape = new HexagonAdapter(
 					new Hexagon(startDrawingPoint.getX(), startDrawingPoint.getY(), startDist), outer, inner);
 		}
+		draggedShape.setObserver(new ShapeObserver(frame, model));
 		model.add(draggedShape);
 		frame.repaint();
 	}
@@ -148,24 +152,24 @@ public class CanvasController implements Serializable {
 				// Create new command, execute it, add it to undo stack
 				Command addLine = new AddLine(model, (Line) draggedShape);
 				addLine.execute();
-				ShapeModel.getUndoStack().offerLast(addLine);
+				model.getUndoStack().offerLast(addLine);
 
 			} else if (selectedShapeTypeModel == circleModel) {
 				Command addCircle = new AddCircle(model, (Circle) draggedShape);
 				addCircle.execute();
-				ShapeModel.getUndoStack().offerLast(addCircle);
+				model.getUndoStack().offerLast(addCircle);
 			} else if (selectedShapeTypeModel == rectangleModel) {
 				Command addRectangle = new AddRectangle(model, (Rectangle) draggedShape);
 				addRectangle.execute();
-				ShapeModel.getUndoStack().offerLast(addRectangle);
+				model.getUndoStack().offerLast(addRectangle);
 			} else if (selectedShapeTypeModel == squareModel) {
 				Command addSquare = new AddSquare(model, (Square) draggedShape);
 				addSquare.execute();
-				ShapeModel.getUndoStack().offerLast(addSquare);
+				model.getUndoStack().offerLast(addSquare);
 			} else if (selectedShapeTypeModel == hexagonModel) {
 				Command addHexagonAdapter = new AddHexagonAdapter(model, (HexagonAdapter) draggedShape);
 				addHexagonAdapter.execute();
-				ShapeModel.getUndoStack().offerLast(addHexagonAdapter);
+				model.getUndoStack().offerLast(addHexagonAdapter);
 			}
 			// re-draw frame
 			frame.repaint();

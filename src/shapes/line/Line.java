@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import shapes.Shape;
-import shapes.ShapeObserver;
 import shapes.point.Point;
 
 public class Line extends Shape {
@@ -14,14 +13,10 @@ public class Line extends Shape {
 	private static final long serialVersionUID = -2677129039763167445L;
 	private Point ptStart;
 	private Point ptEnd;
-	private ShapeObserver observer;
 
 	public Line(Point ptStart, Point ptEnd) {
 		this.ptStart = ptStart;
 		this.ptEnd = ptEnd;
-		observer = new ShapeObserver();
-		observer.setShape(this);
-		addObserver(observer);
 	}
 
 	public Line(Point ptStart, Point ptEnd, Color color) {

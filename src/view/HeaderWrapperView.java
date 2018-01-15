@@ -66,11 +66,9 @@ public class HeaderWrapperView extends JPanel {
 		menuBar.add(mnEdit);
 
 		mntmUndo = new JMenuItem("Undo action");
-		mntmUndo.setEnabled(false);
 		mnEdit.add(mntmUndo);
 
 		mntmRedo = new JMenuItem("Redo action");
-		mntmRedo.setEnabled(false);
 		mnEdit.add(mntmRedo);
 		
 		mntmParseNext = new JMenuItem("Parse next log line");
