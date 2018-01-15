@@ -1,3 +1,7 @@
+# Example Screenshot
+![alt text](https://raw.githubusercontent.com/aleksandar-babic/design-patterns-project-java/master/screenshots/screenshot.png)
+> App is using Nimbus LookNFeel for Swing.
+
 # Opis zahteva za projekat iz predmeta Dizajnerski zadaci
 
 Korišćenjem Java programskog jezika implementirati desktop aplikaciju za rad sa 2D grafikom. Aplikacija
