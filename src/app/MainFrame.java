@@ -254,6 +254,42 @@ public class MainFrame extends JFrame {
 			}
 
 		});
+		
+		shapePickerView.getRdbtnCircle().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
+		
+		shapePickerView.getRdbtnSquare().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
+		
+		shapePickerView.getRdbtnRectangle().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
+		
+		shapePickerView.getRdbtnHexagon().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				toolboxController.handleShapePickerChange();
+			}
+
+		});
 
 		// AdditionalAaction related stuff
 		getContentPane().add(additionalActionsView, BorderLayout.EAST);

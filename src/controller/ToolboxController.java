@@ -337,6 +337,7 @@ public class ToolboxController implements Serializable {
 		} else {
 			frame.getHeaderWrapperView().getToolboxView().getBtnInnerColor().setEnabled(true);
 		}
-
+		// Disable select mode so shapes can be drawn again
+		frame.getHeaderWrapperView().getToolboxView().getTglbtnSelect().setSelected(false);
 	}
 }
