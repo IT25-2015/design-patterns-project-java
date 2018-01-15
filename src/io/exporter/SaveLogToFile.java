@@ -22,10 +22,6 @@ public class SaveLogToFile implements Exporter {
 		if (path == null)
 			return;
 		File logFile = new File(path);
-		if (logFile.exists()) {
-			logFile.delete();
-			logFile = new File(path);
-		}
 		try {
 			logFile.createNewFile();
 		} catch (IOException e1) {
