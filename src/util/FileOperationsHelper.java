@@ -35,7 +35,7 @@ public class FileOperationsHelper {
 				if (getSelectedFile().exists()) {
 					int n = JOptionPane.showConfirmDialog(this, "Do You Want to Overwrite File?", "Confirm Overwrite",
 							JOptionPane.YES_NO_OPTION);
-
+					System.out.println(JOptionPane.YES_OPTION +" " +n);
 					if (n == JOptionPane.YES_OPTION)
 						super.approveSelection();
 
