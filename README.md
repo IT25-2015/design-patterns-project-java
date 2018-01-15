@@ -1,6 +1,7 @@
 # Example Screenshot
 ![alt text](https://raw.githubusercontent.com/aleksandar-babic/design-patterns-project-java/master/screenshots/screenshot.png)
 > App is using new, fancy IO operations so Java 8 is required.
+
 > There is a problem with OpenJDK on Linux when Java support for the ATK accessibility toolkit is enabled. Unfortunately, it seems that it is enabled by default in recent versions of OpenJDK, so please use Oracle JDK instead.
 
 # Opis zahteva za projekat iz predmeta Dizajnerski zadaci
